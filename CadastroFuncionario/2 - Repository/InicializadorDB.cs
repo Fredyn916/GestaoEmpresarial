@@ -23,7 +23,7 @@ namespace GestaoEmpresarial.Repository
                     Id INTEGER PRIMARY KEY AUTOINCREMENT,
                     Nome TEXT NOT NULL,
                     Salario REAL NOT NULL,
-                    CargoId INTEGER NOT NULL
+                    CargoId INTEGER FOREIGN KEY NOT NULL
                 );
 
                 CREATE TABLE IF NOT EXISTS Cargos(
