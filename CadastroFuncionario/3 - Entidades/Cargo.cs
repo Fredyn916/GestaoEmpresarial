@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GestaoEmpresarial._3___Entidades
+namespace GestaoEmpresarial.Entidades
 {
     public class Cargo
     {
