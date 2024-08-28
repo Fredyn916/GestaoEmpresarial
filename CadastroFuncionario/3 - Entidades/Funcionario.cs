@@ -11,6 +11,7 @@ namespace GestaoEmpresarial.Entidades
         int Id { get; set; }
         public string Nome { get; set; }
         public double Salario { get; set; }
-        public Cargo Cargo { get; set; }
+        public int CargoId { get; set; }
+        public virtual Cargo Cargo { get; set; } // Propriedade de navegação
     }
 }
