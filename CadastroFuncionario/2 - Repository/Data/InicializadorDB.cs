@@ -19,25 +19,54 @@ namespace GestaoEmpresarial.Data.Repository
                 connection.Open();
 
                 string commandCREATE = @"
+                CREATE TABLE IF NOT EXISTS Cargos(
+                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    Ocupacao TEXT NOT NULL
+                );
+
                 CREATE TABLE IF NOT EXISTS Funcionarios(
                     Id INTEGER PRIMARY KEY AUTOINCREMENT,
                     Nome TEXT NOT NULL,
                     Idade INTEGER NOT NULL,
                     Peso REAL NOT NULL,
                     Salario REAL NOT NULL,
-                    CargoId INTEGER FOREIGN KEY NOT NULL
-                );
+                    CargoId INTEGER NOT NULL,
+                    FOREIGN KEY (CargoId) REFERENCES Cargos(Id)
+                );"; // Criando aa tabelaa no banco se não existirem
 
-                CREATE TABLE IF NOT EXISTS Cargos(
-                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    Ocupacao TEXT NOT NULL
-                );";
-
-                // Criando a tabela no banco se não existir
+                string commandINSERT = @"
+                INSERT INTO Cargos(Ocupacao)
+                VALUES ('Diretor Executivo'), 
+                       ('Diretor de Operações'), 
+                       ('Diretor Financeiro'), 
+                       ('Diretor de Marketing'),
+                       ('Analista'), 
+                       ('Estagiário'), 
+                       ('Supervisor'), 
+                       ('Gerente'), 
+                       ('Presidente'), 
+                       ('Zelador');
+                "; // Comando para adicionar os cargos se não existirem
 
                 using (var command = new SQLiteCommand(commandCREATE, connection))
                 {
                     command.ExecuteNonQuery();
+                }
+
+                string verificadorCargosCommand = "SELECT COUNT(*) FROM Cargos;"; // Comando para contar quantos itens existem na tabela {Cargos}
+
+                using (var commandVerificador = new SQLiteCommand(verificadorCargosCommand, connection))
+                {
+                    long cargoCount = (long)commandVerificador.ExecuteScalar();
+
+                    // Se a tabela Cargos estiver vazia, insere os cargos
+                    if (cargoCount == 0)
+                    {
+                        using (var insertCommand = new SQLiteCommand(commandINSERT, connection))
+                        {
+                            insertCommand.ExecuteNonQuery();
+                        }
+                    }
                 }
             }
         }
