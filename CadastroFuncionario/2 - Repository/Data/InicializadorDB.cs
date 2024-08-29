@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GestaoEmpresarial.Repository
+namespace GestaoEmpresarial.Data.Repository
 {
     public class InicializadorDB
     {
@@ -22,6 +22,8 @@ namespace GestaoEmpresarial.Repository
                 CREATE TABLE IF NOT EXISTS Funcionarios(
                     Id INTEGER PRIMARY KEY AUTOINCREMENT,
                     Nome TEXT NOT NULL,
+                    Idade INTEGER NOT NULL,
+                    Peso REAL NOT NULL,
                     Salario REAL NOT NULL,
                     CargoId INTEGER FOREIGN KEY NOT NULL
                 );
