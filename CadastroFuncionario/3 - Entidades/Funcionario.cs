@@ -16,6 +16,6 @@ namespace GestaoEmpresarial.Entidades
         public double Salario { get; set; }
         public int CargoId { get; set; }
         [JsonIgnore] // Esconde a solicitação do JSON de {Cargo}
-        public virtual Cargo Cargo { get; set; } // Propriedade de navegação
+        public virtual Cargo? Cargo { get; set; } // Propriedade de navegação
     }
 }
