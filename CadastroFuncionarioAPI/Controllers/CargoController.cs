@@ -5,7 +5,7 @@ using GestaoEmpresarial.Entidades;
 namespace GestaoEmpresarialAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")] // DataNotation
+    [Route("[controller]")] // DataAnnotation
     public class CargoController : ControllerBase
     {
         private CargoService _service;

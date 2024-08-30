@@ -36,15 +36,15 @@ namespace GestaoEmpresarial.Data.Repository
 
                 string commandINSERT = @"
                 INSERT INTO Cargos(Ocupacao)
-                VALUES ('Diretor Executivo'), 
-                       ('Diretor de Operações'), 
-                       ('Diretor Financeiro'), 
+                VALUES ('Diretor Executivo'),
+                       ('Diretor de Operações'),
+                       ('Diretor Financeiro'),
                        ('Diretor de Marketing'),
-                       ('Analista'), 
-                       ('Estagiário'), 
-                       ('Supervisor'), 
-                       ('Gerente'), 
-                       ('Presidente'), 
+                       ('Analista'),
+                       ('Estagiário'),
+                       ('Supervisor'),
+                       ('Gerente'),
+                       ('Presidente'),
                        ('Zelador');
                 "; // Comando para adicionar os cargos se não existirem
 

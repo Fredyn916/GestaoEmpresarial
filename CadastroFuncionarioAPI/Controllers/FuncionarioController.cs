@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace GestaoEmpresarialAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")] // DataNotation
+    [Route("[controller]")] // DataAnnotation
     public class FuncionarioController : ControllerBase
     {
         private FuncionarioService _service;
