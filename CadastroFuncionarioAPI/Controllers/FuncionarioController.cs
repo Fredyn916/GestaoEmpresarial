@@ -10,9 +10,9 @@ namespace GestaoEmpresarialAPI.Controllers
     {
         private FuncionarioService _service;
 
-        public FuncionarioController()
+        public FuncionarioController(IConfiguration connection)
         {
-            _service = new FuncionarioService();
+            _service = new FuncionarioService(connection);
         }
 
         [HttpPost("AdicionarFuncionario")] // Rota (EndPoint)

@@ -1,4 +1,5 @@
 ﻿using GestaoEmpresarial.Entidades;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
@@ -10,12 +11,18 @@ namespace GestaoEmpresarial.Repository
 {
     public class FuncionarioRepository
     {
-        private const string ConnectionString = "Data Source=GestaoEmpresarial.db"; // ConnectionString (Parâmetros necessários para criar um banco de dados)
+        // ConnectionString (Parâmetros necessários para criar um banco de dados)
         // Caso não exista o banco de dados, a var connection cria um database automaticamente
+        public readonly string _ConnectionString; // Variável da connection string a ser preenchida
+
+        public FuncionarioRepository(IConfiguration configuration) // Bloco de código responsável por preencher a connectionString
+        {
+            _ConnectionString = configuration.GetConnectionString("DefaultConnection");
+        }
 
         public void Adicionar(Funcionario funcionario)
         {
-            using (var connection = new SQLiteConnection(ConnectionString)) // Criando a conexão
+            using (var connection = new SQLiteConnection(_ConnectionString)) // Criando a conexão
             {
                 connection.Open();
 
@@ -38,7 +45,7 @@ namespace GestaoEmpresarial.Repository
 
         public void Remover(int id)
         {
-            using (var connection = new SQLiteConnection(ConnectionString)) // Criando a conexão
+            using (var connection = new SQLiteConnection(_ConnectionString)) // Criando a conexão
             {
                 connection.Open();
 
@@ -56,7 +63,7 @@ namespace GestaoEmpresarial.Repository
 
         public void Editar(int id, Funcionario editFuncionario)
         {
-            using (var connection = new SQLiteConnection(ConnectionString)) // Criando a conexão
+            using (var connection = new SQLiteConnection(_ConnectionString)) // Criando a conexão
             {
                 connection.Open();
 
@@ -83,7 +90,7 @@ namespace GestaoEmpresarial.Repository
         {
             List<Funcionario> listAux = new List<Funcionario>();
 
-            using (var connection = new SQLiteConnection(ConnectionString)) // Criando a conexão
+            using (var connection = new SQLiteConnection(_ConnectionString)) // Criando a conexão
             {
                 connection.Open();
 
@@ -114,7 +121,7 @@ namespace GestaoEmpresarial.Repository
 
         public Funcionario BuscarFuncionarioPorId(int id)
         {
-            using (var connection = new SQLiteConnection(ConnectionString)) // Criando a conexão
+            using (var connection = new SQLiteConnection(_ConnectionString)) // Criando a conexão
             {
                 connection.Open();
 
