@@ -10,8 +10,14 @@ namespace GestaoEmpresarial.Repository
 {
     public class CargoRepository
     {
-        private const string ConnectionString = "Data Source=GestaoEmpresarial.db"; // ConnectionString (Parâmetros necessários para criar um banco de dados)
+        // ConnectionString (Parâmetros necessários para criar um banco de dados)
         // Caso não exista o banco de dados, a var connection cria um database automaticamente
+        public readonly string _ConnectionString; // Variável da connection string a ser preenchida
+
+        public CargoRepository(IConfiguration configuration) // Bloco de código responsável por preencher a connectionString
+        {
+            _ConnectionString = configuration.GetConnectionString("DefaulConnection");
+        }
 
         public List<Cargo> Listar()
         {
