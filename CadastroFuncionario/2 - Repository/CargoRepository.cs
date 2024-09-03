@@ -16,7 +16,7 @@ namespace GestaoEmpresarial.Repository
 
         public CargoRepository(IConfiguration configuration) // Bloco de código responsável por preencher a connectionString
         {
-            _ConnectionString = configuration.GetConnectionString("DefaulConnection");
+            _ConnectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
         public List<Cargo> Listar()
