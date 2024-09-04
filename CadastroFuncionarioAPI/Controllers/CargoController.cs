@@ -9,23 +9,23 @@ namespace GestaoEmpresarialAPI.Controllers
     [Route("[controller]")] // DataAnnotation
     public class CargoController : ControllerBase
     {
-        private CargoService _service;
+        private CargoService _Service;
 
         public CargoController(IConfiguration connection)
         {
-            _service = new CargoService(connection.GetConnectionString("DefaultConnection"));
+            _Service = new CargoService(connection.GetConnectionString("DefaultConnection"));
         }
 
         [HttpGet("VisualizarCargos")] // Rota (EndPoint)
         public List<Cargo> ListarCargo()
         {
-            return _service.Listar();
+            return _Service.Listar();
         }
 
         [HttpGet("BuscarCargoPorId")] // Rota (EndPoint)
         public Cargo BuscarCargoPorId(int id)
         {
-            return _service.BuscarCargoPorId(id);
+            return _Service.BuscarCargoPorId(id);
         }
     }
 }

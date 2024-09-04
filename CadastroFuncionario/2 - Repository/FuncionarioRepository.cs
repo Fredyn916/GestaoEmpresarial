@@ -102,15 +102,15 @@ namespace GestaoEmpresarial.Repository
                     {
                         while (reader.Read())
                         {
-                            Funcionario FuncionarioAux = new Funcionario();
-                            FuncionarioAux.Id = int.Parse(reader["Id"].ToString());
-                            FuncionarioAux.Nome = reader["Nome"].ToString();
-                            FuncionarioAux.Idade = int.Parse(reader["Idade"].ToString());
-                            FuncionarioAux.Peso = double.Parse(reader["Peso"].ToString());
-                            FuncionarioAux.Salario = double.Parse(reader["Salario"].ToString());
-                            FuncionarioAux.CargoId = int.Parse(reader["CargoId"].ToString());
+                            Funcionario funcionarioAux = new Funcionario();
+                            funcionarioAux.Id = int.Parse(reader["Id"].ToString());
+                            funcionarioAux.Nome = reader["Nome"].ToString();
+                            funcionarioAux.Idade = int.Parse(reader["Idade"].ToString());
+                            funcionarioAux.Peso = double.Parse(reader["Peso"].ToString());
+                            funcionarioAux.Salario = double.Parse(reader["Salario"].ToString());
+                            funcionarioAux.CargoId = int.Parse(reader["CargoId"].ToString());
 
-                            listAux.Add(FuncionarioAux);
+                            listAux.Add(funcionarioAux);
                         }
                     }
                 }
@@ -135,15 +135,15 @@ namespace GestaoEmpresarial.Repository
                     {
                         if (reader.Read())
                         {
-                            Funcionario FuncionarioAux = new Funcionario();
-                            FuncionarioAux.Id = int.Parse(reader["Id"].ToString());
-                            FuncionarioAux.Nome = reader["Nome"].ToString();
-                            FuncionarioAux.Idade = int.Parse(reader["Idade"].ToString());
-                            FuncionarioAux.Peso = double.Parse(reader["Peso"].ToString());
-                            FuncionarioAux.Salario = double.Parse(reader["Salario"].ToString());
-                            FuncionarioAux.CargoId = int.Parse(reader["CargoId"].ToString());
+                            Funcionario funcionarioAux = new Funcionario();
+                            funcionarioAux.Id = int.Parse(reader["Id"].ToString());
+                            funcionarioAux.Nome = reader["Nome"].ToString();
+                            funcionarioAux.Idade = int.Parse(reader["Idade"].ToString());
+                            funcionarioAux.Peso = double.Parse(reader["Peso"].ToString());
+                            funcionarioAux.Salario = double.Parse(reader["Salario"].ToString());
+                            funcionarioAux.CargoId = int.Parse(reader["CargoId"].ToString());
 
-                            return FuncionarioAux;
+                            return funcionarioAux;
                         }
                     }
                 }

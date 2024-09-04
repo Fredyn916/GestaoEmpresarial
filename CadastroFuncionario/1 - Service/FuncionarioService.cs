@@ -10,36 +10,36 @@ namespace GestaoEmpresarial.Service
 {
     public class FuncionarioService
     {
-        public FuncionarioRepository _repository { get; set; }
+        public FuncionarioRepository _Repository { get; set; }
 
         public FuncionarioService(string connectionString)
         {
-            _repository = new FuncionarioRepository(connectionString);
+            _Repository = new FuncionarioRepository(connectionString);
         }
 
         public void Adicionar(Funcionario funcionario)
         {
-            _repository.Adicionar(funcionario);
+            _Repository.Adicionar(funcionario);
         }
 
         public void Remover(int id)
         {
-            _repository.Remover(id);
+            _Repository.Remover(id);
         }
 
         public void Editar(int id, Funcionario funcionarioEdit)
         {
-            _repository.Editar(id, funcionarioEdit);
+            _Repository.Editar(id, funcionarioEdit);
         }
 
         public List<Funcionario> Listar()
         {
-            return _repository.Listar();
+            return _Repository.Listar();
         }
 
         public Funcionario BuscarFuncionarioPorId(int id)
         {
-            return _repository.BuscarFuncionarioPorId(id);
+            return _Repository.BuscarFuncionarioPorId(id);
         }
     }
 }

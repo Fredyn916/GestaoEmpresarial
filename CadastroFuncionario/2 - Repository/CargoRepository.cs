@@ -36,11 +36,11 @@ namespace GestaoEmpresarial.Repository
                     {
                         while (reader.Read())
                         {
-                            Cargo CargoAux = new Cargo();
-                            CargoAux.Id = int.Parse(reader["Id"].ToString());
-                            CargoAux.Ocupacao = reader["Ocupacao"].ToString();
+                            Cargo cargoAux = new Cargo();
+                            cargoAux.Id = int.Parse(reader["Id"].ToString());
+                            cargoAux.Ocupacao = reader["Ocupacao"].ToString();
 
-                            listAux.Add(CargoAux);
+                            listAux.Add(cargoAux);
                         }
                     }
                 }
@@ -65,11 +65,11 @@ namespace GestaoEmpresarial.Repository
                     {
                         if (reader.Read())
                         {
-                            Cargo CargoAux = new Cargo();
-                            CargoAux.Id = int.Parse(reader["Id"].ToString());
-                            CargoAux.Ocupacao = reader["Ocupacao"].ToString();
+                            Cargo cargoAux = new Cargo();
+                            cargoAux.Id = int.Parse(reader["Id"].ToString());
+                            cargoAux.Ocupacao = reader["Ocupacao"].ToString();
 
-                            return CargoAux;
+                            return cargoAux;
                         }
                     }
                 }
