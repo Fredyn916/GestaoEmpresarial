@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using GestaoEmpresarial.Service;
 using GestaoEmpresarial.Entidades;
+using System.Configuration;
 
 namespace GestaoEmpresarialAPI.Controllers
 {
@@ -12,7 +13,7 @@ namespace GestaoEmpresarialAPI.Controllers
 
         public CargoController(IConfiguration connection)
         {
-            _service = new CargoService(connection);
+            _service = new CargoService(connection.GetConnectionString("DefaultConnection"));
         }
 
         [HttpGet("VisualizarCargos")] // Rota (EndPoint)

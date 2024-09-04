@@ -1,6 +1,5 @@
 ﻿using GestaoEmpresarial.Entidades;
 using GestaoEmpresarial.Repository;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Configuration.Internal;
@@ -14,9 +13,9 @@ namespace GestaoEmpresarial.Service
     {
         public CargoRepository repository { get; set; }
 
-        public CargoService(IConfiguration connection)
+        public CargoService(string connectionString)
         {
-            repository = new CargoRepository(connection);
+            repository = new CargoRepository(connectionString);
         }
 
         public List<Cargo> Listar()

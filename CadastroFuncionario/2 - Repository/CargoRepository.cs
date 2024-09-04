@@ -1,5 +1,4 @@
 ﻿using GestaoEmpresarial.Entidades;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
@@ -15,9 +14,9 @@ namespace GestaoEmpresarial.Repository
         // Caso não exista o banco de dados, a var connection cria um database automaticamente
         public readonly string _ConnectionString; // Variável da connection string a ser preenchida
 
-        public CargoRepository(IConfiguration configuration) // Bloco de código responsável por preencher a connectionString
+        public CargoRepository(string connectionString) // Bloco de código responsável por preencher a connectionString
         {
-            _ConnectionString = configuration.GetConnectionString("DefaultConnection");
+            _ConnectionString = connectionString;
         }
 
         public List<Cargo> Listar()
