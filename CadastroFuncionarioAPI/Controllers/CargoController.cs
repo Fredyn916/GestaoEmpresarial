@@ -10,9 +10,9 @@ namespace GestaoEmpresarialAPI.Controllers
     {
         private CargoService _service;
 
-        public CargoController()
+        public CargoController(IConfiguration connection)
         {
-            _service = new CargoService();
+            _service = new CargoService(connection);
         }
 
         [HttpGet("VisualizarCargos")] // Rota (EndPoint)

@@ -1,4 +1,5 @@
 ﻿using GestaoEmpresarial.Entidades;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
@@ -23,7 +24,7 @@ namespace GestaoEmpresarial.Repository
         {
             List<Cargo> listAux = new List<Cargo>();
 
-            using (var connection = new SQLiteConnection(ConnectionString)) // Criando a conexão
+            using (var connection = new SQLiteConnection(_ConnectionString)) // Criando a conexão
             {
                 connection.Open();
 
@@ -50,7 +51,7 @@ namespace GestaoEmpresarial.Repository
 
         public Cargo BuscarCargoPorId(int id)
         {
-            using (var connection = new SQLiteConnection(ConnectionString)) // Criando a conexão
+            using (var connection = new SQLiteConnection(_ConnectionString)) // Criando a conexão
             {
                 connection.Open();
 

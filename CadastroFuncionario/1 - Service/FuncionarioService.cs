@@ -1,5 +1,6 @@
 ﻿using GestaoEmpresarial.Entidades;
 using GestaoEmpresarial.Repository;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,9 @@ namespace GestaoEmpresarial.Service
     {
         public FuncionarioRepository repository { get; set; }
 
-        public FuncionarioService()
+        public FuncionarioService(IConfiguration connection)
         {
-            repository = new FuncionarioRepository();
+            repository = new FuncionarioRepository(connection);
         }
 
         public void Adicionar(Funcionario funcionario)
