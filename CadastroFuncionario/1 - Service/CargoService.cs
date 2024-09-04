@@ -11,21 +11,21 @@ namespace GestaoEmpresarial.Service
 {
     public class CargoService
     {
-        public CargoRepository repository { get; set; }
+        public CargoRepository _repository { get; set; }
 
         public CargoService(string connectionString)
         {
-            repository = new CargoRepository(connectionString);
+            _repository = new CargoRepository(connectionString);
         }
 
         public List<Cargo> Listar()
         {
-            return repository.Listar();
+            return _repository.Listar();
         }
 
         public Cargo BuscarCargoPorId(int id)
         {
-            return repository.BuscarCargoPorId(id);
+            return _repository.BuscarCargoPorId(id);
         }
     }
 }
