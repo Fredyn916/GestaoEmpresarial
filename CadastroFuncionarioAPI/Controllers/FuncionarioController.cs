@@ -1,6 +1,7 @@
 ﻿using GestaoEmpresarial.Entidades;
 using GestaoEmpresarial.Service;
 using Microsoft.AspNetCore.Mvc;
+using System.Configuration;
 
 namespace GestaoEmpresarialAPI.Controllers
 {
@@ -12,7 +13,7 @@ namespace GestaoEmpresarialAPI.Controllers
 
         public FuncionarioController(IConfiguration connection)
         {
-            _service = new FuncionarioService(connection);
+            _service = new FuncionarioService(connection.GetConnectionString("DefaultConnection"));
         }
 
         [HttpPost("AdicionarFuncionario")] // Rota (EndPoint)
