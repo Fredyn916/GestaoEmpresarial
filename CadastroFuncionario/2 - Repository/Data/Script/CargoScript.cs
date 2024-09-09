@@ -10,7 +10,7 @@ namespace GestaoEmpresarial.Repository.Data.Script
     {
         public static string InsertCargos()
         {
-            string commandINSERT = @"
+            string commandINSERTCargos = @"
                 INSERT INTO Cargos(Ocupacao)
                 VALUES ('Diretor Executivo'),
                        ('Diretor de Operações'),
@@ -24,14 +24,28 @@ namespace GestaoEmpresarial.Repository.Data.Script
                        ('Zelador');
                 "; // Comando para adicionar os cargos
 
-            return commandINSERT;
+            return commandINSERTCargos;
         }
 
         public static string SelectCountAllCargos()
         {
-            string verificadorCargosCommand = "SELECT COUNT(*) FROM Cargos;"; // Comando para contar quantos itens existem na tabela {Cargos}
+            string commandSELECTCOUNTCargos = "SELECT COUNT(*) FROM Cargos;"; // Comando para contar quantos itens existem na tabela {Cargos}
 
-            return verificadorCargosCommand;
+            return commandSELECTCOUNTCargos;
+        }
+
+        public static string SelectCargos()
+        {
+            string commandSELECTCargos = "SELECT Id, Ocupacao FROM Cargos;";
+
+            return commandSELECTCargos;
+        }
+
+        public static string SelectCargoPorId()
+        {
+            string commandSELECTCargo = "SELECT Id, Ocupacao FROM Cargos WHERE Id = @Id;";
+
+            return commandSELECTCargo;
         }
     }
 }

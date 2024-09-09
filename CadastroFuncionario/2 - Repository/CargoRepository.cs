@@ -1,4 +1,5 @@
-﻿using GestaoEmpresarial.Entidades;
+﻿using Dapper.Contrib.Extensions;
+using GestaoEmpresarial.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
@@ -21,60 +22,16 @@ namespace GestaoEmpresarial.Repository
 
         public List<Cargo> Listar()
         {
-            List<Cargo> listAux = new List<Cargo>();
+            using var connection = new SQLiteConnection(_ConnectionString);
 
-            using (var connection = new SQLiteConnection(_ConnectionString)) // Criando a conexão
-            {
-                connection.Open();
-
-                // Comando para selecionar e exibir os dados das tabelas
-                string commandSelectId = "SELECT Id, Ocupacao FROM Cargos;";
-
-                using (var command = new SQLiteCommand(commandSelectId, connection))
-                {
-                    using (var reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            Cargo cargoAux = new Cargo();
-                            cargoAux.Id = int.Parse(reader["Id"].ToString());
-                            cargoAux.Ocupacao = reader["Ocupacao"].ToString();
-
-                            listAux.Add(cargoAux);
-                        }
-                    }
-                }
-            }
-            return listAux;
+            return connection.GetAll<Cargo>().ToList();
         }
 
         public Cargo BuscarCargoPorId(int id)
         {
-            using (var connection = new SQLiteConnection(_ConnectionString)) // Criando a conexão
-            {
-                connection.Open();
+            using var connection = new SQLiteConnection(_ConnectionString);
 
-                // Comando para selecionar e exibir os dados das tabelas
-                string commandSelectId = "SELECT Id, Ocupacao FROM Cargos WHERE Id = @Id;";
-
-                using (var command = new SQLiteCommand(commandSelectId, connection))
-                {
-                    command.Parameters.AddWithValue("@Id", id); // Substitui a chave no comando para a variável do parâmetro
-
-                    using (var reader = command.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            Cargo cargoAux = new Cargo();
-                            cargoAux.Id = int.Parse(reader["Id"].ToString());
-                            cargoAux.Ocupacao = reader["Ocupacao"].ToString();
-
-                            return cargoAux;
-                        }
-                    }
-                }
-            }
-            return null;
+            return connection.Get<Cargo>(id);
         }
     }
 }
