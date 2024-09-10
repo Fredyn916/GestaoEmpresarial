@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GestaoEmpresarial._2___Repository.Data.Script
+namespace GestaoEmpresarial.Repository.Data.Script
 {
     public static class FuncionarioScript
     {
