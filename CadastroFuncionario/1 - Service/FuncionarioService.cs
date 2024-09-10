@@ -27,9 +27,9 @@ namespace GestaoEmpresarial.Service
             _Repository.Remover(id);
         }
 
-        public void Editar(int id, Funcionario funcionarioEdit)
+        public void Editar(Funcionario funcionarioEdit)
         {
-            _Repository.Editar(id, funcionarioEdit);
+            _Repository.Editar(funcionarioEdit);
         }
 
         public List<Funcionario> Listar()

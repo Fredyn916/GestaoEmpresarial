@@ -1,4 +1,6 @@
-﻿using GestaoEmpresarial.Entidades;
+﻿using AutoMapper;
+using GestaoEmpresarial.Entidades;
+using GestaoEmpresarial.Entidades.DTO.FuncionarioDTO;
 using GestaoEmpresarial.Service;
 using Microsoft.AspNetCore.Mvc;
 using System.Configuration;
@@ -10,15 +12,18 @@ namespace GestaoEmpresarialAPI.Controllers
     public class FuncionarioController : ControllerBase
     {
         private FuncionarioService _Service;
+        private readonly IMapper _Mapper;
 
-        public FuncionarioController(IConfiguration connection)
+        public FuncionarioController(IMapper mapper, IConfiguration connection)
         {
             _Service = new FuncionarioService(connection.GetConnectionString("DefaultConnection"));
+            _Mapper = mapper;
         }
 
         [HttpPost("AdicionarFuncionario")] // Rota (EndPoint)
-        public void AdicionarCidade(Funcionario funcionario)
+        public void AdicionarCidade(CreateFuncionarioDTO funcionarioToMap)
         {
+            Funcionario funcionario = _Mapper.Map<Funcionario>(funcionarioToMap);
             _Service.Adicionar(funcionario);
         }
 
@@ -35,9 +40,9 @@ namespace GestaoEmpresarialAPI.Controllers
         }
 
         [HttpPut("EditarFuncionario")] // Rota (EndPoint)
-        public void EditarFuncionario(int id, Funcionario funcionario)
+        public void EditarFuncionario(Funcionario funcionario)
         {
-            _Service.Editar(id, funcionario);
+            _Service.Editar(funcionario);
         }
 
         [HttpDelete("RemoverFuncionario")] // Rota (EndPoint)

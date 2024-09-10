@@ -1,4 +1,5 @@
 using GestaoEmpresarial.Data.Repository;
+using GestaoEmpresarial.Entidades.DTO;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 InicializadorDB.Inicializar();
 
 var app = builder.Build();

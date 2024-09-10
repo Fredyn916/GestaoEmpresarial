@@ -35,7 +35,7 @@ namespace GestaoEmpresarial.Repository
             connection.Delete<Funcionario>(funcionarioToRemove);
         }
 
-        public void Editar(int id, Funcionario editFuncionario)
+        public void Editar(Funcionario editFuncionario)
         {
             using var connection = new SQLiteConnection(_ConnectionString);
 
