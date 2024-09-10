@@ -17,9 +17,9 @@ namespace GestaoEmpresarial.Entidades.DTO.FuncionarioDTO
         [Range(18, 65, ErrorMessage = "Idade Inapripriada")]
         public int Idade { get; set; }
         [Required(ErrorMessage = "Compo Obrigatório 'Peso' não preenchido")]
-        [Range(15, 500, ErrorMessage = "Peso Inapripriada")]
+        [Range(15, 500, ErrorMessage = "Peso Inapripriado")]
         public double Peso { get; set; }
-        public double Salario { get; set; }
+        [Range(1, 10, ErrorMessage = "Cargo Inválido")]
         public int CargoId { get; set; }
         // [JsonIgnore] // Esconde a solicitação do JSON de {Cargo}
         // public virtual Cargo? Cargo { get; set; } // Propriedade de navegação

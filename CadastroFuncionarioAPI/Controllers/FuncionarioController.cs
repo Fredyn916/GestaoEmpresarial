@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using GestaoEmpresarial.Entidades;
 using GestaoEmpresarial.Entidades.DTO.FuncionarioDTO;
+using GestaoEmpresarial.Repository.Data.Script;
 using GestaoEmpresarial.Service;
 using Microsoft.AspNetCore.Mvc;
 using System.Configuration;
@@ -24,6 +25,8 @@ namespace GestaoEmpresarialAPI.Controllers
         public void AdicionarCidade(CreateFuncionarioDTO funcionarioToMap)
         {
             Funcionario funcionario = _Mapper.Map<Funcionario>(funcionarioToMap);
+            funcionario.Salario = FuncionarioScript.GetSalarioFromCargoId(funcionarioToMap.CargoId);
+
             _Service.Adicionar(funcionario);
         }
 

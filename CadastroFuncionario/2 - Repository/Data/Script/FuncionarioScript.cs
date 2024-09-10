@@ -47,5 +47,46 @@ namespace GestaoEmpresarial.Repository.Data.Script
 
             return commandSELECTFuncionarios;
         }
+
+        public static double GetSalarioFromCargoId(int id)
+        {
+            double salario = 0.0;
+
+            switch (id)
+            {
+                case 1:
+                    salario = 100.000;
+                    break;
+                case 2:
+                    salario = 70.000;
+                    break;
+                case 3:
+                    salario = 60.000;
+                    break;
+                case 4:
+                    salario = 50.000;
+                    break;
+                case 5:
+                    salario = 10.000;
+                    break;
+                case 6:
+                    salario = 2.000;
+                    break;
+                case 7:
+                    salario = 12.000;
+                    break;
+                case 8:
+                    salario = 25.000;
+                    break;
+                case 9:
+                    salario = 120.000;
+                    break;
+                case 10:
+                    salario = 3.000;
+                    break;
+            }
+
+            return salario;
+        }
     }
 }
