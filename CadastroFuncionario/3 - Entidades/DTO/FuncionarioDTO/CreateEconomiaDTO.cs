@@ -10,7 +10,7 @@ namespace GestaoEmpresarial.Entidades.DTO.FuncionarioDTO
     public class CreateEconomiaDTO
     {
         [Required(ErrorMessage = "Compo Obrigatório 'DataCalculoFinanceiro' não preenchido")]
-        public DateOnly DataCalculoFinanceiro { get; set; } // Data da Folha Financeira da Empresa
+        public DateTime DataCalculoFinanceiro { get; set; } // Data da Folha Financeira da Empresa
         [Required(ErrorMessage = "Compo Obrigatório 'TotalBruto' não preenchido")]
         public double TotalBruto { get; set; } // Total valor arrecadado pela empresa
         [Required(ErrorMessage = "Compo Obrigatório 'TotalInvestimentos' não preenchido")]

@@ -16,6 +16,19 @@ namespace GestaoEmpresarial.Repository.Data.Script
                     Ocupacao TEXT NOT NULL
                 );
 
+                CREATE TABLE IF NOT EXISTS RelatoriosFinanceiros(
+                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    DataCalculoFinanceiro DATE NOT NULL,
+                    TotalBruto REAL NOT NULL,
+                    TotalInvestimentos REAL NOT NULL,
+                    TotalCapital REAL NOT NULL,
+                    DespesasImovel REAL NOT NULL,
+                    DespesasFuncionarios REAL NOT NULL,
+                    DespesasServicos REAL NOT NULL,
+                    TotalDespesas REAL NOT NULL,
+                    CapitalResultado REAL NOT NULL
+                );
+
                 CREATE TABLE IF NOT EXISTS Funcionarios(
                     Id INTEGER PRIMARY KEY AUTOINCREMENT,
                     Nome TEXT NOT NULL,
