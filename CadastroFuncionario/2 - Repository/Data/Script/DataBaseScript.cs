@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GestaoEmpresarial.Repository.Data.Script
+﻿namespace GestaoEmpresarial.Repository.Data.Script
 {
     public static class DataBaseScript
     {

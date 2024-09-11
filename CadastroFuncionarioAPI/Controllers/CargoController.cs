@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using GestaoEmpresarial.Service;
 using GestaoEmpresarial.Entidades;
-using System.Configuration;
 
 namespace GestaoEmpresarialAPI.Controllers
 {
