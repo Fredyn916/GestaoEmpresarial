@@ -13,6 +13,7 @@ namespace GestaoEmpresarial.Entidades.DTO
         public MappingProfile()
         {
             CreateMap<CreateFuncionarioDTO, Funcionario>().ReverseMap();
+            CreateMap<CreateEconomiaDTO, Economia>().ReverseMap();
         }
     }
 }

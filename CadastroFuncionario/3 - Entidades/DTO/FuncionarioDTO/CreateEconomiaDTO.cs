@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GestaoEmpresarial._3___Entidades.DTO.FuncionarioDTO
+namespace GestaoEmpresarial.Entidades.DTO.FuncionarioDTO
 {
     public class CreateEconomiaDTO
     {
