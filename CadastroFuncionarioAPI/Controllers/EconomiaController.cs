@@ -18,8 +18,8 @@ namespace GestaoEmpresarialAPI.Controllers
             _Mapper = mapper;
         }
 
-        [HttpPost("AdicionarFolhaFinanceira")] // Rota (EndPoint)
-        public void AdicionarCidade([FromBody] CreateEconomiaDTO folhaToMap)
+        [HttpPost("AdicionarRelatorioFinanceiro")] // Rota (EndPoint)
+        public void AdicionarRelatorio([FromBody] CreateEconomiaDTO folhaToMap)
         {
             Economia folhaFinanceira = _Mapper.Map<Economia>(folhaToMap);
             folhaFinanceira.TotalCapital = EconomiaScript.GetTotalCapital(folhaToMap.TotalBruto, folhaToMap.TotalInvestimentos);
@@ -27,6 +27,30 @@ namespace GestaoEmpresarialAPI.Controllers
             folhaFinanceira.CapitalResultado = EconomiaScript.GetCapitalResultado(folhaFinanceira.TotalCapital, folhaFinanceira.TotalDespesas);
 
             _Service.Adicionar(folhaFinanceira);
+        }
+
+        [HttpGet("VisualizarRelatoriosFinanceiros")] // Rota (EndPoint)
+        public List<Economia> ListarRelatorios()
+        {
+            return _Service.Listar();
+        }
+
+        [HttpGet("BuscarRelatorioPorId")] // Rota (EndPoint)
+        public Economia BuscarRelatorioPorId(int id)
+        {
+            return _Service.BuscarRelatorioPorId(id);
+        }
+
+        [HttpPut("EditarRelatorio")] // Rota (EndPoint)
+        public void EditarFuncionario([FromBody] Economia relatorioFinanceiro) // Data Annotation 'FromBody' solicita o parâmetro no corpo por JSON
+        {
+            _Service.Editar(relatorioFinanceiro);
+        }
+
+        [HttpDelete("RemoverRelatorio")] // Rota (EndPoint)
+        public void RemoverRelatorio(int id)
+        {
+            _Service.Remover(id);
         }
     }
 }

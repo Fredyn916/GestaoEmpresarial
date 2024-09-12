@@ -19,5 +19,34 @@ namespace GestaoEmpresarial.Repository
 
             connection.Insert<Economia>(folhaFinanceira);
         }
+
+        public List<Economia> Listar()
+        {
+            using var connection = new SQLiteConnection(_ConnectionString);
+
+            return connection.GetAll<Economia>().ToList();
+        }
+
+        public Economia BuscarRelatorioPorId(int id)
+        {
+            using var connection = new SQLiteConnection(_ConnectionString);
+
+            return connection.Get<Economia>(id);
+        }
+
+        public void Editar(Economia relatorioFinanceiro)
+        {
+            using var connection = new SQLiteConnection(_ConnectionString);
+
+            connection.Update<Economia>(relatorioFinanceiro);
+        }
+
+        public void Remover(int id)
+        {
+            using var connection = new SQLiteConnection(_ConnectionString);
+            Economia relatorioToRemove = BuscarRelatorioPorId(id);
+
+            connection.Delete<Economia>(relatorioToRemove);
+        }
     }
 }

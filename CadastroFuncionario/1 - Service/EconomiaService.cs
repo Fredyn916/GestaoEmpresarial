@@ -1,5 +1,6 @@
 ﻿using GestaoEmpresarial.Entidades;
 using GestaoEmpresarial.Repository;
+using System.Data.SQLite;
 
 namespace GestaoEmpresarial.Service
 {
@@ -16,5 +17,26 @@ namespace GestaoEmpresarial.Service
         {
             _Repository.Adicionar(folhaFinanceira);
         }
+
+        public List<Economia> Listar()
+        {
+            return _Repository.Listar();
+        }
+
+        public Economia BuscarRelatorioPorId(int id)
+        {
+            return _Repository.BuscarRelatorioPorId(id);
+        }
+
+        public void Editar(Economia relatorioFinanceiro)
+        {
+            _Repository.Editar(relatorioFinanceiro);
+        }
+
+        public void Remover(int id)
+        {
+            _Repository.Remover(id);
+        }
+
     }
 }
