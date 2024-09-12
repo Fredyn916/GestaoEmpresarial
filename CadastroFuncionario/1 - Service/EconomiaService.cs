@@ -1,6 +1,5 @@
 ﻿using GestaoEmpresarial.Entidades;
 using GestaoEmpresarial.Repository;
-using System.Data.SQLite;
 
 namespace GestaoEmpresarial.Service
 {
