@@ -1,4 +1,5 @@
 ﻿using Dapper.Contrib.Extensions;
+using GestaoEmpresarial.Entidades;
 using System.Data.SQLite;
 
 namespace GestaoEmpresarial.Repository
@@ -16,13 +17,14 @@ namespace GestaoEmpresarial.Repository
         {
             using var connection = new SQLiteConnection(_ConnectionString);
 
-            DateTime date = new DateTime(2024, 9, 1, 0, 0, 0);
+            DateTime date = DateTime.Now;
             for (int i = 0; i < 1000; i++)
             {
-                Data data = new Data();
+                DataBalanco data = new DataBalanco();
                 data.Date = date;
 
-                connection.Insert<Data>(data);
+                connection.Insert<DataBalanco>(data);
+
                 date = DateTime.Now.AddDays(1);
             }
         }

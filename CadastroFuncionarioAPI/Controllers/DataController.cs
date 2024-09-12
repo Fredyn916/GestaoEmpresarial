@@ -1,7 +1,4 @@
 ﻿using AutoMapper;
-using GestaoEmpresarial.Entidades.DTO.FuncionarioDTO;
-using GestaoEmpresarial.Entidades;
-using GestaoEmpresarial.Repository.Data.Script;
 using GestaoEmpresarial.Service;
 using Microsoft.AspNetCore.Mvc;
 

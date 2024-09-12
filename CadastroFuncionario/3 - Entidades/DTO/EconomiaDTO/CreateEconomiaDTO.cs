@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GestaoEmpresarial.Entidades.DTO.FuncionarioDTO
+namespace GestaoEmpresarial.Entidades.DTO.EconomiaDTO
 {
     public class CreateEconomiaDTO
     {
