@@ -1,9 +1,9 @@
-﻿using GestaoEmpresarial.Entidades.DTO.FuncionarioDTO;
-using GestaoEmpresarial.Entidades;
+﻿using GestaoEmpresarial.Entidades;
 using GestaoEmpresarial.Repository.Data.Script;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using GestaoEmpresarial.Service;
+using GestaoEmpresarial.Entidades.DTO.EconomiaDTO;
 
 namespace GestaoEmpresarialAPI.Controllers
 {
