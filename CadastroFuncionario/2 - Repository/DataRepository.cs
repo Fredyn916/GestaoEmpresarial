@@ -21,9 +21,9 @@ namespace GestaoEmpresarial.Repository
             data.Date = DateTime.Now;
             for (int i = 0; i < 1000; i++)
             {
-                connection.Insert<DataBalanco>(data);
+                data.Date.AddDays(i);
 
-                data.Date.AddDays(1);
+                connection.Insert<DataBalanco>(data);
             }
         }
     }
