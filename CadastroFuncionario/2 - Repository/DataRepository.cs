@@ -17,13 +17,13 @@ namespace GestaoEmpresarial.Repository
         {
             using var connection = new SQLiteConnection(_ConnectionString);
 
-            DataBalanco data = new DataBalanco();
-            data.Date = DateTime.Now;
-            for (int i = 0; i < 1000; i++)
+            for(int i = 0; i < 1000; i++)
             {
-                data.Date.AddDays(i);
-
-                connection.Insert<DataBalanco>(data);
+                DataBalanco d = new DataBalanco()
+                {
+                    Date = DateTime.Now.AddDays(i),
+                };
+                connection.Insert<DataBalanco>(d);
             }
         }
     }

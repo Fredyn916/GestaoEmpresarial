@@ -8,7 +8,7 @@ namespace GestaoEmpresarial.Entidades
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "Compo Obrigatório 'DataId' não preenchido")]
-        public int DataId { get; set; } // Data da Folha Financeira da Empresa
+        public int DataBalancoId { get; set; } // Data da Folha Financeira da Empresa
         [Required(ErrorMessage = "Compo Obrigatório 'TotalBruto' não preenchido")]
         public double TotalBruto { get; set; } // Total valor arrecadado pela empresa
         [Required(ErrorMessage = "Compo Obrigatório 'TotalInvestimentos' não preenchido")]
