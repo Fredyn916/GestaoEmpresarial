@@ -1,4 +1,5 @@
 ﻿using GestaoEmpresarial.Entidades;
+using GestaoEmpresarial.Entidades.DTO.FuncionarioDTO;
 using GestaoEmpresarial.Repository;
 
 namespace GestaoEmpresarial.Service
@@ -27,12 +28,12 @@ namespace GestaoEmpresarial.Service
             _Repository.Editar(funcionarioEdit);
         }
 
-        public List<Funcionario> Listar()
+        public List<ReadFuncionarioDTO> Listar()
         {
             return _Repository.Listar();
         }
 
-        public Funcionario BuscarFuncionarioPorId(int id)
+        public ReadFuncionarioDTO BuscarFuncionarioPorId(int id)
         {
             return _Repository.BuscarFuncionarioPorId(id);
         }

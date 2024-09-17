@@ -1,6 +1,9 @@
-﻿using Dapper.Contrib.Extensions;
+﻿using Dapper;
+using Dapper.Contrib.Extensions;
 using GestaoEmpresarial.Entidades;
+using GestaoEmpresarial.Repository.Data.Script;
 using System.Data.SQLite;
+using System.Security.Cryptography;
 
 namespace GestaoEmpresarial.Repository
 {
@@ -17,14 +20,31 @@ namespace GestaoEmpresarial.Repository
         {
             using var connection = new SQLiteConnection(_ConnectionString);
 
-            for(int i = 0; i < 1000; i++)
+            int datasCount = connection.QueryFirst<int>(DataBalancoScript.SelectCountAllDatasBalanco()); // Query Select na tabela para retornar o Count
+
+            if(datasCount == 0)
             {
-                DataBalanco d = new DataBalanco()
+                for (int i = 0; i < 1000; i++)
                 {
-                    Date = DateTime.Now.AddDays(i),
-                };
-                connection.Insert<DataBalanco>(d);
+                    DataBalanco d = new DataBalanco()
+                    {
+                        Date = DateTime.Now.AddDays(i),
+                    };
+                    connection.Insert<DataBalanco>(d);
+                }
             }
+        }
+
+        public List<DataBalanco> Listar()
+        {
+            using var connection = new SQLiteConnection(_ConnectionString);
+            return connection.GetAll<DataBalanco>().ToList();
+        }
+
+        public DataBalanco BuscarPorID(int id)
+        {
+            using var connection = new SQLiteConnection(_ConnectionString);
+            return connection.Get<DataBalanco>(id);
         }
     }
 }

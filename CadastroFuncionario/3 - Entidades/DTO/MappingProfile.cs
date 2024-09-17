@@ -12,6 +12,7 @@ namespace GestaoEmpresarial.Entidades.DTO
             CreateMap<CreateFuncionarioDTO, Funcionario>().ReverseMap();
             CreateMap<CreateEconomiaDTO, Economia>().ReverseMap();
             CreateMap<CreateDataDTO, DataBalanco>().ReverseMap();
+            CreateMap<ReadFuncionarioDTO, Funcionario>().ReverseMap();
         }
     }
 }

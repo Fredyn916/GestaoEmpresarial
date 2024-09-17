@@ -21,7 +21,7 @@ namespace GestaoEmpresarialAPI.Controllers
         }
 
         [HttpPost("AdicionarFuncionario")] // Rota (EndPoint)
-        public void AdicionarCidade(CreateFuncionarioDTO funcionarioToMap)
+        public void AdicionarFuncionario(CreateFuncionarioDTO funcionarioToMap)
         {
             Funcionario funcionario = _Mapper.Map<Funcionario>(funcionarioToMap);
             funcionario.Salario = FuncionarioScript.GetSalarioFromCargoId(funcionarioToMap.CargoId);
@@ -30,13 +30,13 @@ namespace GestaoEmpresarialAPI.Controllers
         }
 
         [HttpGet("VisualizarFuncionario")] // Rota (EndPoint)
-        public List<Funcionario> ListarFuncionarios()
+        public List<ReadFuncionarioDTO> ListarFuncionarios()
         {
             return _Service.Listar();
         }
 
         [HttpGet("BuscarFuncionarioPorId")] // Rota (EndPoint)
-        public Funcionario BuscarFuncionarioPorId(int id)
+        public ReadFuncionarioDTO BuscarFuncionarioPorId(int id)
         {
             return _Service.BuscarFuncionarioPorId(id);
         }
