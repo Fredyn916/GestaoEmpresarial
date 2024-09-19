@@ -1,12 +1,6 @@
 ﻿using Dapper;
-using GestaoEmpresarial.Entidades;
 using GestaoEmpresarial.Repository.Data.Script;
-using System;
-using System.Collections.Generic;
 using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GestaoEmpresarial.Data.Repository
 {

@@ -2,10 +2,10 @@
 
 namespace GestaoEmpresarial.Entidades
 {
-    [Table("Cargos")]
-    public class Cargo
+    [Table("DatasBalanco")]
+    public class DataBalanco
     {
         public int Id { get; set; }
-        public string Ocupacao { get; set;}
+        public DateTime Date { get; set; }
     }
 }
