@@ -1,4 +1,5 @@
-﻿using GestaoEmpresarial.Entidades;
+﻿using Dapper.Contrib.Extensions;
+using GestaoEmpresarial.Entidades;
 using GestaoEmpresarial.Entidades.DTO.AcaoDTO;
 using System.Data.SQLite;
 
