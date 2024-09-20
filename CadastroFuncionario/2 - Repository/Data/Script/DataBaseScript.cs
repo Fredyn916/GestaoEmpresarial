@@ -28,6 +28,15 @@
                     Date DATE NOT NULL
                 );
 
+                CREATE TABLE IF NOT EXISTS Acoes(
+                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    Nome TEXT NOT NULL,
+                    Ticker TEXT NOT NULL,
+                    Codigo INTEGER NOT NULL,
+                    Valor REAL NOT NULL,
+                    Dividendo REAL NOT NULL,
+                );
+
                 CREATE TABLE IF NOT EXISTS Funcionarios(
                     Id INTEGER PRIMARY KEY AUTOINCREMENT,
                     Nome TEXT NOT NULL,
