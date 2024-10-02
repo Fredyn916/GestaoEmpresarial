@@ -34,7 +34,7 @@
                     Ticker TEXT NOT NULL,
                     Codigo INTEGER NOT NULL,
                     Valor REAL NOT NULL,
-                    Dividendo REAL NOT NULL,
+                    Dividendo REAL NOT NULL
                 );
 
                 CREATE TABLE IF NOT EXISTS Funcionarios(

@@ -20,8 +20,11 @@ namespace GestaoEmpresarialAPI.Controllers
         }
 
         [HttpPost("AdicionarAcao")] // Rota (EndPoint)
-        public void AdicionarAcao(CreateCodigoAcaoDTO CodigoAcao, CreateAcaoDTO acaoDTO)
+        public void AdicionarAcao(int codigoAcao, CreateAcaoDTO acaoDTO)
         {
+            CreateCodigoAcaoDTO CodigoAcao = new CreateCodigoAcaoDTO();
+            CodigoAcao.Codigo = codigoAcao;
+
             Acao acao = _Mapper.Map<Acao>(acaoDTO);
             acao.Codigo = CodigoAcao.Codigo;
             acao.Ticker = acao.Ticker + CodigoAcao.Codigo.ToString();
