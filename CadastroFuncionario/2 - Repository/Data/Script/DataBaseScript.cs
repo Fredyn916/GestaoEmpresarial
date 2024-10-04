@@ -37,6 +37,12 @@
                     Dividendo REAL NOT NULL
                 );
 
+                CREATE TABLE IF NOT EXISTS Balancos(
+                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    EconomiaId INTEGER NOT NULL,
+                    AcaoId INTEGER NOT NULL
+                );
+
                 CREATE TABLE IF NOT EXISTS Funcionarios(
                     Id INTEGER PRIMARY KEY AUTOINCREMENT,
                     Nome TEXT NOT NULL,
