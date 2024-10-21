@@ -3,7 +3,6 @@ using Dapper.Contrib.Extensions;
 using GestaoEmpresarial.Entidades;
 using GestaoEmpresarial.Repository.Data.Script;
 using System.Data.SQLite;
-using System.Security.Cryptography;
 
 namespace GestaoEmpresarial.Repository
 {
