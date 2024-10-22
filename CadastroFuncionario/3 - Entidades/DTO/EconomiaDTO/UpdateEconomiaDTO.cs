@@ -2,7 +2,7 @@
 
 namespace GestaoEmpresarial.Entidades.DTO.EconomiaDTO
 {
-    public class EditEconomiaDTO
+    public class UpdateEconomiaDTO
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "Compo Obrigatório 'DataCalculoFinanceiro' não preenchido")]

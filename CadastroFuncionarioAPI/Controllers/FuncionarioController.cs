@@ -29,7 +29,7 @@ namespace GestaoEmpresarialAPI.Controllers
             _Service.Adicionar(funcionario);
         }
 
-        [HttpGet("VisualizarFuncionario")] // Rota (EndPoint)
+        [HttpGet("VisualizarFuncionarios")] // Rota (EndPoint)
         public List<ReadFuncionarioDTO> ListarFuncionarios()
         {
             return _Service.Listar();

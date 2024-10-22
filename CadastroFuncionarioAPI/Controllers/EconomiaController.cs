@@ -42,7 +42,7 @@ namespace GestaoEmpresarialAPI.Controllers
         }
 
         [HttpPut("EditarRelatorio")] // Rota (EndPoint)
-        public void EditarFuncionario([FromBody] EditEconomiaDTO relatorioToMap) // Data Annotation 'FromBody' solicita o parâmetro no corpo por JSON
+        public void EditarFuncionario([FromBody] UpdateEconomiaDTO relatorioToMap) // Data Annotation 'FromBody' solicita o parâmetro no corpo por JSON
         {
             Economia relatorioFinanceiro = _Mapper.Map<Economia>(relatorioToMap);
             relatorioFinanceiro.TotalCapital = EconomiaScript.GetTotalCapital(relatorioToMap.TotalBruto, relatorioToMap.TotalInvestimentos);

@@ -2,8 +2,9 @@
 
 namespace GestaoEmpresarial.Entidades.DTO.AcaoDTO
 {
-    public class CreateAcaoDTO
+    public class UpdateAcaoDTO
     {
+        public int Id { get; set; }
         [Required(ErrorMessage = "Compo Obrigatório 'Nome' não preenchido")]
         public string Nome { get; set; }
         [Required(ErrorMessage = "Compo Obrigatório 'Ticker' não preenchido")]
