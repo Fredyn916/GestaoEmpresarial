@@ -19,14 +19,14 @@ namespace GestaoEmpresarialAPI.Controllers
         }
 
         [HttpPost("AdicionarRelatorioFinanceiro")] // Rota (EndPoint)
-        public void AdicionarRelatorio([FromBody] CreateEconomiaDTO folhaToMap)
+        public void AdicionarRelatorio([FromBody] CreateEconomiaDTO relatorioToMap)
         {
-            Economia folhaFinanceira = _Mapper.Map<Economia>(folhaToMap);
-            folhaFinanceira.TotalCapital = EconomiaScript.GetTotalCapital(folhaToMap.TotalBruto, folhaToMap.TotalInvestimentos);
-            folhaFinanceira.TotalDespesas = EconomiaScript.GetTotalDespesas(folhaToMap.DespesasImovel, folhaToMap.DespesasFuncionarios, folhaToMap.DespesasServicos);
-            folhaFinanceira.CapitalResultado = EconomiaScript.GetCapitalResultado(folhaFinanceira.TotalCapital, folhaFinanceira.TotalDespesas);
+            Economia relatorioFinanceiro = _Mapper.Map<Economia>(relatorioToMap);
+            relatorioFinanceiro.TotalCapital = EconomiaScript.GetTotalCapital(relatorioToMap.TotalBruto, relatorioToMap.TotalInvestimentos);
+            relatorioFinanceiro.TotalDespesas = EconomiaScript.GetTotalDespesas(relatorioToMap.DespesasImovel, relatorioToMap.DespesasFuncionarios, relatorioToMap.DespesasServicos);
+            relatorioFinanceiro.CapitalResultado = EconomiaScript.GetCapitalResultado(relatorioFinanceiro.TotalCapital, relatorioFinanceiro.TotalDespesas);
 
-            _Service.Adicionar(folhaFinanceira);
+            _Service.Adicionar(relatorioFinanceiro);
         }
 
         [HttpGet("VisualizarRelatoriosFinanceiros")] // Rota (EndPoint)
@@ -42,8 +42,13 @@ namespace GestaoEmpresarialAPI.Controllers
         }
 
         [HttpPut("EditarRelatorio")] // Rota (EndPoint)
-        public void EditarFuncionario([FromBody] Economia relatorioFinanceiro) // Data Annotation 'FromBody' solicita o parâmetro no corpo por JSON
+        public void EditarFuncionario([FromBody] EditEconomiaDTO relatorioToMap) // Data Annotation 'FromBody' solicita o parâmetro no corpo por JSON
         {
+            Economia relatorioFinanceiro = _Mapper.Map<Economia>(relatorioToMap);
+            relatorioFinanceiro.TotalCapital = EconomiaScript.GetTotalCapital(relatorioToMap.TotalBruto, relatorioToMap.TotalInvestimentos);
+            relatorioFinanceiro.TotalDespesas = EconomiaScript.GetTotalDespesas(relatorioToMap.DespesasImovel, relatorioToMap.DespesasFuncionarios, relatorioToMap.DespesasServicos);
+            relatorioFinanceiro.CapitalResultado = EconomiaScript.GetCapitalResultado(relatorioFinanceiro.TotalCapital, relatorioFinanceiro.TotalDespesas);
+
             _Service.Editar(relatorioFinanceiro);
         }
 

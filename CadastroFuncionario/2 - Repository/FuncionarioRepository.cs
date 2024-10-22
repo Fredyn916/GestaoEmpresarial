@@ -25,29 +25,6 @@ namespace GestaoEmpresarial.Repository
             connection.Insert<Funcionario>(funcionario);
         }
 
-        public void Remover(int id)
-        {
-            using var connection = new SQLiteConnection(_ConnectionString);
-            ReadFuncionarioDTO funcionarioDTO = BuscarFuncionarioPorId(id);
-            Funcionario funcionarioToRemove = new Funcionario();
-
-            funcionarioToRemove.Id = funcionarioDTO.Id;
-            funcionarioToRemove.Nome = funcionarioDTO.Nome;
-            funcionarioToRemove.Idade = funcionarioDTO.Idade;
-            funcionarioToRemove.Peso = funcionarioDTO.Peso;
-            funcionarioToRemove.Salario = funcionarioDTO.Salario;
-            funcionarioToRemove.CargoId = funcionarioDTO.Cargo.Id;
-
-            connection.Delete<Funcionario>(funcionarioToRemove);
-        }
-
-        public void Editar(Funcionario editFuncionario)
-        {
-            using var connection = new SQLiteConnection(_ConnectionString);
-
-            connection.Update<Funcionario>(editFuncionario);
-        }
-
         public List<ReadFuncionarioDTO> Listar()
         {
             using var connection = new SQLiteConnection(_ConnectionString);
@@ -70,7 +47,7 @@ namespace GestaoEmpresarial.Repository
             return funcionariosDTO;
         }
 
-        public ReadFuncionarioDTO BuscarFuncionarioPorId(int id)
+        public ReadFuncionarioDTO BuscarFuncionarioDTOPorId(int id)
         {
             using var connection = new SQLiteConnection(_ConnectionString);
 
@@ -85,6 +62,29 @@ namespace GestaoEmpresarial.Repository
             funcionarioDTO.Cargo = _Repository.BuscarCargoPorId(funcionario.CargoId);
 
             return funcionarioDTO;
+        }
+
+        public Funcionario BuscarFuncionarioPorId(int id)
+        {
+            using var connection = new SQLiteConnection(_ConnectionString);
+
+            return connection.Get<Funcionario>(id);
+        }
+
+        public void Editar(Funcionario editFuncionario)
+        {
+            using var connection = new SQLiteConnection(_ConnectionString);
+
+            connection.Update<Funcionario>(editFuncionario);
+        }
+
+        public void Remover(int id)
+        {
+            using var connection = new SQLiteConnection(_ConnectionString);
+
+            Funcionario funcionarioToRemove = BuscarFuncionarioPorId(id);
+
+            connection.Delete<Funcionario>(funcionarioToRemove);
         }
     }
 }

@@ -12,6 +12,11 @@ namespace GestaoEmpresarial.Service
             _Repository = new CargoRepository(connectionString);
         }
 
+        public void Adicionar(Cargo cargo)
+        {
+            _Repository.Adicionar(cargo);
+        }
+
         public List<Cargo> Listar()
         {
             return _Repository.Listar();
@@ -20,6 +25,16 @@ namespace GestaoEmpresarial.Service
         public Cargo BuscarCargoPorId(int id)
         {
             return _Repository.BuscarCargoPorId(id);
+        }
+
+        public void Editar(Cargo cargoEdit)
+        {
+            _Repository.Editar(cargoEdit);
+        }
+
+        public void Remover(int id)
+        {
+            _Repository.Remover(id);
         }
     }
 }

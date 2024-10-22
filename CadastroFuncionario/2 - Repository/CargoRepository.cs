@@ -13,6 +13,13 @@ namespace GestaoEmpresarial.Repository
             _ConnectionString = connectionString;
         }
 
+        public void Adicionar(Cargo cargo)
+        {
+            using var connection = new SQLiteConnection(_ConnectionString);
+
+            connection.Insert<Cargo>(cargo);
+        }
+
         public List<Cargo> Listar()
         {
             using var connection = new SQLiteConnection(_ConnectionString);
@@ -25,6 +32,22 @@ namespace GestaoEmpresarial.Repository
             using var connection = new SQLiteConnection(_ConnectionString);
 
             return connection.Get<Cargo>(id);
+        }
+
+        public void Editar(Cargo editCargo)
+        {
+            using var connection = new SQLiteConnection(_ConnectionString);
+
+            connection.Update<Cargo>(editCargo);
+        }
+
+        public void Remover(int id)
+        {
+            using var connection = new SQLiteConnection(_ConnectionString);
+
+            Cargo cargoToRemove = BuscarCargoPorId(id);
+
+            connection.Delete<Cargo>(cargoToRemove);
         }
     }
 }

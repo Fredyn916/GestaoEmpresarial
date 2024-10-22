@@ -12,7 +12,7 @@
 
                 CREATE TABLE IF NOT EXISTS RelatoriosFinanceiros(
                     Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    DataBalancoId INTEGER NOT NULL,
+                    DataCalculoFinanceiro TEXT NOT NULL,
                     TotalBruto REAL NOT NULL,
                     TotalInvestimentos REAL NOT NULL,
                     TotalCapital REAL NOT NULL,

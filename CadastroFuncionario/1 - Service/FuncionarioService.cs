@@ -18,16 +18,6 @@ namespace GestaoEmpresarial.Service
             _Repository.Adicionar(funcionario);
         }
 
-        public void Remover(int id)
-        {
-            _Repository.Remover(id);
-        }
-
-        public void Editar(Funcionario funcionarioEdit)
-        {
-            _Repository.Editar(funcionarioEdit);
-        }
-
         public List<ReadFuncionarioDTO> Listar()
         {
             return _Repository.Listar();
@@ -35,7 +25,17 @@ namespace GestaoEmpresarial.Service
 
         public ReadFuncionarioDTO BuscarFuncionarioPorId(int id)
         {
-            return _Repository.BuscarFuncionarioPorId(id);
+            return _Repository.BuscarFuncionarioDTOPorId(id);
+        }
+
+        public void Editar(Funcionario funcionarioEdit)
+        {
+            _Repository.Editar(funcionarioEdit);
+        }
+
+        public void Remover(int id)
+        {
+            _Repository.Remover(id);
         }
     }
 }
