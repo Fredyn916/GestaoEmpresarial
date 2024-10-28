@@ -1,13 +1,13 @@
 ﻿using GestaoEmpresarial.Entidades;
-using GestaoEmpresarial.Entidades.DTO.AcaoDTO;
-using GestaoEmpresarial.Entidades.DTO.FuncionarioDTO;
 using GestaoEmpresarial.Repository;
+using GestaoEmpresarial.Repository.Interfaces;
+using GestaoEmpresarial.Service.Interfaces;
 
 namespace GestaoEmpresarial.Service
 {
-    public class AcaoService
+    public class AcaoService : IAcaoService
     {
-        public AcaoRepository _Repository { get; set; }
+        public IAcaoRepository _Repository { get; set; }
 
         public AcaoService(string connectionString)
         {

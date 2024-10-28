@@ -1,12 +1,11 @@
 ﻿using Dapper.Contrib.Extensions;
 using GestaoEmpresarial.Entidades;
-using GestaoEmpresarial.Entidades.DTO.AcaoDTO;
-using GestaoEmpresarial.Entidades.DTO.FuncionarioDTO;
+using GestaoEmpresarial.Repository.Interfaces;
 using System.Data.SQLite;
 
 namespace GestaoEmpresarial.Repository
 {
-    public class AcaoRepository
+    public class AcaoRepository : IAcaoRepository
     {
         public readonly string _ConnectionString; // Variável da connection string a ser preenchida
 

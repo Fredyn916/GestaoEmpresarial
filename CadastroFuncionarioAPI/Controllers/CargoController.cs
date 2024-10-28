@@ -4,6 +4,7 @@ using GestaoEmpresarial.Entidades;
 using GestaoEmpresarial.Repository.Data.Script;
 using GestaoEmpresarial.Entidades.DTO.CargoDTO;
 using AutoMapper;
+using GestaoEmpresarial.Service.Interfaces;
 
 namespace GestaoEmpresarialAPI.Controllers
 {
@@ -11,7 +12,7 @@ namespace GestaoEmpresarialAPI.Controllers
     [Route("[controller]")] // DataAnnotation
     public class CargoController : ControllerBase
     {
-        private CargoService _Service;
+        private ICargoService _Service;
         private readonly IMapper _Mapper;
 
         public CargoController(IMapper mapper, IConfiguration connection)

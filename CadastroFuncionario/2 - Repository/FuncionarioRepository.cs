@@ -1,11 +1,12 @@
 ﻿using Dapper.Contrib.Extensions;
 using GestaoEmpresarial.Entidades;
 using GestaoEmpresarial.Entidades.DTO.FuncionarioDTO;
+using GestaoEmpresarial.Repository.Interfaces;
 using System.Data.SQLite;
 
 namespace GestaoEmpresarial.Repository
 {
-    public class FuncionarioRepository
+    public class FuncionarioRepository : IFuncionarioRepository
     {
         // ConnectionString (Parâmetros necessários para criar um banco de dados)
         // Caso não exista o banco de dados, a var connection cria um database automaticamente

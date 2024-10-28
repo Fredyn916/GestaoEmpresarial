@@ -4,12 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using GestaoEmpresarial.Service;
 using GestaoEmpresarial.Entidades.DTO.EconomiaDTO;
+using GestaoEmpresarial.Service.Interfaces;
 
 namespace GestaoEmpresarialAPI.Controllers
 {
     public class EconomiaController : ControllerBase
     {
-        private EconomiaService _Service;
+        private IEconomiaService _Service;
         private readonly IMapper _Mapper;
 
         public EconomiaController(IMapper mapper, IConfiguration connection)

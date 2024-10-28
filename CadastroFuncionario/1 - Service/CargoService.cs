@@ -1,11 +1,13 @@
 ﻿using GestaoEmpresarial.Entidades;
 using GestaoEmpresarial.Repository;
+using GestaoEmpresarial.Repository.Interfaces;
+using GestaoEmpresarial.Service.Interfaces;
 
 namespace GestaoEmpresarial.Service
 {
-    public class CargoService
+    public class CargoService : ICargoService
     {
-        public CargoRepository _Repository { get; set; }
+        public ICargoRepository _Repository { get; set; }
 
         public CargoService(string connectionString)
         {

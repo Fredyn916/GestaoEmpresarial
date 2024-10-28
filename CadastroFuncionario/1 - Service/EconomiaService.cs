@@ -1,9 +1,10 @@
 ﻿using GestaoEmpresarial.Entidades;
 using GestaoEmpresarial.Repository;
+using GestaoEmpresarial.Service.Interfaces;
 
 namespace GestaoEmpresarial.Service
 {
-    public class EconomiaService
+    public class EconomiaService : IEconomiaService
     {
         public EconomiaRepository _Repository { get; set; }
 
