@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using GestaoEmpresarial.Entidades;
 using GestaoEmpresarial.Service;
+using GestaoEmpresarial.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestaoEmpresarialAPI.Controllers
@@ -9,7 +10,7 @@ namespace GestaoEmpresarialAPI.Controllers
     [Route("[controller]")] // DataAnnotation
     public class BalancoController : ControllerBase
     {
-        private BalancoService _Service;
+        private IBalancoService _Service;
         private readonly IMapper _Mapper;
 
         public BalancoController(IMapper mapper, IConfiguration connection)

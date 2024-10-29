@@ -1,11 +1,13 @@
 ﻿using GestaoEmpresarial.Entidades;
 using GestaoEmpresarial.Repository;
+using GestaoEmpresarial.Repository.Interfaces;
+using GestaoEmpresarial.Service.Interfaces;
 
 namespace GestaoEmpresarial.Service
 {
-    public class DataService
+    public class DataService : IDataService
     {
-        public DataRepository _Repository { get; set; }
+        public IDataRepository _Repository { get; set; }
 
         public DataService(string connectionString)
         {

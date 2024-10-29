@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GestaoEmpresarial.Service;
+using GestaoEmpresarial.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestaoEmpresarialAPI.Controllers
@@ -8,7 +9,7 @@ namespace GestaoEmpresarialAPI.Controllers
     [Route("[controller]")] // DataAnnotation
     public class DataController : ControllerBase
     {
-        private DataService _Service;
+        private IDataService _Service;
 
         public DataController(IConfiguration connection)
         {

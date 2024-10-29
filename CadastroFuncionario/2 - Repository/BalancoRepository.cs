@@ -1,10 +1,11 @@
 ﻿using Dapper.Contrib.Extensions;
 using GestaoEmpresarial.Entidades;
+using GestaoEmpresarial.Repository.Interfaces;
 using System.Data.SQLite;
 
 namespace GestaoEmpresarial.Repository
 {
-    public class BalancoRepository
+    public class BalancoRepository : IBalancoRepository
     {
         public readonly string _ConnectionString; // Variável da connection string a ser preenchida
 

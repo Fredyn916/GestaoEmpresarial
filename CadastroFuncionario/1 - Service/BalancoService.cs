@@ -1,11 +1,13 @@
 ﻿using GestaoEmpresarial.Entidades;
 using GestaoEmpresarial.Repository;
+using GestaoEmpresarial.Repository.Interfaces;
+using GestaoEmpresarial.Service.Interfaces;
 
 namespace GestaoEmpresarial.Service
 {
-    public class BalancoService
+    public class BalancoService : IBalancoService
     {
-        public BalancoRepository _Repository { get; set; }
+        public IBalancoRepository _Repository { get; set; }
 
         public BalancoService(string connectionString)
         {
