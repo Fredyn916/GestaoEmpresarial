@@ -24,13 +24,13 @@ namespace GestaoEmpresarial.Repository
 
             if(datasCount == 0)
             {
-                for (int i = 0; i < 1000; i++)
+                for (int i = 0; i < 1200; i++)
                 {
-                    DataBalanco d = new DataBalanco()
+                    DataBalanco dataDoMes = new DataBalanco()
                     {
-                        Date = DateTime.Now.AddDays(i),
+                        Date = DateTime.Now.AddMonths(i)
                     };
-                    connection.Insert<DataBalanco>(d);
+                    connection.Insert<DataBalanco>(dataDoMes);
                 }
             }
         }
