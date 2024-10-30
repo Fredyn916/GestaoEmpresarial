@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GestaoEmpresarial.Entidades.DTO.AcaoDTO;
+using GestaoEmpresarial.Entidades.DTO.BalancoDTO;
 using GestaoEmpresarial.Entidades.DTO.CargoDTO;
 using GestaoEmpresarial.Entidades.DTO.DataBalancoDTO;
 using GestaoEmpresarial.Entidades.DTO.EconomiaDTO;
@@ -17,6 +18,7 @@ namespace GestaoEmpresarial.Entidades.DTO
             CreateMap<ReadFuncionarioDTO, Funcionario>().ReverseMap();
             CreateMap<CreateAcaoDTO, Acao>().ReverseMap();
             CreateMap<CreateCargoDTO, Cargo>().ReverseMap();
+            CreateMap<CreateBalancoDTO, Balanco>().ReverseMap();
         }
     }
 }

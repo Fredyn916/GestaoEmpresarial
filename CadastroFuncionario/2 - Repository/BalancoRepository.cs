@@ -27,5 +27,28 @@ namespace GestaoEmpresarial.Repository
 
             return connection.GetAll<Balanco>().ToList();
         }
+
+        public Balanco BuscarBalancoPorId(int id)
+        {
+            using var connection = new SQLiteConnection(_ConnectionString);
+
+            return connection.Get<Balanco>(id);
+        }
+
+        public void Editar(Balanco editBalanco)
+        {
+            using var connection = new SQLiteConnection(_ConnectionString);
+
+            connection.Update<Balanco>(editBalanco);
+        }
+
+        public void Remover(int id)
+        {
+            using var connection = new SQLiteConnection(_ConnectionString);
+
+            Balanco balancoToRemove = BuscarBalancoPorId(id);
+
+            connection.Delete<Balanco>(balancoToRemove);
+        }
     }
 }

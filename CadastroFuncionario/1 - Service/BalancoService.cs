@@ -14,15 +14,30 @@ namespace GestaoEmpresarial.Service
             _Repository = new BalancoRepository(connectionString);
         }
 
-        public void Adicionar()
+        public void Adicionar(Balanco balanco)
         {
             // Lógica de coferência de existência
-            // _Repository.Adicionar();
+            _Repository.Adicionar(balanco);
         }
 
         public List<Balanco> Listar()
         {
             return _Repository.Listar();
+        }
+
+        public Balanco BuscarBalancoPorId(int id)
+        {
+            return _Repository.BuscarBalancoPorId(id);
+        }
+
+        public void Editar(Balanco balancoEdit)
+        {
+            _Repository.Editar(balancoEdit);
+        }
+
+        public void Remover(int id)
+        {
+            _Repository.Remover(id);
         }
     }
 }
