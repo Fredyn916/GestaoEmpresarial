@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using GestaoEmpresarial.Service;
+﻿using GestaoEmpresarial.Service;
 using GestaoEmpresarial.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
