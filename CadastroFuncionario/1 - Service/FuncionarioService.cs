@@ -1,6 +1,5 @@
 ﻿using GestaoEmpresarial.Entidades;
 using GestaoEmpresarial.Entidades.DTO.FuncionarioDTO;
-using GestaoEmpresarial.Repository;
 using GestaoEmpresarial.Repository.Interfaces;
 using GestaoEmpresarial.Service.Interfaces;
 
@@ -8,11 +7,11 @@ namespace GestaoEmpresarial.Service
 {
     public class FuncionarioService : IFuncionarioService
     {
-        public IFuncionarioRepository _Repository { get; set; }
+        private readonly IFuncionarioRepository _Repository;
 
-        public FuncionarioService(string connectionString)
+        public FuncionarioService(IFuncionarioRepository funcionarioRepository)
         {
-            _Repository = new FuncionarioRepository(connectionString);
+            _Repository = funcionarioRepository;
         }
 
         public void Adicionar(Funcionario funcionario)

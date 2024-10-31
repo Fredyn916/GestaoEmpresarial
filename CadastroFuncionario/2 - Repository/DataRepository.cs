@@ -3,17 +3,18 @@ using Dapper.Contrib.Extensions;
 using GestaoEmpresarial.Entidades;
 using GestaoEmpresarial.Repository.Data.Script;
 using GestaoEmpresarial.Repository.Interfaces;
+using Microsoft.Extensions.Configuration;
 using System.Data.SQLite;
 
 namespace GestaoEmpresarial.Repository
 {
     public class DataRepository : IDataRepository
     {
-        public readonly string _ConnectionString; // Variável da connection string a ser preenchida
+        private readonly string _ConnectionString; // Variável da connection string a ser preenchida
 
-        public DataRepository(string connectionString) // Bloco de código responsável por preencher a connectionString
+        public DataRepository(IConfiguration connection) // Bloco de código responsável por preencher a connectionString
         {
-            _ConnectionString = connectionString;
+            _ConnectionString = connection.GetConnectionString("DefaultConnection");
         }
 
         public void Adicionar()

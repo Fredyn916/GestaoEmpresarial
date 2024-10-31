@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using GestaoEmpresarial.Service;
 using GestaoEmpresarial.Entidades;
-using GestaoEmpresarial.Repository.Data.Script;
 using GestaoEmpresarial.Entidades.DTO.CargoDTO;
 using AutoMapper;
 using GestaoEmpresarial.Service.Interfaces;
@@ -12,12 +10,12 @@ namespace GestaoEmpresarialAPI.Controllers
     [Route("[controller]")] // DataAnnotation
     public class CargoController : ControllerBase
     {
-        private ICargoService _Service;
+        private readonly ICargoService _Service;
         private readonly IMapper _Mapper;
 
-        public CargoController(IMapper mapper, IConfiguration connection)
+        public CargoController(IMapper mapper, ICargoService cargoService)
         {
-            _Service = new CargoService(connection.GetConnectionString("DefaultConnection"));
+            _Service = cargoService;
             _Mapper = mapper;
         }
 

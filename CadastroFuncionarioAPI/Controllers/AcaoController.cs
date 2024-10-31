@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using GestaoEmpresarial.Entidades;
 using GestaoEmpresarial.Entidades.DTO.AcaoDTO;
-using GestaoEmpresarial.Entidades.DTO.FuncionarioDTO;
-using GestaoEmpresarial.Service;
 using GestaoEmpresarial.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,12 +10,12 @@ namespace GestaoEmpresarialAPI.Controllers
     [Route("[controller]")] // DataAnnotation
     public class AcaoController : ControllerBase
     {
-        private IAcaoService _Service;
+        private readonly IAcaoService _Service;
         private readonly IMapper _Mapper;
 
-        public AcaoController(IMapper mapper, IConfiguration connection)
+        public AcaoController(IMapper mapper, IAcaoService acaoService)
         {
-            _Service = new AcaoService(connection.GetConnectionString("DefaultConnection"));
+            _Service = acaoService;
             _Mapper = mapper;
         }
 

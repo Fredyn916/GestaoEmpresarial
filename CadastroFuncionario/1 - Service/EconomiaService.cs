@@ -1,16 +1,16 @@
 ﻿using GestaoEmpresarial.Entidades;
-using GestaoEmpresarial.Repository;
+using GestaoEmpresarial.Repository.Interfaces;
 using GestaoEmpresarial.Service.Interfaces;
 
 namespace GestaoEmpresarial.Service
 {
     public class EconomiaService : IEconomiaService
     {
-        public EconomiaRepository _Repository { get; set; }
+        private readonly IEconomiaRepository _Repository;
 
-        public EconomiaService(string connectionString) 
+        public EconomiaService(IEconomiaRepository economiaRepository) 
         {
-            _Repository = new EconomiaRepository(connectionString);
+            _Repository = economiaRepository;
         }
 
         public void Adicionar(Economia folhaFinanceira)

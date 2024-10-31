@@ -1,5 +1,4 @@
-﻿using GestaoEmpresarial.Service;
-using GestaoEmpresarial.Service.Interfaces;
+﻿using GestaoEmpresarial.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestaoEmpresarialAPI.Controllers
@@ -8,11 +7,11 @@ namespace GestaoEmpresarialAPI.Controllers
     [Route("[controller]")] // DataAnnotation
     public class DataController : ControllerBase
     {
-        private IDataService _Service;
+        private readonly IDataService _Service;
 
-        public DataController(IConfiguration connection)
+        public DataController(IDataService dataService)
         {
-            _Service = new DataService(connection.GetConnectionString("DefaultConnection"));
+            _Service = dataService;
         }
 
         [HttpPost("AdicionarDatas")] // Rota (EndPoint)

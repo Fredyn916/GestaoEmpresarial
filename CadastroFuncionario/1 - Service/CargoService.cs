@@ -1,5 +1,4 @@
 ﻿using GestaoEmpresarial.Entidades;
-using GestaoEmpresarial.Repository;
 using GestaoEmpresarial.Repository.Interfaces;
 using GestaoEmpresarial.Service.Interfaces;
 
@@ -7,11 +6,11 @@ namespace GestaoEmpresarial.Service
 {
     public class CargoService : ICargoService
     {
-        public ICargoRepository _Repository { get; set; }
+        private readonly ICargoRepository _Repository;
 
-        public CargoService(string connectionString)
+        public CargoService(ICargoRepository cargoRepository)
         {
-            _Repository = new CargoRepository(connectionString);
+            _Repository = cargoRepository;
         }
 
         public void Adicionar(Cargo cargo)

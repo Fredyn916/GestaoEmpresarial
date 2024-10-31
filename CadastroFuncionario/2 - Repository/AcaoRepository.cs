@@ -1,17 +1,18 @@
 ﻿using Dapper.Contrib.Extensions;
 using GestaoEmpresarial.Entidades;
 using GestaoEmpresarial.Repository.Interfaces;
+using Microsoft.Extensions.Configuration;
 using System.Data.SQLite;
 
 namespace GestaoEmpresarial.Repository
 {
     public class AcaoRepository : IAcaoRepository
     {
-        public readonly string _ConnectionString; // Variável da connection string a ser preenchida
+        private readonly string _ConnectionString; // Variável da connection string a ser preenchida
 
-        public AcaoRepository(string connectionString) // Bloco de código responsável por preencher a connectionString
+        public AcaoRepository(IConfiguration connection) // Bloco de código responsável por preencher a connectionString
         {
-            _ConnectionString = connectionString;
+            _ConnectionString = connection.GetConnectionString("DefaultConnection");
         }
 
         public void Adicionar(Acao acao)

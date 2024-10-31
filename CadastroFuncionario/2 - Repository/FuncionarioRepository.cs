@@ -2,21 +2,20 @@
 using GestaoEmpresarial.Entidades;
 using GestaoEmpresarial.Entidades.DTO.FuncionarioDTO;
 using GestaoEmpresarial.Repository.Interfaces;
+using Microsoft.Extensions.Configuration;
 using System.Data.SQLite;
 
 namespace GestaoEmpresarial.Repository
 {
     public class FuncionarioRepository : IFuncionarioRepository
     {
-        // ConnectionString (Parâmetros necessários para criar um banco de dados)
-        // Caso não exista o banco de dados, a var connection cria um database automaticamente
-        public readonly string _ConnectionString; // Variável da connection string a ser preenchida
-        public CargoRepository _Repository { get; set; }
+        private readonly string _ConnectionString; // Variável da connection string a ser preenchida
+        private readonly ICargoRepository _Repository;
 
-        public FuncionarioRepository(string connectionString) // Bloco de código responsável por preencher a connectionString
+        public FuncionarioRepository(IConfiguration connection, ICargoRepository cargoRepository) // Bloco de código responsável por preencher a connectionString
         {
-            _ConnectionString = connectionString;
-            _Repository = new CargoRepository(connectionString);
+            _ConnectionString = connection.GetConnectionString("DefaultConnection");
+            _Repository = cargoRepository;
         }
 
         public void Adicionar(Funcionario funcionario)

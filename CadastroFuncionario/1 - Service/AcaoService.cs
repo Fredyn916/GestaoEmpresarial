@@ -1,5 +1,4 @@
 ﻿using GestaoEmpresarial.Entidades;
-using GestaoEmpresarial.Repository;
 using GestaoEmpresarial.Repository.Interfaces;
 using GestaoEmpresarial.Service.Interfaces;
 
@@ -7,11 +6,11 @@ namespace GestaoEmpresarial.Service
 {
     public class AcaoService : IAcaoService
     {
-        public IAcaoRepository _Repository { get; set; }
+        private readonly IAcaoRepository _Repository;
 
-        public AcaoService(string connectionString)
+        public AcaoService(IAcaoRepository acaoRepository)
         {
-            _Repository = new AcaoRepository(connectionString);
+            _Repository = acaoRepository;
         }
 
         public void Adicionar(Acao acao)

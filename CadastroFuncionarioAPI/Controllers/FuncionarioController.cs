@@ -2,7 +2,6 @@
 using GestaoEmpresarial.Entidades;
 using GestaoEmpresarial.Entidades.DTO.FuncionarioDTO;
 using GestaoEmpresarial.Repository.Data.Script;
-using GestaoEmpresarial.Service;
 using GestaoEmpresarial.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,12 +11,12 @@ namespace GestaoEmpresarialAPI.Controllers
     [Route("[controller]")] // DataAnnotation
     public class FuncionarioController : ControllerBase
     {
-        private IFuncionarioService _Service;
+        private readonly IFuncionarioService _Service;
         private readonly IMapper _Mapper;
 
-        public FuncionarioController(IMapper mapper, IConfiguration connection)
+        public FuncionarioController(IMapper mapper, IFuncionarioService funcionarioService)
         {
-            _Service = new FuncionarioService(connection.GetConnectionString("DefaultConnection"));
+            _Service = funcionarioService;
             _Mapper = mapper;
         }
 

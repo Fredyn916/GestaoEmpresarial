@@ -1,17 +1,15 @@
-﻿using GestaoEmpresarial.Entidades;
-using GestaoEmpresarial.Repository;
-using GestaoEmpresarial.Repository.Interfaces;
+﻿using GestaoEmpresarial.Repository.Interfaces;
 using GestaoEmpresarial.Service.Interfaces;
 
 namespace GestaoEmpresarial.Service
 {
     public class DataService : IDataService
     {
-        public IDataRepository _Repository { get; set; }
+        private readonly IDataRepository _Repository;
 
-        public DataService(string connectionString)
+        public DataService(IDataRepository dataRepository)
         {
-            _Repository = new DataRepository(connectionString);
+            _Repository = dataRepository;
         }
 
         public void Adicionar()
