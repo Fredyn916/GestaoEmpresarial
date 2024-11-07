@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>C:\Users\Alunos\Desktop\Fred Git (Turno Tarde)\C#\TrabalhoSemestre\CadastroFuncionario\CadastroFuncionarioAPI\GestaoEmpresarial.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

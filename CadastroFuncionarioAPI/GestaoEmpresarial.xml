@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GestaoEmpresarialAPI</name>
+    </assembly>
+    <members>
+        <member name="M:GestaoEmpresarialAPI.Controllers.AcaoController.AdicionarAcao(GestaoEmpresarial.Entidades.DTO.AcaoDTO.CreateAcaoDTO)">
+            <summary>
+            Adiciona uma ação no Banco de Dados
+            </summary>
+            <param name="acaoDTO"></param>
+        </member>
+    </members>
+</doc>

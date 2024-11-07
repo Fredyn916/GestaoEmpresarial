@@ -13,7 +13,9 @@ namespace GestaoEmpresarialAPI.Controllers
         {
             _Service = dataService;
         }
-
+        /// <summary>
+        /// Adiciona datas no Banco de Dados
+        /// </summary>
         [HttpPost("AdicionarDatas")] // Rota (EndPoint)
         public void AdicionarDatas()
         {

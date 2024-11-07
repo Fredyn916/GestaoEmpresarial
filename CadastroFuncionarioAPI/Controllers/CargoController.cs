@@ -18,7 +18,10 @@ namespace GestaoEmpresarialAPI.Controllers
             _Service = cargoService;
             _Mapper = mapper;
         }
-
+        /// <summary>
+        /// Adiciona um cargo no Banco de Dados
+        /// </summary>
+        /// <param name="cargoToMap"></param>
         [HttpPost("AdicionarCargo")] // Rota (EndPoint)
         public void AdicionarFuncionario(CreateCargoDTO cargoToMap)
         {
@@ -26,25 +29,38 @@ namespace GestaoEmpresarialAPI.Controllers
 
             _Service.Adicionar(cargo);
         }
-
+        /// <summary>
+        /// Visualiza os cargos do Banco de Dados
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("VisualizarCargos")] // Rota (EndPoint)
         public List<Cargo> ListarCargo()
         {
             return _Service.Listar();
         }
-
+        /// <summary>
+        /// Visualiza um cargo do Banco de Dados respectivo ao Id do parâmetro
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("BuscarCargoPorId")] // Rota (EndPoint)
         public Cargo BuscarCargoPorId(int id)
         {
             return _Service.BuscarCargoPorId(id);
         }
-
+        /// <summary>
+        /// Edita um cargo do Banco de Dados respectivo ao valor da propriedade "Id" do objeto do parâmetro
+        /// </summary>
+        /// <param name="cargo"></param>
         [HttpPut("EditarCargo")] // Rota (EndPoint)
         public void EditarFuncionario(Cargo cargo)
         {
             _Service.Editar(cargo);
         }
-
+        /// <summary>
+        /// Remove um cargo do Banco de Dados
+        /// </summary>
+        /// <param name="id"></param>
         [HttpDelete("RemoverCargo")] // Rota (EndPoint)
         public void RemoverCargo(int id)
         {

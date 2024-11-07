@@ -17,7 +17,10 @@ namespace GestaoEmpresarialAPI.Controllers
             _Service = economiaService;
             _Mapper = mapper;
         }
-
+        /// <summary>
+        /// Adiciona um relatória de economia no Banco de Dados
+        /// </summary>
+        /// <param name="relatorioToMap"></param>
         [HttpPost("AdicionarRelatorioFinanceiro")] // Rota (EndPoint)
         public void AdicionarRelatorio([FromBody] CreateEconomiaDTO relatorioToMap)
         {
@@ -28,19 +31,29 @@ namespace GestaoEmpresarialAPI.Controllers
 
             _Service.Adicionar(relatorioFinanceiro);
         }
-
+        /// <summary>
+        /// Visualiza os relatórios de economia do Banco de Dados
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("VisualizarRelatoriosFinanceiros")] // Rota (EndPoint)
         public List<Economia> ListarRelatorios()
         {
             return _Service.Listar();
         }
-
+        /// <summary>
+        /// Visualiza um relatório de economia do Banco de Dados respectivo ao Id do parâmetro
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("BuscarRelatorioPorId")] // Rota (EndPoint)
         public Economia BuscarRelatorioPorId(int id)
         {
             return _Service.BuscarRelatorioPorId(id);
         }
-
+        /// <summary>
+        /// Edita um relatório de economia do Banco de Dados respectivo ao valor da propriedade "Id" do objeto do parâmetro
+        /// </summary>
+        /// <param name="relatorioToMap"></param>
         [HttpPut("EditarRelatorio")] // Rota (EndPoint)
         public void EditarFuncionario([FromBody] UpdateEconomiaDTO relatorioToMap) // Data Annotation 'FromBody' solicita o parâmetro no corpo por JSON
         {
@@ -51,7 +64,10 @@ namespace GestaoEmpresarialAPI.Controllers
 
             _Service.Editar(relatorioFinanceiro);
         }
-
+        /// <summary>
+        /// Remove um relatório de economia do Banco de Dados
+        /// </summary>
+        /// <param name="id"></param>
         [HttpDelete("RemoverRelatorio")] // Rota (EndPoint)
         public void RemoverRelatorio(int id)
         {
