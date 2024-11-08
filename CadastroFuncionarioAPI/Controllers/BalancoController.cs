@@ -23,11 +23,20 @@ namespace GestaoEmpresarialAPI.Controllers
         /// </summary>
         /// <param name="balancoToMap"></param>
         [HttpPost("AdicionarBalanco")] // Rota (EndPoint)
-        public void AdicionarBalanco(CreateBalancoDTO balancoToMap)
+        public IActionResult AdicionarBalanco(CreateBalancoDTO balancoToMap)
         {
-            Balanco balanco = _Mapper.Map<Balanco>(balancoToMap);
+            try
+            {
+                Balanco balanco = _Mapper.Map<Balanco>(balancoToMap);
 
-            _Service.Adicionar(balanco);
+                _Service.Adicionar(balanco);
+                return Ok();
+            }
+            catch (Exception erro)
+            {
+                return BadRequest("Ocorreu um erro ao adicionar Balanço." +
+                    $"O erro é: \n {erro.Message}");
+            }
         }
         /// <summary>
         /// Visualiza os balanços do Banco de Dados
@@ -36,7 +45,15 @@ namespace GestaoEmpresarialAPI.Controllers
         [HttpGet("VisualizarBalancos")] // Rota (EndPoint)
         public List<Balanco> ListarBalanco()
         {
-            return _Service.Listar();
+            try
+            {
+                return _Service.Listar();
+            }
+            catch (Exception erro)
+            {
+                throw new Exception("Ocorreu um erro ao listar Balanço." +
+                    $"O erro é: \n {erro.Message}");
+            }
         }
         /// <summary>
         /// Visualiza um balanço do Banco de Dados respectivo ao Id do parâmetro
@@ -46,25 +63,51 @@ namespace GestaoEmpresarialAPI.Controllers
         [HttpGet("BuscarBalancoPorId")] // Rota (EndPoint)
         public Balanco BuscarBalancoPorId(int id)
         {
-            return _Service.BuscarBalancoPorId(id);
+            try
+            {
+                return _Service.BuscarBalancoPorId(id);
+            }
+            catch (Exception erro)
+            {
+                throw new Exception("Ocorreu um erro ao listar Balanço por Id." +
+                    $"O erro é: \n {erro.Message}");
+            }
         }
         /// <summary>
         /// Edita um balanço do Banco de Dados respectivo ao valor da propriedade "Id" do objeto do parâmetro
         /// </summary>
         /// <param name="balanco"></param>
         [HttpPut("EditarBalanco")] // Rota (EndPoint)
-        public void EditarBalanco(Balanco balanco)
+        public IActionResult EditarBalanco(Balanco balanco)
         {
-            _Service.Editar(balanco);
+            try
+            {
+                _Service.Editar(balanco);
+                return NoContent();
+            }
+            catch (Exception erro)
+            {
+                return BadRequest("Ocorreu um erro ao editar Balanço." +
+                    $"O erro é: \n {erro.Message}");
+            }
         }
         /// <summary>
         /// Remove um balanço do Banco de Dados
         /// </summary>
         /// <param name="id"></param>
         [HttpDelete("RemoverBalanco")] // Rota (EndPoint)
-        public void RemoverBalanco(int id)
+        public IActionResult RemoverBalanco(int id)
         {
-            _Service.Remover(id);
+            try
+            {
+                _Service.Remover(id);
+                return NoContent();
+            }
+            catch (Exception erro)
+            {
+                return BadRequest("Ocorreu um erro ao remover Balanço." +
+                    $"O erro é: \n {erro.Message}");
+            }
         }
     }
 }

@@ -23,11 +23,20 @@ namespace GestaoEmpresarialAPI.Controllers
         /// </summary>
         /// <param name="cargoToMap"></param>
         [HttpPost("AdicionarCargo")] // Rota (EndPoint)
-        public void AdicionarFuncionario(CreateCargoDTO cargoToMap)
+        public IActionResult AdicionarFuncionario(CreateCargoDTO cargoToMap)
         {
-            Cargo cargo = _Mapper.Map<Cargo>(cargoToMap);
+            try
+            {
+                Cargo cargo = _Mapper.Map<Cargo>(cargoToMap);
 
-            _Service.Adicionar(cargo);
+                _Service.Adicionar(cargo);
+                return Ok();
+            }
+            catch (Exception erro)
+            {
+                return BadRequest("Ocorreu um erro ao adicionar Cargo." +
+                    $"O erro é: \n {erro.Message}");
+            }
         }
         /// <summary>
         /// Visualiza os cargos do Banco de Dados
@@ -36,7 +45,15 @@ namespace GestaoEmpresarialAPI.Controllers
         [HttpGet("VisualizarCargos")] // Rota (EndPoint)
         public List<Cargo> ListarCargo()
         {
-            return _Service.Listar();
+            try
+            {
+                return _Service.Listar();
+            }
+            catch (Exception erro)
+            {
+                throw new Exception("Ocorreu um erro ao listar Cargo." +
+                    $"O erro é: \n {erro.Message}");
+            }
         }
         /// <summary>
         /// Visualiza um cargo do Banco de Dados respectivo ao Id do parâmetro
@@ -46,25 +63,51 @@ namespace GestaoEmpresarialAPI.Controllers
         [HttpGet("BuscarCargoPorId")] // Rota (EndPoint)
         public Cargo BuscarCargoPorId(int id)
         {
-            return _Service.BuscarCargoPorId(id);
+            try
+            {
+                return _Service.BuscarCargoPorId(id);
+            }
+            catch (Exception erro)
+            {
+                throw new Exception("Ocorreu um erro ao listar Cargo por Id." +
+                    $"O erro é: \n {erro.Message}");
+            }
         }
         /// <summary>
         /// Edita um cargo do Banco de Dados respectivo ao valor da propriedade "Id" do objeto do parâmetro
         /// </summary>
         /// <param name="cargo"></param>
         [HttpPut("EditarCargo")] // Rota (EndPoint)
-        public void EditarFuncionario(Cargo cargo)
+        public IActionResult EditarFuncionario(Cargo cargo)
         {
-            _Service.Editar(cargo);
+            try
+            {
+                _Service.Editar(cargo);
+                return NoContent();
+            }
+            catch (Exception erro)
+            {
+                return BadRequest("Ocorreu um erro ao editar Cargo." +
+                    $"O erro é: \n {erro.Message}");
+            }
         }
         /// <summary>
         /// Remove um cargo do Banco de Dados
         /// </summary>
         /// <param name="id"></param>
         [HttpDelete("RemoverCargo")] // Rota (EndPoint)
-        public void RemoverCargo(int id)
+        public IActionResult RemoverCargo(int id)
         {
-            _Service.Remover(id);
+            try
+            {
+                _Service.Remover(id);
+                return NoContent();
+            }
+            catch (Exception erro)
+            {
+                return BadRequest("Ocorreu um erro ao remover Cargo." +
+                    $"O erro é: \n {erro.Message}");
+            }
         }
     }
 }

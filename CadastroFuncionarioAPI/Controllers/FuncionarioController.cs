@@ -24,12 +24,22 @@ namespace GestaoEmpresarialAPI.Controllers
         /// </summary>
         /// <param name="funcionarioToMap"></param>
         [HttpPost("AdicionarFuncionario")] // Rota (EndPoint)
-        public void AdicionarFuncionario(CreateFuncionarioDTO funcionarioToMap)
+        public IActionResult AdicionarFuncionario(CreateFuncionarioDTO funcionarioToMap)
         {
-            Funcionario funcionario = _Mapper.Map<Funcionario>(funcionarioToMap);
-            funcionario.Salario = FuncionarioScript.GetSalarioFromCargoId(funcionarioToMap.CargoId);
+            try
+            {
+                Funcionario funcionario = _Mapper.Map<Funcionario>(funcionarioToMap);
+                funcionario.Salario = FuncionarioScript.GetSalarioFromCargoId(funcionarioToMap.CargoId);
 
-            _Service.Adicionar(funcionario);
+                _Service.Adicionar(funcionario);
+                return Ok();
+            }
+            catch (Exception erro)
+            {
+                return BadRequest("Ocorreu um erro ao adicionar Funcionário." +
+                    $"O erro é: \n {erro.Message}");
+            }
+            
         }
         /// <summary>
         /// Visualiza os funcionário do Banco de Dados
@@ -38,7 +48,15 @@ namespace GestaoEmpresarialAPI.Controllers
         [HttpGet("VisualizarFuncionarios")] // Rota (EndPoint)
         public List<ReadFuncionarioDTO> ListarFuncionarios()
         {
-            return _Service.Listar();
+            try
+            {
+                return _Service.Listar();
+            }
+            catch (Exception erro)
+            {
+                throw new Exception("Ocorreu um erro ao listar Funcionário." +
+                    $"O erro é: \n {erro.Message}");
+            }
         }
         /// <summary>
         /// Visualiza um funcionário do Banco de Dados respectivo ao Id do parâmetro
@@ -48,25 +66,51 @@ namespace GestaoEmpresarialAPI.Controllers
         [HttpGet("BuscarFuncionarioPorId")] // Rota (EndPoint)
         public ReadFuncionarioDTO BuscarFuncionarioPorId(int id)
         {
-            return _Service.BuscarFuncionarioPorId(id);
+            try
+            {
+                return _Service.BuscarFuncionarioPorId(id);
+            }
+            catch (Exception erro)
+            {
+                throw new Exception("Ocorreu um erro ao listar Funcionário por Id." +
+                    $"O erro é: \n {erro.Message}");
+            }
         }
         /// <summary>
         /// Edita um funcionário do Banco de Dados respectivo ao valor da propriedade "Id" do objeto do parâmetro
         /// </summary>
         /// <param name="funcionario"></param>
         [HttpPut("EditarFuncionario")] // Rota (EndPoint)
-        public void EditarFuncionario(Funcionario funcionario)
+        public IActionResult EditarFuncionario(Funcionario funcionario)
         {
-            _Service.Editar(funcionario);
+            try
+            {
+                _Service.Editar(funcionario);
+                return NoContent();
+            }
+            catch (Exception erro)
+            {
+                return BadRequest("Ocorreu um erro ao editar Funcionário." +
+                    $"O erro é: \n {erro.Message}");
+            }
         }
         /// <summary>
         /// Remove um funcionário do Banco de Dados
         /// </summary>
         /// <param name="id"></param>
         [HttpDelete("RemoverFuncionario")] // Rota (EndPoint)
-        public void RemoverFuncionario(int id)
+        public IActionResult RemoverFuncionario(int id)
         {
-            _Service.Remover(id);
+            try
+            {
+                _Service.Remover(id);
+                return NoContent();
+            }
+            catch (Exception erro)
+            {
+                return BadRequest("Ocorreu um erro ao remover Cargo." +
+                    $"O erro é: \n {erro.Message}");
+            }
         }
     }
 }

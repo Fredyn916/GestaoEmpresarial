@@ -1,4 +1,5 @@
-﻿using GestaoEmpresarial.Service.Interfaces;
+﻿using GestaoEmpresarial.Entidades;
+using GestaoEmpresarial.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestaoEmpresarialAPI.Controllers
@@ -17,9 +18,18 @@ namespace GestaoEmpresarialAPI.Controllers
         /// Adiciona datas no Banco de Dados
         /// </summary>
         [HttpPost("AdicionarDatas")] // Rota (EndPoint)
-        public void AdicionarDatas()
+        public IActionResult AdicionarDatas()
         {
-            _Service.Adicionar();
+            try
+            {
+                _Service.Adicionar();
+                return Ok();
+            }
+            catch (Exception erro)
+            {
+                return BadRequest("Ocorreu um erro ao adicionar Data." +
+                    $"O erro é: \n {erro.Message}");
+            }
         }
     }
 }

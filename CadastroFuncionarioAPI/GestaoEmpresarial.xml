@@ -10,5 +10,159 @@
             </summary>
             <param name="acaoDTO"></param>
         </member>
+        <member name="M:GestaoEmpresarialAPI.Controllers.AcaoController.ListarAcoes">
+            <summary>
+            Visualiza as ações do Banco de Dados
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoEmpresarialAPI.Controllers.AcaoController.BuscarAcaoPorId(System.Int32)">
+            <summary>
+            Visualiza uma ação do Banco de Dados respectivo ao Id do parâmetro
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoEmpresarialAPI.Controllers.AcaoController.EditarAcao(GestaoEmpresarial.Entidades.DTO.AcaoDTO.UpdateAcaoDTO)">
+            <summary>
+            Edita uma ação do Banco de Dados respectivo ao valor da propriedade "Id" do objeto do parâmetro
+            </summary>
+            <param name="acaoDTO"></param>
+        </member>
+        <member name="M:GestaoEmpresarialAPI.Controllers.AcaoController.RemoverAcao(System.Int32)">
+            <summary>
+            Remove uma ação do Banco de Dados
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:GestaoEmpresarialAPI.Controllers.BalancoController.AdicionarBalanco(GestaoEmpresarial.Entidades.DTO.BalancoDTO.CreateBalancoDTO)">
+            <summary>
+            Adiciona um balanço no Banco de Dados
+            </summary>
+            <param name="balancoToMap"></param>
+        </member>
+        <member name="M:GestaoEmpresarialAPI.Controllers.BalancoController.ListarBalanco">
+            <summary>
+            Visualiza os balanços do Banco de Dados
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoEmpresarialAPI.Controllers.BalancoController.BuscarBalancoPorId(System.Int32)">
+            <summary>
+            Visualiza um balanço do Banco de Dados respectivo ao Id do parâmetro
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoEmpresarialAPI.Controllers.BalancoController.EditarBalanco(GestaoEmpresarial.Entidades.Balanco)">
+            <summary>
+            Edita um balanço do Banco de Dados respectivo ao valor da propriedade "Id" do objeto do parâmetro
+            </summary>
+            <param name="balanco"></param>
+        </member>
+        <member name="M:GestaoEmpresarialAPI.Controllers.BalancoController.RemoverBalanco(System.Int32)">
+            <summary>
+            Remove um balanço do Banco de Dados
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:GestaoEmpresarialAPI.Controllers.CargoController.AdicionarFuncionario(GestaoEmpresarial.Entidades.DTO.CargoDTO.CreateCargoDTO)">
+            <summary>
+            Adiciona um cargo no Banco de Dados
+            </summary>
+            <param name="cargoToMap"></param>
+        </member>
+        <member name="M:GestaoEmpresarialAPI.Controllers.CargoController.ListarCargo">
+            <summary>
+            Visualiza os cargos do Banco de Dados
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoEmpresarialAPI.Controllers.CargoController.BuscarCargoPorId(System.Int32)">
+            <summary>
+            Visualiza um cargo do Banco de Dados respectivo ao Id do parâmetro
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoEmpresarialAPI.Controllers.CargoController.EditarFuncionario(GestaoEmpresarial.Entidades.Cargo)">
+            <summary>
+            Edita um cargo do Banco de Dados respectivo ao valor da propriedade "Id" do objeto do parâmetro
+            </summary>
+            <param name="cargo"></param>
+        </member>
+        <member name="M:GestaoEmpresarialAPI.Controllers.CargoController.RemoverCargo(System.Int32)">
+            <summary>
+            Remove um cargo do Banco de Dados
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:GestaoEmpresarialAPI.Controllers.DataController.AdicionarDatas">
+            <summary>
+            Adiciona datas no Banco de Dados
+            </summary>
+        </member>
+        <member name="M:GestaoEmpresarialAPI.Controllers.EconomiaController.AdicionarRelatorio(GestaoEmpresarial.Entidades.DTO.EconomiaDTO.CreateEconomiaDTO)">
+            <summary>
+            Adiciona um relatória de economia no Banco de Dados
+            </summary>
+            <param name="relatorioToMap"></param>
+        </member>
+        <member name="M:GestaoEmpresarialAPI.Controllers.EconomiaController.ListarRelatorios">
+            <summary>
+            Visualiza os relatórios de economia do Banco de Dados
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoEmpresarialAPI.Controllers.EconomiaController.BuscarRelatorioPorId(System.Int32)">
+            <summary>
+            Visualiza um relatório de economia do Banco de Dados respectivo ao Id do parâmetro
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoEmpresarialAPI.Controllers.EconomiaController.EditarFuncionario(GestaoEmpresarial.Entidades.DTO.EconomiaDTO.UpdateEconomiaDTO)">
+            <summary>
+            Edita um relatório de economia do Banco de Dados respectivo ao valor da propriedade "Id" do objeto do parâmetro
+            </summary>
+            <param name="relatorioToMap"></param>
+        </member>
+        <member name="M:GestaoEmpresarialAPI.Controllers.EconomiaController.RemoverRelatorio(System.Int32)">
+            <summary>
+            Remove um relatório de economia do Banco de Dados
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:GestaoEmpresarialAPI.Controllers.FuncionarioController.AdicionarFuncionario(GestaoEmpresarial.Entidades.DTO.FuncionarioDTO.CreateFuncionarioDTO)">
+            <summary>
+            Adiciona um funcionário no Banco de Dados
+            </summary>
+            <param name="funcionarioToMap"></param>
+        </member>
+        <member name="M:GestaoEmpresarialAPI.Controllers.FuncionarioController.ListarFuncionarios">
+            <summary>
+            Visualiza os funcionário do Banco de Dados
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoEmpresarialAPI.Controllers.FuncionarioController.BuscarFuncionarioPorId(System.Int32)">
+            <summary>
+            Visualiza um funcionário do Banco de Dados respectivo ao Id do parâmetro
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoEmpresarialAPI.Controllers.FuncionarioController.EditarFuncionario(GestaoEmpresarial.Entidades.Funcionario)">
+            <summary>
+            Edita um funcionário do Banco de Dados respectivo ao valor da propriedade "Id" do objeto do parâmetro
+            </summary>
+            <param name="funcionario"></param>
+        </member>
+        <member name="M:GestaoEmpresarialAPI.Controllers.FuncionarioController.RemoverFuncionario(System.Int32)">
+            <summary>
+            Remove um funcionário do Banco de Dados
+            </summary>
+            <param name="id"></param>
+        </member>
     </members>
 </doc>

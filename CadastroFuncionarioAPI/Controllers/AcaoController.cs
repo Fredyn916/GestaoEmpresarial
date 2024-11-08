@@ -23,12 +23,21 @@ namespace GestaoEmpresarialAPI.Controllers
         /// </summary>
         /// <param name="acaoDTO"></param>
         [HttpPost("AdicionarAcao")] // Rota (EndPoint)
-        public void AdicionarAcao(CreateAcaoDTO acaoDTO)
+        public IActionResult AdicionarAcao(CreateAcaoDTO acaoDTO)
         {
-            Acao acao = _Mapper.Map<Acao>(acaoDTO);
-            acao.Ticker = acao.Ticker + acao.Codigo.ToString();
+            try
+            {
+                Acao acao = _Mapper.Map<Acao>(acaoDTO);
+                acao.Ticker = acao.Ticker + acao.Codigo.ToString();
 
-            _Service.Adicionar(acao);
+                _Service.Adicionar(acao);
+                return Ok();
+            }
+            catch (Exception erro)
+            {
+                return BadRequest("Ocorreu um erro ao adicionar Ação." +
+                    $"O erro é: \n {erro.Message}");
+            }
         }
         /// <summary>
         /// Visualiza as ações do Banco de Dados
@@ -37,7 +46,15 @@ namespace GestaoEmpresarialAPI.Controllers
         [HttpGet("VisualizarAcoes")] // Rota (EndPoint)
         public List<Acao> ListarAcoes()
         {
-            return _Service.Listar();
+            try
+            {
+                return _Service.Listar();
+            }
+            catch (Exception erro)
+            {
+                throw new Exception("Ocorreu um erro ao listar Ação." +
+                    $"O erro é: \n {erro.Message}");
+            }
         }
         /// <summary>
         /// Visualiza uma ação do Banco de Dados respectivo ao Id do parâmetro
@@ -47,28 +64,54 @@ namespace GestaoEmpresarialAPI.Controllers
         [HttpGet("BuscarAcaoPorId")] // Rota (EndPoint)
         public Acao BuscarAcaoPorId(int id)
         {
-            return _Service.BuscarAcaoPorId(id);
+            try
+            {
+                return _Service.BuscarAcaoPorId(id);
+            }
+            catch (Exception erro)
+            {
+                throw new Exception("Ocorreu um erro ao listar Ação por Id." +
+                    $"O erro é: \n {erro.Message}");
+            }
         }
         /// <summary>
         /// Edita uma ação do Banco de Dados respectivo ao valor da propriedade "Id" do objeto do parâmetro
         /// </summary>
         /// <param name="acaoDTO"></param>
         [HttpPut("EditarFuncionario")] // Rota (EndPoint)
-        public void EditarAcao(UpdateAcaoDTO acaoDTO)
+        public IActionResult EditarAcao(UpdateAcaoDTO acaoDTO)
         {
-            Acao acao = _Mapper.Map<Acao>(acaoDTO);
-            acao.Ticker = acao.Ticker + acao.Codigo.ToString();
+            try
+            {
+                Acao acao = _Mapper.Map<Acao>(acaoDTO);
+                acao.Ticker = acao.Ticker + acao.Codigo.ToString();
 
-            _Service.Editar(acao);
+                _Service.Editar(acao);
+                return NoContent();
+            }
+            catch (Exception erro)
+            {
+                return BadRequest("Ocorreu um erro ao editar Ação." +
+                    $"O erro é: \n {erro.Message}");
+            }
         }
         /// <summary>
         /// Remove uma ação do Banco de Dados
         /// </summary>
         /// <param name="id"></param>
         [HttpDelete("RemoverAcao")] // Rota (EndPoint)
-        public void RemoverAcao(int id)
+        public IActionResult RemoverAcao(int id)
         {
-            _Service.Remover(id);
+            try
+            {
+                _Service.Remover(id);
+                return NoContent();
+            }
+            catch (Exception erro)
+            {
+                return BadRequest("Ocorreu um erro ao remover Ação." +
+                    $"O erro é: \n {erro.Message}");
+            }
         }
     }
 }
