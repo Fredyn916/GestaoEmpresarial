@@ -84,7 +84,7 @@ namespace GestaoEmpresarialAPI.Controllers
             try
             {
                 Acao acao = _Mapper.Map<Acao>(acaoDTO);
-                acao.Ticker = acao.Ticker + acao.Codigo.ToString();
+                acao.Ticker = (acao.Ticker + acao.Codigo).ToString();
 
                 _Service.Editar(acao);
                 return NoContent();
