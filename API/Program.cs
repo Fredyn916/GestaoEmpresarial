@@ -1,20 +1,11 @@
+using API.Extensions;
 using Core.Entity;
-using Core.Interface;
-using Core.Interface.Repository;
-using Core.Interface.Repository.Generic;
-using Core.Interface.Service;
-using Core.Interface.Service.Generic;
-using Core.Repository;
-using Core.Repository.Generic;
-using Core.Service;
-using Core.Service.Generic;
 using Entidades.DTO;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorPages();
-
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("MyDbContextConnection")));

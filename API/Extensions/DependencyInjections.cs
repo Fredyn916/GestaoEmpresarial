@@ -6,9 +6,8 @@ using Core.Repository.Generic;
 using Core.Repository;
 using Core.Service.Generic;
 using Core.Service;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace Core.Interface;
+namespace API.Extensions;
 
 public static class DependencyInjections
 {
