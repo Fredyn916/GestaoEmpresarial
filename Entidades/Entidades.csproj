@@ -16,7 +16,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTO\" />
+    <Folder Include="DTO\Cargo\" />
+    <Folder Include="DTO\DateBalance\" />
+    <Folder Include="DTO\Economia\" />
+    <Folder Include="DTO\Empresa\" />
+    <Folder Include="DTO\Funcionario\" />
+    <Folder Include="DTO\Usuario\" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
-﻿using Core.Interface.Repository;
-using Core.Interface.Service;
+﻿using Core.Interface.Repository.Generic;
+using Core.Interface.Service.Generic;
 
-namespace Core.Service;
+namespace Core.Service.Generic;
 
 public class GenericService<T> : IGenericService<T> where T : class
 {

@@ -9,5 +9,7 @@ public class Funcionario
     public double Peso { get; set; }
     public double Salario { get; set; }
     public int CargoId { get; set; }
+    public virtual Cargo Cargo { get; set; }
     public int EmpresaId { get; set; }
+    public virtual Empresa Empresa { get; set; }
 }

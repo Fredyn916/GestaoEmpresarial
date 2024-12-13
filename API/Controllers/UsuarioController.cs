@@ -1,4 +1,4 @@
-﻿using Core.Interface.Service;
+﻿using Core.Interface.Service.Generic;
 using Entidades;
 using Microsoft.AspNetCore.Mvc;
 

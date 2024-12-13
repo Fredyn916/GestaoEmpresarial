@@ -1,15 +1,15 @@
 ﻿using Core.Entity;
-using Core.Interface.Repository;
+using Core.Interface.Repository.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace Core.Repository;
+namespace Core.Repository.Generic;
 
 public class GenericRepository<T> : IGenericRepository<T> where T : class
 {
-    private readonly MyDbContext _context;
+    private readonly AppDbContext _context;
     private readonly DbSet<T> _dbSet;
 
-    public GenericRepository(MyDbContext context)
+    public GenericRepository(AppDbContext context)
     {
         _context = context;
         _dbSet = _context.Set<T>();

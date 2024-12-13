@@ -1,6 +1,6 @@
-﻿namespace Core.Interface.Service;
+﻿namespace Core.Interface.Repository.Generic;
 
-public interface IGenericService<T> where T : class
+public interface IGenericRepository<T> where T : class
 {
     Task Create(T entity);
     Task<IEnumerable<T>> GetAll();
