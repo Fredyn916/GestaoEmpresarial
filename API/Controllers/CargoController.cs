@@ -1,32 +1,32 @@
 ﻿using AutoMapper;
 using Core.Interface.Service;
 using Entidades;
-using Entidades.DTO.UsuarioDTO;
+using Entidades.DTO.CargoDTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class UsuarioController : ControllerBase
+public class CargoController : ControllerBase
 {
-    private readonly IUsuarioService _service;
+    private readonly ICargoService _service;
     private readonly IMapper _mapper;
 
-    public UsuarioController(IUsuarioService service, IMapper mapper)
+    public CargoController(ICargoService service, IMapper mapper)
     {
         _service = service;
         _mapper = mapper;
     }
 
-    [HttpPost("CreateUsuario")]
-    public async Task<IActionResult> Create(CreateUsuarioDTO usuarioDTO)
+    [HttpPost("CreateCargo")]
+    public async Task<IActionResult> Create(CreateCargoDTO cargoDTO)
     {
         try
         {
-            Usuario usuario = _mapper.Map<Usuario>(usuarioDTO);
+            Cargo cargo = _mapper.Map<Cargo>(cargoDTO);
 
-            await _service.Create(usuario);
+            await _service.Create(cargo);
             return Ok();
         }
         catch (Exception ex)
@@ -35,8 +35,8 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    [HttpGet("GetAllUsuario")]
-    public async Task<List<Usuario>> GetAll()
+    [HttpGet("GetAllCargo")]
+    public async Task<List<Cargo>> GetAll()
     {
         try
         {
@@ -48,8 +48,8 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    [HttpGet("GetByIdUsuario")]
-    public async Task<Usuario> GetById(int id)
+    [HttpGet("GetByIdCargo")]
+    public async Task<Cargo> GetById(int id)
     {
         try
         {
@@ -61,12 +61,12 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    [HttpPut("UpdateUsuario")]
-    public async Task<IActionResult> Update(Usuario usuario)
+    [HttpPut("UpdateCargo")]
+    public async Task<IActionResult> Update(Cargo cargo)
     {
         try
         {
-            await _service.Update(usuario);
+            await _service.Update(cargo);
             return NoContent();
         }
         catch (Exception ex)
@@ -75,7 +75,7 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    [HttpDelete("RemoveUsuario")]
+    [HttpDelete("RemoveCargo")]
     public async Task<IActionResult> Remove(int id)
     {
         try

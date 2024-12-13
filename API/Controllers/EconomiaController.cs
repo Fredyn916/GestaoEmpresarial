@@ -1,32 +1,32 @@
 ﻿using AutoMapper;
 using Core.Interface.Service;
 using Entidades;
-using Entidades.DTO.UsuarioDTO;
 using Microsoft.AspNetCore.Mvc;
+using Entidades.DTO.EconomiaDTO;
 
 namespace API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class UsuarioController : ControllerBase
+public class EconomiaController : ControllerBase
 {
-    private readonly IUsuarioService _service;
+    private readonly IEconomiaService _service;
     private readonly IMapper _mapper;
 
-    public UsuarioController(IUsuarioService service, IMapper mapper)
+    public EconomiaController(IEconomiaService service, IMapper mapper)
     {
         _service = service;
         _mapper = mapper;
     }
 
-    [HttpPost("CreateUsuario")]
-    public async Task<IActionResult> Create(CreateUsuarioDTO usuarioDTO)
+    [HttpPost("CreateEconomia")]
+    public async Task<IActionResult> Create(CreateEconomiaDTO economiaDTO)
     {
         try
         {
-            Usuario usuario = _mapper.Map<Usuario>(usuarioDTO);
+            Economia economia = _mapper.Map<Economia>(economiaDTO);
 
-            await _service.Create(usuario);
+            await _service.Create(economia);
             return Ok();
         }
         catch (Exception ex)
@@ -35,8 +35,8 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    [HttpGet("GetAllUsuario")]
-    public async Task<List<Usuario>> GetAll()
+    [HttpGet("GetAllEconomia")]
+    public async Task<List<Economia>> GetAll()
     {
         try
         {
@@ -48,8 +48,8 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    [HttpGet("GetByIdUsuario")]
-    public async Task<Usuario> GetById(int id)
+    [HttpGet("GetByIdEconomia")]
+    public async Task<Economia> GetById(int id)
     {
         try
         {
@@ -61,12 +61,12 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    [HttpPut("UpdateUsuario")]
-    public async Task<IActionResult> Update(Usuario usuario)
+    [HttpPut("UpdateEconomia")]
+    public async Task<IActionResult> Update(Economia economia)
     {
         try
         {
-            await _service.Update(usuario);
+            await _service.Update(economia);
             return NoContent();
         }
         catch (Exception ex)
@@ -75,7 +75,7 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    [HttpDelete("RemoveUsuario")]
+    [HttpDelete("RemoveEconomia")]
     public async Task<IActionResult> Remove(int id)
     {
         try

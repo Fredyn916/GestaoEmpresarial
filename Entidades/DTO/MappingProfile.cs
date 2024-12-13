@@ -13,7 +13,7 @@ public class MappingProfile : Profile
     public MappingProfile()
     {
         CreateMap<CreateCargoDTO, Cargo>().ReverseMap();
-        CreateMap<CreateDataBalanceDTO, DateBalance>().ReverseMap();
+        CreateMap<CreateDateBalanceDTO, DateBalance>().ReverseMap();
         CreateMap<CreateEconomiaDTO, Economia>().ReverseMap();
         CreateMap<CreateEmpresaDTO, Empresa>().ReverseMap();
         CreateMap<CreateFuncionarioDTO, Funcionario>().ReverseMap();

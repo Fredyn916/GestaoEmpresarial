@@ -1,32 +1,32 @@
 ﻿using AutoMapper;
 using Core.Interface.Service;
 using Entidades;
-using Entidades.DTO.UsuarioDTO;
+using Entidades.DTO.FuncionarioDTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class UsuarioController : ControllerBase
+public class FuncionarioController : ControllerBase
 {
-    private readonly IUsuarioService _service;
+    private readonly IFuncionarioService _service;
     private readonly IMapper _mapper;
 
-    public UsuarioController(IUsuarioService service, IMapper mapper)
+    public FuncionarioController(IFuncionarioService service, IMapper mapper)
     {
         _service = service;
         _mapper = mapper;
     }
 
-    [HttpPost("CreateUsuario")]
-    public async Task<IActionResult> Create(CreateUsuarioDTO usuarioDTO)
+    [HttpPost("CreateFuncionario")]
+    public async Task<IActionResult> Create(CreateFuncionarioDTO funcionarioDTO)
     {
         try
         {
-            Usuario usuario = _mapper.Map<Usuario>(usuarioDTO);
+            Funcionario funcionario = _mapper.Map<Funcionario>(funcionarioDTO);
 
-            await _service.Create(usuario);
+            await _service.Create(funcionario);
             return Ok();
         }
         catch (Exception ex)
@@ -35,8 +35,8 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    [HttpGet("GetAllUsuario")]
-    public async Task<List<Usuario>> GetAll()
+    [HttpGet("GetAllFuncionario")]
+    public async Task<List<Funcionario>> GetAll()
     {
         try
         {
@@ -48,8 +48,8 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    [HttpGet("GetByIdUsuario")]
-    public async Task<Usuario> GetById(int id)
+    [HttpGet("GetByIdFuncionario")]
+    public async Task<Funcionario> GetById(int id)
     {
         try
         {
@@ -61,12 +61,12 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    [HttpPut("UpdateUsuario")]
-    public async Task<IActionResult> Update(Usuario usuario)
+    [HttpPut("UpdateFuncionario")]
+    public async Task<IActionResult> Update(Funcionario funcionario)
     {
         try
         {
-            await _service.Update(usuario);
+            await _service.Update(funcionario);
             return NoContent();
         }
         catch (Exception ex)
@@ -75,7 +75,7 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    [HttpDelete("RemoveUsuario")]
+    [HttpDelete("RemoveFuncionario")]
     public async Task<IActionResult> Remove(int id)
     {
         try

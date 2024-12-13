@@ -1,6 +1,6 @@
 ﻿namespace Entidades.DTO.DateBalanceDTO;
 
-public class CreateDataBalanceDTO
+public class CreateDateBalanceDTO
 {
     public DateOnly Data { get; set; }
 }

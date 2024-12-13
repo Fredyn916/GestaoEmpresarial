@@ -1,32 +1,32 @@
 ﻿using AutoMapper;
 using Core.Interface.Service;
 using Entidades;
-using Entidades.DTO.UsuarioDTO;
+using Entidades.DTO.EmpresaDTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class UsuarioController : ControllerBase
+public class EmpresaController : ControllerBase
 {
-    private readonly IUsuarioService _service;
+    private readonly IEmpresaService _service;
     private readonly IMapper _mapper;
 
-    public UsuarioController(IUsuarioService service, IMapper mapper)
+    public EmpresaController(IEmpresaService service, IMapper mapper)
     {
         _service = service;
         _mapper = mapper;
     }
 
-    [HttpPost("CreateUsuario")]
-    public async Task<IActionResult> Create(CreateUsuarioDTO usuarioDTO)
+    [HttpPost("CreateEmpresa")]
+    public async Task<IActionResult> Create(CreateEmpresaDTO empresaDTO)
     {
         try
         {
-            Usuario usuario = _mapper.Map<Usuario>(usuarioDTO);
+            Empresa empresa = _mapper.Map<Empresa>(empresaDTO);
 
-            await _service.Create(usuario);
+            await _service.Create(empresa);
             return Ok();
         }
         catch (Exception ex)
@@ -35,8 +35,8 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    [HttpGet("GetAllUsuario")]
-    public async Task<List<Usuario>> GetAll()
+    [HttpGet("GetAllEmpresa")]
+    public async Task<List<Empresa>> GetAll()
     {
         try
         {
@@ -48,8 +48,8 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    [HttpGet("GetByIdUsuario")]
-    public async Task<Usuario> GetById(int id)
+    [HttpGet("GetByIdEmpresa")]
+    public async Task<Empresa> GetById(int id)
     {
         try
         {
@@ -61,12 +61,12 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    [HttpPut("UpdateUsuario")]
-    public async Task<IActionResult> Update(Usuario usuario)
+    [HttpPut("UpdateEmpresa")]
+    public async Task<IActionResult> Update(Empresa empresa)
     {
         try
         {
-            await _service.Update(usuario);
+            await _service.Update(empresa);
             return NoContent();
         }
         catch (Exception ex)
@@ -75,7 +75,7 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    [HttpDelete("RemoveUsuario")]
+    [HttpDelete("RemoveEmpresa")]
     public async Task<IActionResult> Remove(int id)
     {
         try

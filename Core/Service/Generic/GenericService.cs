@@ -17,7 +17,7 @@ public class GenericService<T> : IGenericService<T> where T : class
         await _repository.Create(entity);
     }
 
-    public async Task<IEnumerable<T>> GetAll()
+    public async Task<List<T>> GetAll()
     {
         return await _repository.GetAll();
     }

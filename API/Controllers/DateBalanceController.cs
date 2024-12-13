@@ -1,32 +1,32 @@
 ﻿using AutoMapper;
 using Core.Interface.Service;
 using Entidades;
-using Entidades.DTO.UsuarioDTO;
 using Microsoft.AspNetCore.Mvc;
+using Entidades.DTO.DateBalanceDTO;
 
 namespace API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class UsuarioController : ControllerBase
+public class DateBalanceController : ControllerBase
 {
-    private readonly IUsuarioService _service;
+    private readonly IDateBalanceService _service;
     private readonly IMapper _mapper;
 
-    public UsuarioController(IUsuarioService service, IMapper mapper)
+    public DateBalanceController(IDateBalanceService service, IMapper mapper)
     {
         _service = service;
         _mapper = mapper;
     }
 
-    [HttpPost("CreateUsuario")]
-    public async Task<IActionResult> Create(CreateUsuarioDTO usuarioDTO)
+    [HttpPost("CreateDateBalance")]
+    public async Task<IActionResult> Create(CreateDateBalanceDTO dateBalanceDTO)
     {
         try
         {
-            Usuario usuario = _mapper.Map<Usuario>(usuarioDTO);
+            DateBalance dateBalance = _mapper.Map<DateBalance>(dateBalanceDTO);
 
-            await _service.Create(usuario);
+            await _service.Create(dateBalance);
             return Ok();
         }
         catch (Exception ex)
@@ -35,8 +35,8 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    [HttpGet("GetAllUsuario")]
-    public async Task<List<Usuario>> GetAll()
+    [HttpGet("GetAllDateBalance")]
+    public async Task<List<DateBalance>> GetAll()
     {
         try
         {
@@ -48,8 +48,8 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    [HttpGet("GetByIdUsuario")]
-    public async Task<Usuario> GetById(int id)
+    [HttpGet("GetByIdDateBalance")]
+    public async Task<DateBalance> GetById(int id)
     {
         try
         {
@@ -61,12 +61,12 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    [HttpPut("UpdateUsuario")]
-    public async Task<IActionResult> Update(Usuario usuario)
+    [HttpPut("UpdateDateBalance")]
+    public async Task<IActionResult> Update(DateBalance dateBalance)
     {
         try
         {
-            await _service.Update(usuario);
+            await _service.Update(dateBalance);
             return NoContent();
         }
         catch (Exception ex)
@@ -75,7 +75,7 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    [HttpDelete("RemoveUsuario")]
+    [HttpDelete("RemoveDateBalance")]
     public async Task<IActionResult> Remove(int id)
     {
         try
