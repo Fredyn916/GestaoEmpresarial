@@ -1,4 +1,5 @@
-﻿using Core.Interface.Service.Generic;
+﻿using Core.Interface.Service;
+using Core.Interface.Service.Generic;
 using Entidades;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,9 +9,9 @@ namespace API.Controllers;
 [Route("[controller]")]
 public class UsuarioController : ControllerBase
 {
-    private readonly IGenericService<Usuario> _service;
+    private readonly IUsuarioService _service;
 
-    public UsuarioController(IGenericService<Usuario> service)
+    public UsuarioController(IUsuarioService service)
     {
         _service = service;
     }

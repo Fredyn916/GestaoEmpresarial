@@ -1,7 +1,12 @@
 using Core.Entity;
+using Core.Interface;
+using Core.Interface.Repository;
 using Core.Interface.Repository.Generic;
+using Core.Interface.Service;
 using Core.Interface.Service.Generic;
+using Core.Repository;
 using Core.Repository.Generic;
+using Core.Service;
 using Core.Service.Generic;
 using Entidades.DTO;
 using Microsoft.EntityFrameworkCore;
@@ -14,8 +19,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("MyDbContextConnection")));
 
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-builder.Services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
+DependencyInjections.DIs(builder.Services);
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
