@@ -1,32 +1,32 @@
 ﻿using AutoMapper;
 using Core.Interface.Service;
 using Entidades;
-using Entidades.DTO.UsuarioDTO;
 using Microsoft.AspNetCore.Mvc;
+using Entidades.DTO.TipoUsuarioDTO;
 
 namespace API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class UsuarioController : ControllerBase
+public class TipoUsuarioController : ControllerBase
 {
-    private readonly IUsuarioService _service;
+    private readonly ITipoUsuarioService _service;
     private readonly IMapper _mapper;
 
-    public UsuarioController(IUsuarioService service, IMapper mapper)
+    public TipoUsuarioController(ITipoUsuarioService service, IMapper mapper)
     {
         _service = service;
         _mapper = mapper;
     }
 
-    [HttpPost("CreateUsuario")]
-    public async Task<IActionResult> Create(CreateUsuarioDTO usuarioDTO)
+    [HttpPost("CreateTipoUsuario")]
+    public async Task<IActionResult> Create(CreateTipoUsuarioDTO tipoUsuarioDTO)
     {
         try
         {
-            Usuario usuario = _mapper.Map<Usuario>(usuarioDTO);
+            TipoUsuario tipoUsuario = _mapper.Map<TipoUsuario>(tipoUsuarioDTO);
 
-            await _service.Create(usuario);
+            await _service.Create(tipoUsuario);
             return Ok();
         }
         catch (Exception ex)
@@ -35,8 +35,8 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    [HttpGet("GetAllUsuario")]
-    public async Task<List<Usuario>> GetAll()
+    [HttpGet("GetAllTipoUsuario")]
+    public async Task<List<TipoUsuario>> GetAll()
     {
         try
         {
@@ -48,8 +48,8 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    [HttpGet("GetByIdUsuario")]
-    public async Task<Usuario> GetById(int id)
+    [HttpGet("GetByIdTipoUsuario")]
+    public async Task<TipoUsuario> GetById(int id)
     {
         try
         {
@@ -61,12 +61,12 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    [HttpPut("UpdateUsuario")]
-    public async Task<IActionResult> Update(Usuario usuario)
+    [HttpPut("UpdateTipoUsuario")]
+    public async Task<IActionResult> Update(TipoUsuario tipoUsuario)
     {
         try
         {
-            await _service.Update(usuario);
+            await _service.Update(tipoUsuario);
             return NoContent();
         }
         catch (Exception ex)
@@ -75,7 +75,7 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    [HttpDelete("RemoveUsuario")]
+    [HttpDelete("RemoveTipoUsuario")]
     public async Task<IActionResult> Remove(int id)
     {
         try
@@ -89,29 +89,17 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    [HttpPost("LoginUsuario")]
-    public async Task<Usuario> Login(string username, string password)
+    [HttpPost("InitializeTipoUsuario")]
+    public async Task<IActionResult> Initialize()
     {
         try
         {
-            return await _service.Login(username, password);
+            await _service.Initialize();
+            return Ok();
         }
         catch (Exception ex)
         {
-            throw new Exception(ex.Message);
-        }
-    }
-
-    [HttpPost("ReturnTypeIdUsuario")]
-    public async Task<int> ReturnTypeId(int usuarioId)
-    {
-        try
-        {
-            return await _service.ReturnTypeId(usuarioId);
-        }
-        catch (Exception ex)
-        {
-            throw new Exception(ex.Message);
+            return BadRequest(ex.Message);
         }
     }
 }

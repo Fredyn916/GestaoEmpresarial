@@ -15,4 +15,5 @@ public class AppDbContext : DbContext
     public DbSet<Empresa> Empresas { get; set; }
     public DbSet<Funcionario> Funcionarios { get; set; }
     public DbSet<Usuario> Usuario { get; set; }
+    public DbSet<TipoUsuario> TiposUsuario { get; set; }
 }

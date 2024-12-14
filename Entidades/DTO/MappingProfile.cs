@@ -4,6 +4,7 @@ using Entidades.DTO.DateBalanceDTO;
 using Entidades.DTO.EconomiaDTO;
 using Entidades.DTO.EmpresaDTO;
 using Entidades.DTO.FuncionarioDTO;
+using Entidades.DTO.TipoUsuarioDTO;
 using Entidades.DTO.UsuarioDTO;
 
 namespace Entidades.DTO;
@@ -18,5 +19,6 @@ public class MappingProfile : Profile
         CreateMap<CreateEmpresaDTO, Empresa>().ReverseMap();
         CreateMap<CreateFuncionarioDTO, Funcionario>().ReverseMap();
         CreateMap<CreateUsuarioDTO, Usuario>().ReverseMap();
+        CreateMap<CreateTipoUsuarioDTO, TipoUsuario>().ReverseMap();
     }
 }
