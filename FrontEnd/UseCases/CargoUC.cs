@@ -38,4 +38,9 @@ public class CargoUC
     {
         HttpResponseMessage response = _client.DeleteAsync($"Cargo/RemoveCargo?id={id}").Result;
     }
+
+    public void Initialize()
+    {
+        HttpResponseMessage response = _client.GetAsync($"Cargo/InitializeCargo").Result;
+    }
 }

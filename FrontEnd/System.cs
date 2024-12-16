@@ -21,6 +21,8 @@ public class SystemGE
 
         do
         {
+            _methods.InitializeAll();
+
             if(_usuarioLogado == null)
             {
                 _usuarioLogado = _methods.CadastroOuLogin();

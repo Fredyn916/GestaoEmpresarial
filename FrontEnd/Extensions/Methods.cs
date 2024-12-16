@@ -27,6 +27,12 @@ public class Methods
         _usuarioUC = new UsuarioUC(cliente);
     }
 
+    public void InitializeAll()
+    {
+        _tipoUsuarioUC.Initialize();
+        _cargoUC.Initialize();
+    }
+
     public Usuario CadastroOuLogin()
     {
         int action = -1;

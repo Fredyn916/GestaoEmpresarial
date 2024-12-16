@@ -89,7 +89,7 @@ public class TipoUsuarioController : ControllerBase
         }
     }
 
-    [HttpPost("InitializeTipoUsuario")]
+    [HttpGet("InitializeTipoUsuario")]
     public async Task<IActionResult> Initialize()
     {
         try
