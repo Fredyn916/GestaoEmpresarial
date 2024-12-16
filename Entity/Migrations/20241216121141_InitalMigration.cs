@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Entity.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitalMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,7 +16,8 @@ namespace Entity.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Ocupacao = table.Column<string>(type: "TEXT", nullable: false),
-                    Remuneracao = table.Column<double>(type: "REAL", nullable: false)
+                    Remuneracao = table.Column<double>(type: "REAL", nullable: false),
+                    Step = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -37,18 +38,16 @@ namespace Entity.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Usuario",
+                name: "TiposUsuario",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Tipo = table.Column<string>(type: "TEXT", nullable: false),
-                    Username = table.Column<string>(type: "TEXT", nullable: false),
-                    Password = table.Column<string>(type: "TEXT", nullable: false)
+                    Tipo = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Usuario", x => x.Id);
+                    table.PrimaryKey("PK_TiposUsuario", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -77,6 +76,27 @@ namespace Entity.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Usuarios",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    TipoUsuarioId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Username = table.Column<string>(type: "TEXT", nullable: false),
+                    Password = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Usuarios", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Usuarios_TiposUsuario_TipoUsuarioId",
+                        column: x => x.TipoUsuarioId,
+                        principalTable: "TiposUsuario",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Empresas",
                 columns: table => new
                 {
@@ -98,9 +118,9 @@ namespace Entity.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Empresas_Usuario_UsuarioId",
+                        name: "FK_Empresas_Usuarios_UsuarioId",
                         column: x => x.UsuarioId,
-                        principalTable: "Usuario",
+                        principalTable: "Usuarios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -160,6 +180,11 @@ namespace Entity.Migrations
                 name: "IX_Funcionarios_EmpresaId",
                 table: "Funcionarios",
                 column: "EmpresaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Usuarios_TipoUsuarioId",
+                table: "Usuarios",
+                column: "TipoUsuarioId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -177,10 +202,13 @@ namespace Entity.Migrations
                 name: "Economias");
 
             migrationBuilder.DropTable(
-                name: "Usuario");
+                name: "Usuarios");
 
             migrationBuilder.DropTable(
                 name: "Datas");
+
+            migrationBuilder.DropTable(
+                name: "TiposUsuario");
         }
     }
 }

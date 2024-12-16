@@ -13,4 +13,5 @@ public class Economia
     public double DespesasServicos { get; set; }
     public double TotalDespesas { get; set; }
     public double TotalLucro { get; set; }
+    public int EmpresaId { get; set; }
 }

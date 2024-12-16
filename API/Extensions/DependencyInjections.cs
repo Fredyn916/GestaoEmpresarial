@@ -22,6 +22,7 @@ public static class DependencyInjections
         services.AddScoped(typeof(IEmpresaRepository), typeof(EmpresaRepository));
         services.AddScoped(typeof(IFuncionarioRepository), typeof(FuncionarioRepository));
         services.AddScoped(typeof(IUsuarioRepository), typeof(UsuarioRepository));
+        services.AddScoped(typeof(ITipoUsuarioRepository), typeof(TipoUsuarioRepository));
 
         services.AddScoped(typeof(ICargoService), typeof(CargoService));
         services.AddScoped(typeof(IDateBalanceService), typeof(DateBalanceService));
@@ -29,5 +30,6 @@ public static class DependencyInjections
         services.AddScoped(typeof(IEmpresaService), typeof(EmpresaService));
         services.AddScoped(typeof(IFuncionarioService), typeof(FuncionarioService));
         services.AddScoped(typeof(IUsuarioService), typeof(UsuarioService));
+        services.AddScoped(typeof(ITipoUsuarioService), typeof(TipoUsuarioService));
     }
 }

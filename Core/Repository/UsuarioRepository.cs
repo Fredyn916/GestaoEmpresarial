@@ -16,11 +16,10 @@ public class UsuarioRepository : GenericRepository<Usuario>, IUsuarioRepository
         _context = context;
     }
 
-    public async Task<Usuario> CreateUsuario(Usuario usuario)
+    public async Task Create(Usuario usuario)
     {
         await _context.Usuarios.AddAsync(usuario);
         await _context.SaveChangesAsync();
-        return usuario;
     }
 
     public async Task<Usuario> Login(string username, string password)

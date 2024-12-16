@@ -3,6 +3,7 @@ using Core.Interface.Service;
 using Entidades;
 using Microsoft.AspNetCore.Mvc;
 using Entidades.DTO.EconomiaDTO;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
@@ -28,6 +29,10 @@ public class EconomiaController : ControllerBase
 
             await _service.Create(economia);
             return Ok();
+        }
+        catch (DbUpdateException ex)
+        {
+            return BadRequest(ex.InnerException);
         }
         catch (Exception ex)
         {

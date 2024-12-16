@@ -2,7 +2,7 @@
 
 public class CreateUsuarioDTO
 {
-    public int Tipo { get; set; }
+    public int TipoUsuarioId { get; set; }
     public string Username { get; set; }
     public string Password { get; set; }
 }

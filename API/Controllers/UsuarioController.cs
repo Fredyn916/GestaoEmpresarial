@@ -3,6 +3,7 @@ using Core.Interface.Service;
 using Entidades;
 using Entidades.DTO.UsuarioDTO;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
@@ -20,17 +21,22 @@ public class UsuarioController : ControllerBase
     }
 
     [HttpPost("CreateUsuario")]
-    public async Task<Usuario> CreateUsuario(CreateUsuarioDTO usuarioDTO)
+    public async Task<IActionResult> Create(CreateUsuarioDTO usuarioDTO)
     {
         try
         {
             Usuario usuario = _mapper.Map<Usuario>(usuarioDTO);
 
-            return await _service.CreateUsuario(usuario);
+            await _service.Create(usuario);
+            return Ok();
+        }
+        catch (DbUpdateException ex)
+        {
+            return BadRequest(ex.InnerException);
         }
         catch (Exception ex)
         {
-            throw new Exception(ex.Message);
+            return BadRequest(ex.Message);
         }
     }
 
@@ -88,7 +94,7 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    [HttpPost("LoginUsuario")]
+    [HttpGet("LoginUsuario")]
     public async Task<Usuario> Login(string username, string password)
     {
         try
@@ -101,7 +107,7 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    [HttpPost("ReturnTypeIdUsuario")]
+    [HttpGet("ReturnTypeIdUsuario")]
     public async Task<int> ReturnTypeId(int usuarioId)
     {
         try
