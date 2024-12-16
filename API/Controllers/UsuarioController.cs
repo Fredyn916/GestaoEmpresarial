@@ -20,18 +20,17 @@ public class UsuarioController : ControllerBase
     }
 
     [HttpPost("CreateUsuario")]
-    public async Task<IActionResult> Create(CreateUsuarioDTO usuarioDTO)
+    public async Task<Usuario> CreateUsuario(CreateUsuarioDTO usuarioDTO)
     {
         try
         {
             Usuario usuario = _mapper.Map<Usuario>(usuarioDTO);
 
-            await _service.Create(usuario);
-            return Ok();
+            return await _service.CreateUsuario(usuario);
         }
         catch (Exception ex)
         {
-            return BadRequest(ex.Message);
+            throw new Exception(ex.Message);
         }
     }
 

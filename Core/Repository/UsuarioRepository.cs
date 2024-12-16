@@ -2,13 +2,26 @@
 using Core.Interface.Repository;
 using Core.Repository.Generic;
 using Entidades;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Repository;
 
 public class UsuarioRepository : GenericRepository<Usuario>, IUsuarioRepository
 {
+    private readonly AppDbContext _context;
+
     public UsuarioRepository(AppDbContext context) 
-        : base(context) { }
+        : base(context)
+    {
+        _context = context;
+    }
+
+    public async Task<Usuario> CreateUsuario(Usuario usuario)
+    {
+        await _context.Usuarios.AddAsync(usuario);
+        await _context.SaveChangesAsync();
+        return usuario;
+    }
 
     public async Task<Usuario> Login(string username, string password)
     {

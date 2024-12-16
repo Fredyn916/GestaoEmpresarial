@@ -16,6 +16,11 @@ public class UsuarioService : GenericService<Usuario>, IUsuarioService
         _repository = usuarioRepository;
     }
 
+    public async Task<Usuario> CreateUsuario(Usuario usuario)
+    {
+        return await _repository.CreateUsuario(usuario);
+    }
+
     public async Task<Usuario> Login(string username, string password)
     {
         return await _repository.Login(username, password);
