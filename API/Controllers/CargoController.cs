@@ -88,4 +88,18 @@ public class CargoController : ControllerBase
             return BadRequest(ex.Message);
         }
     }
+
+    [HttpPost("InitializeCargo")]
+    public async Task<IActionResult> Initialize()
+    {
+        try
+        {
+            await _service.Initialize();
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
 }

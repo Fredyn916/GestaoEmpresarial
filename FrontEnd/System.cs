@@ -17,7 +17,7 @@ public class SystemGE
     {
         int action = -1;
 
-        Console.WriteLine("<--------------- GESTÃO EMPRESARIAL--------------->");
+        Console.WriteLine("<-------------- GESTÃO EMPRESARIAL --------------->");
 
         do
         {

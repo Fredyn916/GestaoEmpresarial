@@ -1,5 +1,6 @@
 ﻿using Entidades;
 using Entidades.DTO.EmpresaDTO;
+using Entidades.DTO.FuncionarioDTO;
 using Entidades.DTO.UsuarioDTO;
 using FrontEnd.UseCases;
 
@@ -39,7 +40,7 @@ public class Methods
 
             if(action != 1 && action != 2)
             {
-                Console.WriteLine("<------------ Digite o número válido ------------->");
+                Console.WriteLine("<------------ Digite um número válido ------------>");
             }
         }
         if (action == 1)
@@ -62,7 +63,7 @@ public class Methods
 
                     if (action != 1 && action != 2)
                     {
-                        Console.WriteLine("<------------ Digite o número válido ------------->");
+                        Console.WriteLine("<------------ Digite um número válido ------------>");
                     }
                 }
                 if (action == 1)
@@ -95,6 +96,7 @@ public class Methods
         {
             Console.WriteLine("<-------------------- CADASTRO ------------------->");
             CreateUsuarioDTO usuarioDTO = new CreateUsuarioDTO();
+            action = -1;
             while (action != 1 && action != 2)
             {
                 Console.WriteLine("Digite o número do Tipo de Usuário: ");
@@ -104,7 +106,7 @@ public class Methods
 
                 if (action != 1 && action != 2)
                 {
-                    Console.WriteLine("<------------ Digite o número válido ------------->");
+                    Console.WriteLine("<------------ Digite um número válido ------------>");
                 }
             }
             if (action == 1)
@@ -145,7 +147,7 @@ public class Methods
 
             if(action < 1 || action > 4)
             {
-                Console.WriteLine("<------------ Digite o número válido ------------->");
+                Console.WriteLine("<------------ Digite um número válido ------------>");
             }
         }
 
@@ -166,11 +168,47 @@ public class Methods
                 Console.WriteLine("<-------- Empresa Cadastrada com Sucesso --------->");
                 break;
             case 2:
-
+                Console.WriteLine("<-------------- VIZUALIZAR EMPRESAS -------------->");
+                List<Empresa> empresas = _empresaUC.GetAll();
+                foreach (var e in empresas)
+                {
+                    Console.WriteLine(e.ToString());
+                }
                 break;
             case 3:
+                Console.WriteLine("<------------- EMPRESAS CADASTRADAS -------------->");
+                List<Empresa> possiveisEmpresas = _empresaUC.GetAll();
+                foreach (var e in possiveisEmpresas)
+                {
+                    Console.WriteLine(e.ToString());
+                }
+                Console.WriteLine("<------------------------------------------------->");
+                Console.WriteLine("Digite o Id da empresa que deseja editar: ");
+                int empresaEditId = int.Parse(Console.ReadLine());
+                Empresa empresaEdit = _empresaUC.GetById(empresaEditId);
+                Console.WriteLine($"Se necessário, digite o novo Nome da Empresa: (Atual Nome: {empresaEdit.Nome})");
+                empresaEdit.Nome = Console.ReadLine();
+                Console.WriteLine($"Se necessário, digite o novo CNPJ: (Atual CNPJ: {empresaEdit.CNPJ})");
+                empresaEdit.CNPJ = Console.ReadLine();
+                Console.WriteLine($"Se necessário, digite o novo CEP: (Atual CNPJ: {empresaEdit.CEP})");
+                empresaEdit.CEP = Console.ReadLine();
+                Console.WriteLine($"Se necessário, digite o novo Id do Usuário Proprietário: (Atual Id do Proprietário: {empresaEdit.UsuarioId})"); // APLICAR UMA LÓGICA MELHOR
+                empresaEdit.UsuarioId = int.Parse(Console.ReadLine());
+                _empresaUC.Update(empresaEdit);
+                Console.WriteLine("<--------- Empresa Editada com Sucesso ----------->");
                 break;
             case 4:
+                Console.WriteLine("<------------- EMPRESAS CADASTRADAS -------------->");
+                List<Empresa> empresasCadastradas = _empresaUC.GetAll();
+                foreach (var e in empresasCadastradas)
+                {
+                    Console.WriteLine(e.ToString());
+                }
+                Console.WriteLine("<------------------------------------------------->");
+                Console.WriteLine("Digite o Id da empresa que deseja remover: ");
+                int empresaId = int.Parse(Console.ReadLine());
+                _empresaUC.Remove(empresaId);
+                Console.WriteLine("<--------- Empresa Removida com Sucesso ---------->");
                 break;
         }
     }
@@ -179,26 +217,82 @@ public class Methods
     {
         int action = -1;
 
-        Console.WriteLine("<--------------- MENU PROPRIETÁRIO --------------->");
-        Console.WriteLine("1 - Cadastrar Funcionário");
-        Console.WriteLine("2 - Vizualizar Funcionários");
-        Console.WriteLine("3 - Editar Dados de Funcionário");
-        Console.WriteLine("4 - Demitir Funcionário");
-        Console.WriteLine("5 - Promover Funcionário");
-        Console.WriteLine("6 - Anotar Balanço Mensal");
-        Console.WriteLine("7 - Vizualizar Balanços");
-        Console.WriteLine("8 - Editar Balanço");
-        Console.WriteLine("<-- Digite o número respectivo à ação desejada: -->");
+        while (action < 1 || action > 8)
+        {
+            Console.WriteLine("<--------------- MENU PROPRIETÁRIO --------------->");
+            Console.WriteLine("1 - Cadastrar Funcionário");
+            Console.WriteLine("2 - Vizualizar Funcionários");
+            Console.WriteLine("3 - Editar Dados de Funcionário");
+            Console.WriteLine("4 - Demitir Funcionário");
+            Console.WriteLine("5 - Promover Funcionário");
+            Console.WriteLine("6 - Anotar Balanço Mensal");
+            Console.WriteLine("7 - Vizualizar Balanços");
+            Console.WriteLine("8 - Editar Balanço");
+            Console.WriteLine("<-- Digite o número respectivo à ação desejada: -->");
+
+            if(action < 1 || action > 8)
+            {
+                Console.WriteLine("<------------ Digite um número válido ------------>");
+            }
+        }
+
+        switch (action)
+        {
+            case 1:
+                Console.WriteLine("<-------------- CADASTRO FUNCIONÁRIO ------------->");
+                CreateFuncionarioDTO funcionarioDTO = new CreateFuncionarioDTO();
+                Console.WriteLine("Digite o Nome do Funcionário: ");
+                funcionarioDTO.Nome = Console.ReadLine();
+                Console.WriteLine("Digite o CPF do Funcionário: ");
+                funcionarioDTO.CPF = Console.ReadLine();
+                Console.WriteLine("Digite a Idade do Funcionário: ");
+                funcionarioDTO.Idade = int.Parse(Console.ReadLine());
+                Console.WriteLine("Digite o Peso do Funcionário: ");
+                funcionarioDTO.Peso = double.Parse(Console.ReadLine());
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
+        }
     }
 
     public void MenuPrincipal3()
     {
         int action = -1;
 
-        Console.WriteLine("<--------------- MENU FUNCIONÁRIO ---------------->");
-        Console.WriteLine("1 - Vizualizar Dados");
-        Console.WriteLine("2 - Conferir Remuneração");
-        Console.WriteLine("3 - Solicitar Demição");
-        Console.WriteLine("<-- Digite o número respectivo à ação desejada: -->");
+        while (action < 1 || action > 3)
+        {
+            Console.WriteLine("<--------------- MENU FUNCIONÁRIO ---------------->");
+            Console.WriteLine("1 - Vizualizar Dados");
+            Console.WriteLine("2 - Conferir Remuneração");
+            Console.WriteLine("3 - Solicitar Demição");
+            Console.WriteLine("<-- Digite o número respectivo à ação desejada: -->");
+
+            if (action < 1 || action > 3)
+            {
+                Console.WriteLine("<------------ Digite um número válido ------------>");
+            }
+        }
+
+        switch (action)
+        {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+        }
     }
 }

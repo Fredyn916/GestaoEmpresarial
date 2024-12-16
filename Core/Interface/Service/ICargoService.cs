@@ -4,4 +4,6 @@ using Entidades;
 namespace Core.Interface.Service;
 
 public interface ICargoService : IGenericService<Cargo>
-{ }
+{
+    Task Initialize();
+}
