@@ -1,4 +1,6 @@
-﻿namespace Entidades;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Entidades;
 
 public class Empresa
 {
@@ -8,6 +10,7 @@ public class Empresa
     public string CEP { get; set; }
     public int UsuarioId { get; set; }
     public virtual Usuario Usuario { get; set; }
+    [NotMapped]
     public List<Funcionario> Funcionarios { get; set; }
 
     public string ExibirDetalhes(Usuario? usuario)

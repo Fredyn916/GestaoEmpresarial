@@ -1,19 +1,20 @@
 ﻿using System.Text.Json.Serialization;
 using System.Text.Json;
+using System.Globalization;
 
 namespace API.Extensions;
 
 public class DateOnlyConverter : JsonConverter<DateOnly>
 {
-    private const string Format = "yyyy-MM-dd";
+    private const string DateFormat = "yyyy-MM-dd";
 
     public override DateOnly Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        return DateOnly.ParseExact(reader.GetString(), Format, null);
+        return DateOnly.ParseExact(reader.GetString()!, DateFormat, CultureInfo.InvariantCulture);
     }
 
     public override void Write(Utf8JsonWriter writer, DateOnly value, JsonSerializerOptions options)
     {
-        writer.WriteStringValue(value.ToString(Format));
+        writer.WriteStringValue(value.ToString(DateFormat, CultureInfo.InvariantCulture));
     }
 }

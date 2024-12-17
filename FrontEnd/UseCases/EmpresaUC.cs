@@ -38,8 +38,39 @@ public class EmpresaUC
         HttpResponseMessage response = _client.DeleteAsync($"Empresa/RemoveEmpresa?id={id}").Result;
     }
 
-    public int GetEmpresaIdByUsuarioId(int usuarioId)
+    public async Task<int> GetEmpresaIdByUsuarioId(int usuarioId)
     {
-        return int.Parse(_client.GetStringAsync($"Empresa/GetEmpresaIdByUsuarioIdEmpresa?usuarioId={usuarioId}").ToString());
+        try
+        {
+            var response = await _client.GetAsync($"Empresa/GetEmpresaIdByUsuarioIdEmpresa?usuarioId={usuarioId}");
+
+            response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            if (int.TryParse(content, out int empresaId))
+            {
+                return empresaId;
+            }
+            else
+            {
+                throw new FormatException("A resposta não está no formato esperado de um inteiro.");
+            }
+        }
+        catch (HttpRequestException e)
+        {
+            Console.WriteLine($"Erro de requisição HTTP: {e.Message}");
+            throw;
+        }
+        catch (FormatException e)
+        {
+            Console.WriteLine($"Erro de formatação: {e.Message}");
+            throw;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Erro inesperado: {e.Message}");
+            throw;
+        }
     }
 }

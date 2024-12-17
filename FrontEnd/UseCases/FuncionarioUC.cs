@@ -16,8 +16,42 @@ public class FuncionarioUC
 
     public void Create(CreateFuncionarioDTO funcionarioDTO)
     {
-        HttpResponseMessage response = _client.PostAsJsonAsync("Funcionario/CreateFuncionario", funcionarioDTO).Result;
+        try
+        {
+            HttpResponseMessage response = _client.PostAsJsonAsync("Funcionario/CreateFuncionario", funcionarioDTO).Result;
+
+            response.EnsureSuccessStatusCode();
+        }
+        catch (HttpRequestException e)
+        {
+            Console.WriteLine($"Erro de requisição HTTP: {e.Message}");
+        }
+        catch (TaskCanceledException e)
+        {
+            Console.WriteLine($"Requisição cancelada: {e.Message}");
+        }
+        catch (AggregateException e)
+        {
+            foreach (var innerException in e.InnerExceptions)
+            {
+                Console.WriteLine($"Erro agregado: {innerException.Message}");
+            }
+        }
+        catch (InvalidOperationException e)
+        {
+            Console.WriteLine($"Operação inválida: {e.Message}");
+        }
+        catch (FormatException e)
+        {
+            Console.WriteLine($"Erro de formatação: {e.Message}");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Erro inesperado: {e.Message}");
+            throw;
+        }
     }
+
 
     public List<Funcionario> GetAll()
     {
@@ -31,7 +65,36 @@ public class FuncionarioUC
 
     public void Update(Funcionario funcionario)
     {
-        HttpResponseMessage response = _client.PutAsJsonAsync("Funcionario/UpdateFuncionario", funcionario).Result;
+        try
+        {
+            HttpResponseMessage response = _client.PutAsJsonAsync("Funcionario/UpdateFuncionario", funcionario).Result;
+            response.EnsureSuccessStatusCode();
+        }
+        catch (HttpRequestException e)
+        {
+            Console.WriteLine($"Erro de requisição HTTP: {e.Message}");
+        }
+        catch (TaskCanceledException e)
+        {
+            Console.WriteLine($"Requisição cancelada: {e.Message}");
+        }
+        catch (AggregateException e)
+        {
+            foreach (var innerException in e.InnerExceptions)
+            {
+                Console.WriteLine($"Erro agregado: {innerException.Message}");
+            }
+        }
+        catch (InvalidOperationException e)
+        {
+            Console.WriteLine($"Operação inválida: {e.Message}");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Erro inesperado: {e.Message}");
+            throw;
+        }
+
     }
 
     public void Remove(int id)

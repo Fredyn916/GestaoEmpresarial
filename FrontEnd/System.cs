@@ -38,7 +38,7 @@ public class SystemGE
                         action = _methods.MenuPrincipal2(_usuarioLogado);
                         break;
                     case 3:
-                        action = _methods.MenuPrincipal3();
+                        action = _methods.MenuPrincipal3(_usuarioLogado);
                         break;
                 }
             }

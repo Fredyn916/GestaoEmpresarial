@@ -17,7 +17,12 @@ public class CargoRepository : GenericRepository<Cargo>, ICargoRepository
 
     public async Task Initialize()
     {
-        List<Cargo> registros = new List<Cargo>
+        List<Cargo> cargos = GetAll().Result;
+        int count = cargos.Count;
+
+        if (count == 0)
+        {
+            List<Cargo> registros = new List<Cargo>
             {
                 new Cargo
                 {
@@ -201,11 +206,12 @@ public class CargoRepository : GenericRepository<Cargo>, ICargoRepository
                 },
             };
 
-        foreach (var registro in registros)
-        {
-            _context.Cargos.Add(registro);
-            _context.SaveChanges();
-        }
+            foreach (var registro in registros)
+            {
+                _context.Cargos.Add(registro);
+                _context.SaveChanges();
+            }
+        }  
     }
 
 }

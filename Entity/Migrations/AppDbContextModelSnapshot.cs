@@ -146,11 +146,16 @@ namespace Entity.Migrations
                     b.Property<double>("Salario")
                         .HasColumnType("REAL");
 
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CargoId");
 
                     b.HasIndex("EmpresaId");
+
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Funcionarios");
                 });
@@ -225,14 +230,22 @@ namespace Entity.Migrations
                         .IsRequired();
 
                     b.HasOne("Entidades.Empresa", "Empresa")
-                        .WithMany("Funcionarios")
+                        .WithMany()
                         .HasForeignKey("EmpresaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entidades.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Cargo");
 
                     b.Navigation("Empresa");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Entidades.Usuario", b =>
@@ -244,11 +257,6 @@ namespace Entity.Migrations
                         .IsRequired();
 
                     b.Navigation("TipoUsuario");
-                });
-
-            modelBuilder.Entity("Entidades.Empresa", b =>
-                {
-                    b.Navigation("Funcionarios");
                 });
 #pragma warning restore 612, 618
         }

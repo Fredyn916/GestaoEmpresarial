@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Entity.Migrations
 {
-    public partial class InitalMigration : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -62,7 +62,8 @@ namespace Entity.Migrations
                     DespesasFuncionarios = table.Column<double>(type: "REAL", nullable: false),
                     DespesasServicos = table.Column<double>(type: "REAL", nullable: false),
                     TotalDespesas = table.Column<double>(type: "REAL", nullable: false),
-                    TotalLucro = table.Column<double>(type: "REAL", nullable: false)
+                    TotalLucro = table.Column<double>(type: "REAL", nullable: false),
+                    EmpresaId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -105,18 +106,11 @@ namespace Entity.Migrations
                     Nome = table.Column<string>(type: "TEXT", nullable: false),
                     CNPJ = table.Column<string>(type: "TEXT", nullable: false),
                     CEP = table.Column<string>(type: "TEXT", nullable: false),
-                    UsuarioId = table.Column<int>(type: "INTEGER", nullable: false),
-                    EconomiaId = table.Column<int>(type: "INTEGER", nullable: false)
+                    UsuarioId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Empresas", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Empresas_Economias_EconomiaId",
-                        column: x => x.EconomiaId,
-                        principalTable: "Economias",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Empresas_Usuarios_UsuarioId",
                         column: x => x.UsuarioId,
@@ -137,7 +131,8 @@ namespace Entity.Migrations
                     Peso = table.Column<double>(type: "REAL", nullable: false),
                     Salario = table.Column<double>(type: "REAL", nullable: false),
                     CargoId = table.Column<int>(type: "INTEGER", nullable: false),
-                    EmpresaId = table.Column<int>(type: "INTEGER", nullable: false)
+                    EmpresaId = table.Column<int>(type: "INTEGER", nullable: false),
+                    UsuarioId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -154,17 +149,18 @@ namespace Entity.Migrations
                         principalTable: "Empresas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Funcionarios_Usuarios_UsuarioId",
+                        column: x => x.UsuarioId,
+                        principalTable: "Usuarios",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Economias_DateBalanceId",
                 table: "Economias",
                 column: "DateBalanceId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Empresas_EconomiaId",
-                table: "Empresas",
-                column: "EconomiaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Empresas_UsuarioId",
@@ -182,6 +178,11 @@ namespace Entity.Migrations
                 column: "EmpresaId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Funcionarios_UsuarioId",
+                table: "Funcionarios",
+                column: "UsuarioId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Usuarios_TipoUsuarioId",
                 table: "Usuarios",
                 column: "TipoUsuarioId");
@@ -190,7 +191,13 @@ namespace Entity.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Economias");
+
+            migrationBuilder.DropTable(
                 name: "Funcionarios");
+
+            migrationBuilder.DropTable(
+                name: "Datas");
 
             migrationBuilder.DropTable(
                 name: "Cargos");
@@ -199,13 +206,7 @@ namespace Entity.Migrations
                 name: "Empresas");
 
             migrationBuilder.DropTable(
-                name: "Economias");
-
-            migrationBuilder.DropTable(
                 name: "Usuarios");
-
-            migrationBuilder.DropTable(
-                name: "Datas");
 
             migrationBuilder.DropTable(
                 name: "TiposUsuario");

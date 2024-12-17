@@ -9,4 +9,5 @@ public class CreateFuncionarioDTO
     public double Salario { get; set; }
     public int CargoId { get; set; }
     public int EmpresaId { get; set; }
+    public int UsuarioId { get; set; }
 }

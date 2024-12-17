@@ -298,7 +298,16 @@ public class Methods
                 Console.WriteLine("Digite o Id do Cargo que deseja atribuir ao Funcionário: ");
                 funcionarioDTO.CargoId = int.Parse(Console.ReadLine());
                 funcionarioDTO.Salario = _cargoUC.GetById(funcionarioDTO.CargoId).Remuneracao;
-                funcionarioDTO.EmpresaId = _empresaUC.GetEmpresaIdByUsuarioId(_usuarioLogado.Id);
+                funcionarioDTO.EmpresaId = _empresaUC.GetEmpresaIdByUsuarioId(_usuarioLogado.Id).Result;
+                Console.WriteLine("<------------- USUÁRIOS CADASTRADOS -------------->");
+                List<Usuario> usuarios = _usuarioUC.GetAll();
+                foreach (var u in usuarios)
+                {
+                    Console.WriteLine(u.ExibirDetalhes(_tipoUsuarioUC.GetById(u.TipoUsuarioId)));
+                }
+                Console.WriteLine("<------------------------------------------------->");
+                Console.WriteLine("Digite o Id do Usuário Funcionário: ");
+                funcionarioDTO.UsuarioId = int.Parse(Console.ReadLine());
                 _funcionarioUC.Create(funcionarioDTO);
                 Console.WriteLine("<------ Funcionário Cadastrado com Sucesso ------->");
                 break;
@@ -339,7 +348,7 @@ public class Methods
                 Console.WriteLine($"Se necessário, digite o novo Cargo Id: (Atual Cargo Id: {funcionarioEdit.CargoId})");
                 funcionarioEdit.CargoId = int.Parse(Console.ReadLine());
                 funcionarioEdit.Salario = _cargoUC.GetById(funcionarioEdit.CargoId).Remuneracao;
-                funcionarioEdit.EmpresaId = _empresaUC.GetEmpresaIdByUsuarioId(_usuarioLogado.Id);
+                funcionarioEdit.EmpresaId = _empresaUC.GetEmpresaIdByUsuarioId(_usuarioLogado.Id).Result;
                 _funcionarioUC.Update(funcionarioEdit);
                 Console.WriteLine("<--------- Empresa Editada com Sucesso ----------->");
                 break;
@@ -486,7 +495,7 @@ public class Methods
         return action;
     }
 
-    public int MenuPrincipal3()
+    public int MenuPrincipal3(Usuario _usuarioLogado)
     {
         int action = -1;
 
@@ -495,7 +504,7 @@ public class Methods
             Console.WriteLine("<--------------- MENU FUNCIONÁRIO ---------------->");
             Console.WriteLine("1 - Vizualizar Dados");
             Console.WriteLine("2 - Conferir Remuneração");
-            Console.WriteLine("3 - Solicitar Demição");
+            Console.WriteLine("3 - Solicitar Demissão");
             Console.WriteLine("0 - Sair");
             Console.WriteLine("<-- Digite o número respectivo à ação desejada: -->");
             action = int.Parse(Console.ReadLine());
@@ -514,10 +523,47 @@ public class Methods
         switch (action)
         {
             case 1:
+                Console.WriteLine("<--------------- VIZUALIZAR DADOS ---------------->");
+                List<Funcionario> funcionarios = _funcionarioUC.GetAll();
+                foreach (var f in funcionarios)
+                {
+                    if (f.UsuarioId == _usuarioLogado.Id)
+                    {
+                        Console.WriteLine(f.ExibirDetalhes(_cargoUC.GetById(f.CargoId), _empresaUC.GetById(f.EmpresaId)));
+                    }
+                }
                 break;
             case 2:
+                Console.WriteLine("<------------ VIZUALIZAR REMUNERAÇÃO ------------->");
+                List<Funcionario> funcionariosCadastrados = _funcionarioUC.GetAll();
+                foreach (var f in funcionariosCadastrados)
+                {
+                    if (f.UsuarioId == _usuarioLogado.Id)
+                    {
+                        Console.WriteLine(f.ExibirRemuneracao(_cargoUC.GetById(f.CargoId)));
+                    }
+                }
                 break;
             case 3:
+                Console.WriteLine("<-------------- SOLICITAR DEMISSÃO --------------->");
+                Console.WriteLine("Deseja assinar demissão de sua atual Empresa? ");
+                Console.WriteLine("1 - Sim");
+                Console.WriteLine("2 - Não");
+                int acao = int.Parse(Console.ReadLine());
+                if (acao == 1)
+                {
+                    List<Funcionario> funcionariosKRL = _funcionarioUC.GetAll();
+                    foreach (var f in funcionariosKRL)
+                    {
+                        if (f.UsuarioId == _usuarioLogado.Id)
+                        {
+                            _funcionarioUC.Remove(f.Id);
+                        }
+                    }
+                }
+                else if (acao == 2)
+                { acao = 1000; }
+                Console.WriteLine("<-------- Demissão Concluída com Sucesso --------->");
                 break;
         }
 

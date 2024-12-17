@@ -17,4 +17,13 @@ public class Usuario
                           $"\nUsername: {Username}";
         return detalhes;
     }
+
+    public string ExibirDetalhesCompleto(TipoUsuario? tipoUsuario)
+    {
+        string detalhes = $"<----------------- USUÁRIO {Id} ----------------->" +
+                          $"\nTipo de Usuário: {tipoUsuario.Tipo}" +
+                          $"\nUsername: {Username}" +
+                          $"\nPassword: {Password}";
+        return detalhes;
+    }
 }
