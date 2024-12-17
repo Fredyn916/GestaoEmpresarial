@@ -4,4 +4,6 @@ using Entidades;
 namespace Core.Interface.Service;
 
 public interface IDateBalanceService : IGenericService<DateBalance>
-{ }
+{
+    Task Initialize();
+}

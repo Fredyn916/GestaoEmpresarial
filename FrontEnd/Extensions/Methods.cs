@@ -1,4 +1,5 @@
 ﻿using Entidades;
+using Entidades.DTO.EconomiaDTO;
 using Entidades.DTO.EmpresaDTO;
 using Entidades.DTO.FuncionarioDTO;
 using Entidades.DTO.UsuarioDTO;
@@ -29,6 +30,7 @@ public class Methods
 
     public void InitializeAll()
     {
+        _dateBalanceUC.Initialize();
         _tipoUsuarioUC.Initialize();
         _usuarioUC.Initialize();
         _cargoUC.Initialize();
@@ -139,23 +141,29 @@ public class Methods
         return null;
     }
 
-    public void MenuPrincipal1()
+    public int MenuPrincipal1()
     {
         int action = -1;
 
-        while (action < 1 || action > 4)
+        while (action < 0 || action > 4)
         {
             Console.WriteLine("<------------------ MENU ADMIN ------------------->");
             Console.WriteLine("1 - Cadastrar Empresa");
             Console.WriteLine("2 - Vizualizar Empresas");
             Console.WriteLine("3 - Editar Empresa");
             Console.WriteLine("4 - Remover Empresa");
+            Console.WriteLine("0 - Sair");
             Console.WriteLine("<-- Digite o número respectivo à ação desejada: -->");
 
-            if(action < 1 || action > 4)
+            if(action < 0 || action > 4)
             {
                 Console.WriteLine("<------------ Digite um número válido ------------>");
             }
+        }
+
+        if(action == 0)
+        {
+            return action;
         }
 
         switch (action)
@@ -169,7 +177,14 @@ public class Methods
                 empresaDTO.CNPJ = Console.ReadLine();
                 Console.WriteLine("Digite o CEP: ");
                 empresaDTO.CEP = Console.ReadLine();
-                Console.WriteLine("Digite o Id do Usuário Proprietário: "); // APLICAR UMA LÓGICA MELHOR
+                Console.WriteLine("<------------- USUÁRIOS CADASTRADOS -------------->");
+                List<Funcionario> funcionarios = _funcionarioUC.GetAll();
+                foreach (var f in funcionarios)
+                {
+                    Console.WriteLine(f.ExibirDetalhes(_cargoUC.GetById(f.CargoId), _empresaUC.GetById(f.EmpresaId)));
+                }
+                Console.WriteLine("<------------------------------------------------->");
+                Console.WriteLine("Digite o Id do Usuário Proprietário: ");
                 empresaDTO.UsuarioId = int.Parse(Console.ReadLine());
                 _empresaUC.Create(empresaDTO);
                 Console.WriteLine("<-------- Empresa Cadastrada com Sucesso --------->");
@@ -218,13 +233,15 @@ public class Methods
                 Console.WriteLine("<--------- Empresa Removida com Sucesso ---------->");
                 break;
         }
+
+        return action;
     }
 
-    public void MenuPrincipal2(Usuario _usuarioLogado)
+    public int MenuPrincipal2(Usuario _usuarioLogado)
     {
         int action = -1;
 
-        while (action < 1 || action > 8)
+        while (action < 0 || action > 8)
         {
             Console.WriteLine("<--------------- MENU PROPRIETÁRIO --------------->");
             Console.WriteLine("1 - Cadastrar Funcionário");
@@ -235,12 +252,18 @@ public class Methods
             Console.WriteLine("6 - Anotar Balanço Mensal");
             Console.WriteLine("7 - Vizualizar Balanços");
             Console.WriteLine("8 - Editar Balanço");
+            Console.WriteLine("0 - Sair");
             Console.WriteLine("<-- Digite o número respectivo à ação desejada: -->");
 
-            if(action < 1 || action > 8)
+            if(action < 0 || action > 8)
             {
                 Console.WriteLine("<------------ Digite um número válido ------------>");
             }
+        }
+
+        if (action == 0)
+        {
+            return action;
         }
 
         switch (action)
@@ -271,7 +294,7 @@ public class Methods
                 Console.WriteLine("<------ Funcionário Cadastrado com Sucesso ------->");
                 break;
             case 2:
-                Console.WriteLine("<----------- FUNCIONÁRIOS CADASTRADOS ------------>");
+                Console.WriteLine("<----------- VIZUALIZAR FUNCIONÁRIOS ------------->");
                 List<Funcionario> funcionarios = _funcionarioUC.GetAll();
                 foreach (var f in funcionarios)
                 {
@@ -312,16 +335,146 @@ public class Methods
                 Console.WriteLine("<--------- Empresa Editada com Sucesso ----------->");
                 break;
             case 4:
+                Console.WriteLine("<----------- FUNCIONÁRIOS CADASTRADOS ------------>");
+                List<Funcionario> funcionariosParaDemicao = _funcionarioUC.GetAll();
+                foreach (var f in funcionariosParaDemicao)
+                {
+                    Console.WriteLine(f.ExibirDetalhes(_cargoUC.GetById(f.CargoId), _empresaUC.GetById(f.EmpresaId)));
+                }
+                Console.WriteLine("<------------------------------------------------->");
+                Console.WriteLine("Digite o Id do Funcionário que deseja demitir: ");
+                int funcionarioId = int.Parse(Console.ReadLine());
+                _funcionarioUC.Remove(funcionarioId);
+                Console.WriteLine("<------- Funcionário Demitido com Sucesso -------->");
                 break;
             case 5:
+                Console.WriteLine("<----------- FUNCIONÁRIOS CADASTRADOS ------------>");
+                List<Funcionario> funcionariosParaPromocao = _funcionarioUC.GetAll();
+                foreach (var f in funcionariosParaPromocao)
+                {
+                    Console.WriteLine(f.ExibirDetalhes(_cargoUC.GetById(f.CargoId), _empresaUC.GetById(f.EmpresaId)));
+                }
+                Console.WriteLine("<------------------------------------------------->");
+                Console.WriteLine("Digite o Id do Funcionário que deseja promover: ");
+                int funcionarioPromocaoId = int.Parse(Console.ReadLine());
+                Funcionario funcionaroPromocao = _funcionarioUC.GetById(funcionarioPromocaoId);
+                Cargo cargoFuncionario = _cargoUC.GetById(funcionaroPromocao.CargoId);
+                if (cargoFuncionario.Step == 1)
+                {
+                    funcionaroPromocao.CargoId += 1;
+                    _funcionarioUC.Update(funcionaroPromocao);
+                    Console.WriteLine("<------ Funcionário Promovido para o Step 2 ------>");
+                }
+                else if (cargoFuncionario.Step == 2)
+                {
+                    funcionaroPromocao.CargoId += 1;
+                    _funcionarioUC.Update(funcionaroPromocao);
+                    Console.WriteLine("<------ Funcionário Promovido para o Step 3 ------>");
+                }
+                else if (cargoFuncionario.Step == 3)
+                {
+                    Console.WriteLine("<--- O Funcionário já possui o cargo mais alto --->");
+                }
                 break;
             case 6:
+                Console.WriteLine("<------------ ANOTAR BALANÇO MENSAL -------------->");
+                CreateEconomiaDTO economiaDTO = new CreateEconomiaDTO();
+                Console.WriteLine("<-------- DATAS DISPONÍVEIS PARA BALANÇO --------->");
+                List<DateBalance> datas = _dateBalanceUC.GetAll();
+                foreach (var d in datas)
+                {
+                    Console.WriteLine(d.ExibirDetalhes());
+                }
+                Console.WriteLine("<------------------------------------------------->");
+                Console.WriteLine("Digite o Id da Data que deseja slecionar para realizar o balanço mensal: ");
+                economiaDTO.DateBalanceId = int.Parse(Console.ReadLine());
+                Console.WriteLine("Digite o Total Bruto da Empresa: ");
+                economiaDTO.TotalBruto = double.Parse(Console.ReadLine());
+                Console.WriteLine("Digite o Total de Despesas com Imóvel(eis): ");
+                economiaDTO.DespesasImovel = double.Parse(Console.ReadLine());
+                List<Funcionario> funcionariosEmpresa = _funcionarioUC.GetAll();
+                List<Empresa> empresas = _empresaUC.GetAll();
+                double valor = 0.0;
+                foreach (var f in funcionariosEmpresa)
+                {
+                    foreach (var e in empresas)
+                    {
+                        if (e.UsuarioId == _usuarioLogado.Id)
+                        {
+                            if(f.EmpresaId == e.Id)
+                            {
+                                valor += f.Salario;
+                            }
+                        }
+                    }
+                }
+                economiaDTO.DespesasFuncionarios = valor;
+                Console.WriteLine($"Total de Despesas com Funcionários: R$ {economiaDTO.DespesasFuncionarios}");
+                Console.WriteLine("Digite o Total de Despesas com Serviços: ");
+                economiaDTO.DespesasServicos = double.Parse(Console.ReadLine());
+                economiaDTO.TotalDespesas = (economiaDTO.DespesasImovel + economiaDTO.DespesasFuncionarios) + economiaDTO.DespesasServicos;
+                Console.WriteLine($"Total de Despesas: R$ {economiaDTO.TotalDespesas}");
+                economiaDTO.TotalLucro = economiaDTO.TotalBruto - economiaDTO.TotalDespesas;
+                Console.WriteLine($"Total Lucro: R$ {economiaDTO.TotalLucro}");
+                economiaDTO.EmpresaId = _usuarioLogado.Id;
+                _economiaUC.Create(economiaDTO);
+                _dateBalanceUC.Remove(economiaDTO.DateBalanceId);
+                Console.WriteLine("<----- BALANÇO MENSAL REALIZADO COM SUCESSO ------>");
                 break;
             case 7:
+                Console.WriteLine("<-------- VIZUALIZAR BALANÇOS REALIZADOS --------->");
+                List<Economia> economias = _economiaUC.GetAll();
+                foreach (var e in economias)
+                {
+                    Console.WriteLine(e.ExibirDetalhes(_dateBalanceUC.GetById(e.DateBalanceId), _empresaUC.GetById(e.EmpresaId)));
+                }
+                Console.WriteLine("<------------------------------------------------->");
                 break;
             case 8:
+                Console.WriteLine("<-------- VIZUALIZAR BALANÇOS REALIZADOS --------->");
+                List<Economia> economiasRealizadas = _economiaUC.GetAll();
+                foreach (var e in economiasRealizadas)
+                {
+                    Console.WriteLine(e.ExibirDetalhes(_dateBalanceUC.GetById(e.DateBalanceId), _empresaUC.GetById(e.EmpresaId)));
+                }
+                Console.WriteLine("<------------------------------------------------->");
+                Console.WriteLine("Digite o Id do Balanço que deseja editar: ");
+                int economiaId = int.Parse(Console.ReadLine());
+                Economia economiaEdit = _economiaUC.GetById(economiaId);
+                Console.WriteLine($"Se necessário, digite o novo Total Bruto da Empresa: (Atual Total Bruto: R$ {economiaEdit.TotalBruto})");
+                economiaEdit.TotalBruto = double.Parse(Console.ReadLine());
+                Console.WriteLine($"Se necessário, digite o novo Total de Despesas com Imóvel(eis): (Atual Total de Despesas com Imóvel(eis): R$ {economiaEdit.DespesasImovel})");
+                economiaEdit.DespesasImovel = double.Parse(Console.ReadLine());
+                List<Funcionario> funcionariosCadastradosParaEdit = _funcionarioUC.GetAll();
+                List<Empresa> empresasCadastradasParaEdit = _empresaUC.GetAll();
+                double valorTotal = 0.0;
+                foreach (var f in funcionariosCadastradosParaEdit)
+                {
+                    foreach (var e in empresasCadastradasParaEdit)
+                    {
+                        if (e.UsuarioId == _usuarioLogado.Id)
+                        {
+                            if (f.EmpresaId == e.Id)
+                            {
+                                valorTotal += f.Salario;
+                            }
+                        }
+                    }
+                }
+                economiaEdit.DespesasFuncionarios = valorTotal;
+                Console.WriteLine($"Total de Despesas com Funcionários: R$ {economiaEdit.DespesasFuncionarios}");
+                Console.WriteLine($"Se necessário, digite o novo Total de Despesas com Serviços: (Atual Total de Despesas com Serviços: R$ {economiaEdit.DespesasServicos})");
+                economiaEdit.DespesasServicos = double.Parse(Console.ReadLine());
+                economiaEdit.TotalDespesas = (economiaEdit.DespesasImovel + economiaEdit.DespesasFuncionarios) + economiaEdit.DespesasServicos;
+                Console.WriteLine($"Total de Despesas: R$ {economiaEdit.TotalDespesas}");
+                economiaEdit.TotalLucro = economiaEdit.TotalBruto - economiaEdit.TotalDespesas;
+                Console.WriteLine($"Total Lucro: R$ {economiaEdit.TotalLucro}");
+                _economiaUC.Update(economiaEdit);
+                Console.WriteLine("<--------- Balanço Editado com Sucesso ----------->");
                 break;
         }
+
+        return action;
     }
 
     public void MenuPrincipal3()
@@ -334,6 +487,7 @@ public class Methods
             Console.WriteLine("1 - Vizualizar Dados");
             Console.WriteLine("2 - Conferir Remuneração");
             Console.WriteLine("3 - Solicitar Demição");
+            Console.WriteLine("0 - Sair");
             Console.WriteLine("<-- Digite o número respectivo à ação desejada: -->");
 
             if (action < 1 || action > 3)

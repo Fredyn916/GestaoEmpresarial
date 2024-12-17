@@ -38,4 +38,9 @@ public class DateBalanceUC
     {
         HttpResponseMessage response = _client.DeleteAsync($"DateBalance/RemoveDateBalance?id={id}").Result;
     }
+
+    public void Initialize()
+    {
+        HttpResponseMessage response = _client.GetAsync($"DateBalance/InitializeDateBalance").Result;
+    }
 }

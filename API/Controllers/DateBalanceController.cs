@@ -88,4 +88,18 @@ public class DateBalanceController : ControllerBase
             return BadRequest(ex.Message);
         }
     }
+
+    [HttpGet("InitializeDateBalance")]
+    public async Task<IActionResult> Initialize()
+    {
+        try
+        {
+            await _service.Initialize();
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
 }
