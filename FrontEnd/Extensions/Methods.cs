@@ -30,6 +30,7 @@ public class Methods
     public void InitializeAll()
     {
         _tipoUsuarioUC.Initialize();
+        _usuarioUC.Initialize();
         _cargoUC.Initialize();
     }
 

@@ -30,4 +30,9 @@ public class UsuarioService : GenericService<Usuario>, IUsuarioService
     {
         return await _repository.ReturnTypeId(usuarioId);
     }
+
+    public async Task Initialize()
+    {
+        await _repository.Initialize();
+    }
 }

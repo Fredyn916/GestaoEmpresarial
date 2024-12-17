@@ -119,4 +119,18 @@ public class UsuarioController : ControllerBase
             throw new Exception(ex.Message);
         }
     }
+
+    [HttpGet("InitializeUsuario")]
+    public async Task<IActionResult> Initialize()
+    {
+        try
+        {
+            await _service.Initialize();
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
 }

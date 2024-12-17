@@ -47,4 +47,9 @@ public class UsuarioUC
     {
         return int.Parse(_client.GetStringAsync($"Usuario/ReturnTypeIdUsuario?usuarioId={usuarioId}").Result);
     }
+
+    public void Initialize()
+    {
+        HttpResponseMessage response = _client.GetAsync($"Usuario/InitializeUsuario").Result;
+    }
 }

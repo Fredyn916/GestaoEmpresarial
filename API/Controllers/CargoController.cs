@@ -89,7 +89,7 @@ public class CargoController : ControllerBase
         }
     }
 
-    [HttpPost("InitializeCargo")]
+    [HttpGet("InitializeCargo")]
     public async Task<IActionResult> Initialize()
     {
         try
