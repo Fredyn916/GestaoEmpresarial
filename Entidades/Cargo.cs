@@ -12,8 +12,8 @@ public class Cargo
     public override string ToString()
     {
         return $"<----------------- CARGO {Id} ----------------->" +
-               $"Ocupação: {Ocupacao}" +
-               $"Remuneração: R$ {Remuneracao}" +
-               $"Step: {Step}";
+               $"\nOcupação: {Ocupacao}" +
+               $"\nRemuneração: R$ {Remuneracao}" +
+               $"\nStep: {Step}";
     }
 }

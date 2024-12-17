@@ -50,14 +50,20 @@ public class UsuarioRepository : GenericRepository<Usuario>, IUsuarioRepository
 
     public async Task Initialize()
     {
-        Usuario usuario = new Usuario
-        {
-            TipoUsuarioId = 1,
-            Username = "Admin",
-            Password = "Admin"
-        };
+        List<Usuario> usuarios = GetAll().Result;
+        int count = usuarios.Count;
 
-        _context.Usuarios.Add(usuario);
-        _context.SaveChanges();
+        if (count == 0)
+        {
+            Usuario usuario = new Usuario
+            {
+                TipoUsuarioId = 1,
+                Username = "Admin",
+                Password = "Admin"
+            };
+
+            _context.Usuarios.Add(usuario);
+            _context.SaveChanges();
+        }
     }
 }

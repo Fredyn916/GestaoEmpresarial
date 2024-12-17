@@ -32,13 +32,13 @@ public class SystemGE
                 switch (_usuarioLogado.TipoUsuarioId)
                 {
                     case 1:
-                        _methods.MenuPrincipal1();
+                        action = _methods.MenuPrincipal1();
                         break;
                     case 2:
-                        _methods.MenuPrincipal2(_usuarioLogado);
+                        action = _methods.MenuPrincipal2(_usuarioLogado);
                         break;
                     case 3:
-                        _methods.MenuPrincipal3();
+                        action = _methods.MenuPrincipal3();
                         break;
                 }
             }

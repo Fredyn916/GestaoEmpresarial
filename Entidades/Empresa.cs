@@ -13,12 +13,12 @@ public class Empresa
     public string ExibirDetalhes(Usuario? usuario)
     {
         string detalhes = $"<----------------- EMPRESA {Id} ----------------->" +
-                          $"Nome: {Nome}" +
-                          $"CNPJ: {CNPJ}" +
-                          $"CEP: {CEP}";
+                          $"\nNome: {Nome}" +
+                          $"\nCNPJ: {CNPJ}" +
+                          $"\nCEP: {CEP}";
                           if(usuario != null)
                           {
-              detalhes += $"Proprietário: {usuario.Username}";
+              detalhes += $"\nProprietário: {usuario.Username}";
                           }
         return detalhes;
     }

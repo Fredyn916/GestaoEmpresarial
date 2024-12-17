@@ -10,7 +10,7 @@ public class DateBalance
     public string ExibirDetalhes()
     {
         string detalhes = $"<------------------ DATA {Id} ------------------->" +
-                          $"Dia/Mês/Ano: { Data.ToString("dd/MM/yyyy")}";
+                          $"\nDia/Mês/Ano: { Data.ToString("dd/MM/yyyy")}";
         return detalhes;
     }
 }

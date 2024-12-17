@@ -1,4 +1,6 @@
-﻿namespace Entidades;
+﻿using static System.Net.Mime.MediaTypeNames;
+
+namespace Entidades;
 
 public class Usuario
 {
@@ -7,4 +9,12 @@ public class Usuario
     public virtual TipoUsuario TipoUsuario { get; set; }
     public string Username { get; set; }
     public string Password { get; set; }
+
+    public string ExibirDetalhes(TipoUsuario? tipoUsuario)
+    {
+        string detalhes = $"<----------------- USUÁRIO {Id} ----------------->" +
+                          $"\nTipo de Usuário: {tipoUsuario.Tipo}" +
+                          $"\nUsername: {Username}";
+        return detalhes;
+    }
 }

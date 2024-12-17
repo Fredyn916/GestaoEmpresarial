@@ -19,14 +19,14 @@ public class Economia
     public string ExibirDetalhes(DateBalance? dateBalance, Empresa? empresa)
     {
         string detalhes = $"<----------------- BALANÇO {Id} ----------------->" +
-                          $"Data: {dateBalance.Data.ToString("dd/MM/yyyy")}" +
-                          $"Total Bruto: R$ {TotalBruto}" +
-                          $"Despesas Imóvel: R$ {DespesasImovel}" +
-                          $"Despesas Funcionários: R$ {DespesasFuncionarios}" +
-                          $"Despesas Serviços: R$ {DespesasServicos}" +
-                          $"Total Despesas:  R$ {TotalDespesas}" +
-                          $"Total Lucro:  R$ {TotalLucro}" +
-                          $"Empresa: {empresa.Nome}";
+                          $"\nData: {dateBalance.Data.ToString("dd/MM/yyyy")}" +
+                          $"\nTotal Bruto: R$ {TotalBruto}" +
+                          $"\nDespesas Imóvel: R$ {DespesasImovel}" +
+                          $"\nDespesas Funcionários: R$ {DespesasFuncionarios}" +
+                          $"\nDespesas Serviços: R$ {DespesasServicos}" +
+                          $"\nTotal Despesas:  R$ {TotalDespesas}" +
+                          $"\nTotal Lucro:  R$ {TotalLucro}" +
+                          $"\nEmpresa: {empresa.Nome}";
         return detalhes;
     }
 }

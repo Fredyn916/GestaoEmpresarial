@@ -154,8 +154,9 @@ public class Methods
             Console.WriteLine("4 - Remover Empresa");
             Console.WriteLine("0 - Sair");
             Console.WriteLine("<-- Digite o número respectivo à ação desejada: -->");
+            action = int.Parse(Console.ReadLine());
 
-            if(action < 0 || action > 4)
+            if (action < 0 || action > 4)
             {
                 Console.WriteLine("<------------ Digite um número válido ------------>");
             }
@@ -178,10 +179,10 @@ public class Methods
                 Console.WriteLine("Digite o CEP: ");
                 empresaDTO.CEP = Console.ReadLine();
                 Console.WriteLine("<------------- USUÁRIOS CADASTRADOS -------------->");
-                List<Funcionario> funcionarios = _funcionarioUC.GetAll();
-                foreach (var f in funcionarios)
+                List<Usuario> usuarios = _usuarioUC.GetAll();
+                foreach (var u in usuarios)
                 {
-                    Console.WriteLine(f.ExibirDetalhes(_cargoUC.GetById(f.CargoId), _empresaUC.GetById(f.EmpresaId)));
+                    Console.WriteLine(u.ExibirDetalhes(_tipoUsuarioUC.GetById(u.TipoUsuarioId)));
                 }
                 Console.WriteLine("<------------------------------------------------->");
                 Console.WriteLine("Digite o Id do Usuário Proprietário: ");
@@ -214,7 +215,14 @@ public class Methods
                 empresaEdit.CNPJ = Console.ReadLine();
                 Console.WriteLine($"Se necessário, digite o novo CEP: (Atual CNPJ: {empresaEdit.CEP})");
                 empresaEdit.CEP = Console.ReadLine();
-                Console.WriteLine($"Se necessário, digite o novo Id do Usuário Proprietário: (Atual Id do Proprietário: {empresaEdit.UsuarioId})"); // APLICAR UMA LÓGICA MELHOR
+                Console.WriteLine("<------------- USUÁRIOS CADASTRADOS -------------->");
+                List<Usuario> usuariosCadastrados = _usuarioUC.GetAll();
+                foreach (var u in usuariosCadastrados)
+                {
+                    Console.WriteLine(u.ExibirDetalhes(_tipoUsuarioUC.GetById(u.TipoUsuarioId)));
+                }
+                Console.WriteLine("<------------------------------------------------->");
+                Console.WriteLine($"Se necessário, digite o novo Id do Usuário Proprietário: (Atual Id do Proprietário: {empresaEdit.UsuarioId})");
                 empresaEdit.UsuarioId = int.Parse(Console.ReadLine());
                 _empresaUC.Update(empresaEdit);
                 Console.WriteLine("<--------- Empresa Editada com Sucesso ----------->");
@@ -254,6 +262,7 @@ public class Methods
             Console.WriteLine("8 - Editar Balanço");
             Console.WriteLine("0 - Sair");
             Console.WriteLine("<-- Digite o número respectivo à ação desejada: -->");
+            action = int.Parse(Console.ReadLine());
 
             if(action < 0 || action > 8)
             {
@@ -477,11 +486,11 @@ public class Methods
         return action;
     }
 
-    public void MenuPrincipal3()
+    public int MenuPrincipal3()
     {
         int action = -1;
 
-        while (action < 1 || action > 3)
+        while (action < 0 || action > 3)
         {
             Console.WriteLine("<--------------- MENU FUNCIONÁRIO ---------------->");
             Console.WriteLine("1 - Vizualizar Dados");
@@ -489,11 +498,17 @@ public class Methods
             Console.WriteLine("3 - Solicitar Demição");
             Console.WriteLine("0 - Sair");
             Console.WriteLine("<-- Digite o número respectivo à ação desejada: -->");
+            action = int.Parse(Console.ReadLine());
 
-            if (action < 1 || action > 3)
+            if (action < 0 || action > 3)
             {
                 Console.WriteLine("<------------ Digite um número válido ------------>");
             }
+        }
+
+        if(action == 0)
+        {
+            return action;
         }
 
         switch (action)
@@ -505,5 +520,7 @@ public class Methods
             case 3:
                 break;
         }
+
+        return action;
     }
 }

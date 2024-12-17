@@ -18,13 +18,13 @@ public class Funcionario
     public string ExibirDetalhes(Cargo? cargo, Empresa? empresa)
     {
         string detalhes = $"<--------------- FUNCIONÁRIO {Id} --------------->" +
-                          $"Nome: {Nome}" +
-                          $"CPF: {CPF}" +
-                          $"Idade: {Idade}" +
-                          $"Peso: {Peso}" +
-                          $"Salário: R$ {Salario}" +
-                          $"Cargo: {cargo.Ocupacao}" +
-                          $"Empresa: {empresa.Nome}";
+                          $"\nNome: {Nome}" +
+                          $"\nCPF: {CPF}" +
+                          $"\nIdade: {Idade}" +
+                          $"\nPeso: {Peso}" +
+                          $"\nSalário: R$ {Salario}" +
+                          $"\nCargo: {cargo.Ocupacao}" +
+                          $"\nEmpresa: {empresa.Nome}";
         return detalhes;
     }
 }
