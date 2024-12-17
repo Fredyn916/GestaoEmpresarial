@@ -179,7 +179,7 @@ public class Methods
                 List<Empresa> empresas = _empresaUC.GetAll();
                 foreach (var e in empresas)
                 {
-                    Console.WriteLine(e.ToString());
+                    Console.WriteLine(e.ExibirDetalhes(_usuarioUC.GetById(e.UsuarioId)));
                 }
                 break;
             case 3:
@@ -187,10 +187,10 @@ public class Methods
                 List<Empresa> possiveisEmpresas = _empresaUC.GetAll();
                 foreach (var e in possiveisEmpresas)
                 {
-                    Console.WriteLine(e.ToString());
+                    Console.WriteLine(e.ExibirDetalhes(_usuarioUC.GetById(e.UsuarioId)));
                 }
                 Console.WriteLine("<------------------------------------------------->");
-                Console.WriteLine("Digite o Id da empresa que deseja editar: ");
+                Console.WriteLine("Digite o Id da Empresa que deseja editar: ");
                 int empresaEditId = int.Parse(Console.ReadLine());
                 Empresa empresaEdit = _empresaUC.GetById(empresaEditId);
                 Console.WriteLine($"Se necessário, digite o novo Nome da Empresa: (Atual Nome: {empresaEdit.Nome})");
@@ -209,10 +209,10 @@ public class Methods
                 List<Empresa> empresasCadastradas = _empresaUC.GetAll();
                 foreach (var e in empresasCadastradas)
                 {
-                    Console.WriteLine(e.ToString());
+                    Console.WriteLine(e.ExibirDetalhes(_usuarioUC.GetById(e.UsuarioId)));
                 }
                 Console.WriteLine("<------------------------------------------------->");
-                Console.WriteLine("Digite o Id da empresa que deseja remover: ");
+                Console.WriteLine("Digite o Id da Empresa que deseja remover: ");
                 int empresaId = int.Parse(Console.ReadLine());
                 _empresaUC.Remove(empresaId);
                 Console.WriteLine("<--------- Empresa Removida com Sucesso ---------->");
@@ -220,7 +220,7 @@ public class Methods
         }
     }
 
-    public void MenuPrincipal2()
+    public void MenuPrincipal2(Usuario _usuarioLogado)
     {
         int action = -1;
 
@@ -256,10 +256,60 @@ public class Methods
                 funcionarioDTO.Idade = int.Parse(Console.ReadLine());
                 Console.WriteLine("Digite o Peso do Funcionário: ");
                 funcionarioDTO.Peso = double.Parse(Console.ReadLine());
+                Console.WriteLine("<------------- CARGOS CADASTRADOS -------------->");
+                List<Cargo> cargos = _cargoUC.GetAll();
+                foreach (var c in cargos)
+                {
+                    Console.WriteLine(c.ToString());
+                }
+                Console.WriteLine("<------------------------------------------------->");
+                Console.WriteLine("Digite o Id do Cargo que deseja atribuir ao Funcionário: ");
+                funcionarioDTO.CargoId = int.Parse(Console.ReadLine());
+                funcionarioDTO.Salario = _cargoUC.GetById(funcionarioDTO.CargoId).Remuneracao;
+                funcionarioDTO.EmpresaId = _empresaUC.GetEmpresaIdByUsuarioId(_usuarioLogado.Id);
+                _funcionarioUC.Create(funcionarioDTO);
+                Console.WriteLine("<------ Funcionário Cadastrado com Sucesso ------->");
                 break;
             case 2:
+                Console.WriteLine("<----------- FUNCIONÁRIOS CADASTRADOS ------------>");
+                List<Funcionario> funcionarios = _funcionarioUC.GetAll();
+                foreach (var f in funcionarios)
+                {
+                    Console.WriteLine(f.ExibirDetalhes(_cargoUC.GetById(f.CargoId), _empresaUC.GetById(f.EmpresaId)));
+                }
                 break;
             case 3:
+                Console.WriteLine("<----------- FUNCIONÁRIOS CADASTRADOS ------------>");
+                List<Funcionario> funcionariosCadastrados = _funcionarioUC.GetAll();
+                foreach (var f in funcionariosCadastrados)
+                {
+                    Console.WriteLine(f.ExibirDetalhes(_cargoUC.GetById(f.CargoId), _empresaUC.GetById(f.EmpresaId)));
+                }
+                Console.WriteLine("<------------------------------------------------->");
+                Console.WriteLine("Digite o Id do Funcionário que deseja editar: ");
+                int funcionarioEditId = int.Parse(Console.ReadLine());
+                Funcionario funcionarioEdit = _funcionarioUC.GetById(funcionarioEditId);
+                Console.WriteLine($"Se necessário, digite o novo Nome do Funcionário: (Atual Nome: {funcionarioEdit.Nome})");
+                funcionarioEdit.Nome = Console.ReadLine();
+                Console.WriteLine($"Se necessário, digite o novo CPF: (Atual CPF: {funcionarioEdit.CPF})");
+                funcionarioEdit.CPF = Console.ReadLine();
+                Console.WriteLine($"Se necessário, digite a nova Idade: (Atual Idade: {funcionarioEdit.Idade})");
+                funcionarioEdit.Idade = int.Parse(Console.ReadLine());
+                Console.WriteLine($"Se necessário, digite o novo Peso: (Atual Peso: {funcionarioEdit.Peso})");
+                funcionarioEdit.Peso = double.Parse(Console.ReadLine());
+                Console.WriteLine("<------------- CARGOS CADASTRADOS -------------->");
+                List<Cargo> cargosCadastrados = _cargoUC.GetAll();
+                foreach (var c in cargosCadastrados)
+                {
+                    Console.WriteLine(c.ToString());
+                }
+                Console.WriteLine("<------------------------------------------------->");
+                Console.WriteLine($"Se necessário, digite o novo Cargo Id: (Atual Cargo Id: {funcionarioEdit.CargoId})");
+                funcionarioEdit.CargoId = int.Parse(Console.ReadLine());
+                funcionarioEdit.Salario = _cargoUC.GetById(funcionarioEdit.CargoId).Remuneracao;
+                funcionarioEdit.EmpresaId = _empresaUC.GetEmpresaIdByUsuarioId(_usuarioLogado.Id);
+                _funcionarioUC.Update(funcionarioEdit);
+                Console.WriteLine("<--------- Empresa Editada com Sucesso ----------->");
                 break;
             case 4:
                 break;

@@ -35,7 +35,7 @@ public class SystemGE
                         _methods.MenuPrincipal1();
                         break;
                     case 2:
-                        _methods.MenuPrincipal2();
+                        _methods.MenuPrincipal2(_usuarioLogado);
                         break;
                     case 3:
                         _methods.MenuPrincipal3();

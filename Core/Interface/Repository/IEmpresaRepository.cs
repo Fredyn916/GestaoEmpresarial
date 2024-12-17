@@ -4,4 +4,6 @@ using Entidades;
 namespace Core.Interface.Repository;
 
 public interface IEmpresaRepository : IGenericRepository<Empresa>
-{ }
+{
+    Task<int?> GetEmpresaIdByUsuarioId(int usuarioId);
+}

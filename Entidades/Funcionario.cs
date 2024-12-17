@@ -1,4 +1,6 @@
-﻿namespace Entidades;
+﻿using System.Runtime.ConstrainedExecution;
+
+namespace Entidades;
 
 public class Funcionario
 {
@@ -12,4 +14,17 @@ public class Funcionario
     public virtual Cargo Cargo { get; set; }
     public int EmpresaId { get; set; }
     public virtual Empresa Empresa { get; set; }
+
+    public string ExibirDetalhes(Cargo? cargo, Empresa? empresa)
+    {
+        string detalhes = $"<--------------- FUNCIONÁRIO {Id} --------------->" +
+                          $"Nome: {Nome}" +
+                          $"CPF: {CPF}" +
+                          $"Idade: {Idade}" +
+                          $"Peso: {Peso}" +
+                          $"Salário: R$ {Salario}" +
+                          $"Cargo: {cargo.Ocupacao}" +
+                          $"Empresa: {empresa.Nome}";
+        return detalhes;
+    }
 }

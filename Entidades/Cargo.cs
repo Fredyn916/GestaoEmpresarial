@@ -1,4 +1,6 @@
-﻿namespace Entidades;
+﻿using System.Runtime.ConstrainedExecution;
+
+namespace Entidades;
 
 public class Cargo
 {
@@ -6,4 +8,12 @@ public class Cargo
     public string Ocupacao { get; set; }
     public double Remuneracao { get; set; }
     public int Step { get; set; }
+
+    public override string ToString()
+    {
+        return $"<----------------- CARGO {Id} ----------------->" +
+               $"Ocupação: {Ocupacao}" +
+               $"Remuneração: R$ {Remuneracao}" +
+               $"Step: {Step}";
+    }
 }

@@ -37,4 +37,9 @@ public class EmpresaUC
     {
         HttpResponseMessage response = _client.DeleteAsync($"Empresa/RemoveEmpresa?id={id}").Result;
     }
+
+    public int GetEmpresaIdByUsuarioId(int usuarioId)
+    {
+        return int.Parse(_client.GetStringAsync($"Empresa/GetEmpresaIdByUsuarioIdEmpresa?usuarioId={usuarioId}").ToString());
+    }
 }

@@ -88,4 +88,17 @@ public class EmpresaController : ControllerBase
             return BadRequest(ex.Message);
         }
     }
+
+    [HttpGet("GetEmpresaIdByUsuarioIdEmpresa")]
+    public async Task<int?> GetEmpresaIdByUsuarioId(int usuarioId)
+    {
+        try
+        {
+            return await _service.GetEmpresaIdByUsuarioId(usuarioId);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    }
 }

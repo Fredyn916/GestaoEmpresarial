@@ -10,12 +10,16 @@ public class Empresa
     public virtual Usuario Usuario { get; set; }
     public List<Funcionario> Funcionarios { get; set; }
 
-    public override string ToString()
+    public string ExibirDetalhes(Usuario? usuario)
     {
-        return $"<----------------- EMPRESA {Id} ----------------->" +
-               $"Nome: {Nome}" +
-               $"CNPJ: {CNPJ}" +
-               $"CEP: {CEP}" +
-               $"Proprietário: {Usuario.Username}";
+        string detalhes = $"<----------------- EMPRESA {Id} ----------------->" +
+                          $"Nome: {Nome}" +
+                          $"CNPJ: {CNPJ}" +
+                          $"CEP: {CEP}";
+                          if(usuario != null)
+                          {
+              detalhes += $"Proprietário: {usuario.Username}";
+                          }
+        return detalhes;
     }
 }
